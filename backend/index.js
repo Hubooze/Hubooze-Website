@@ -11,9 +11,13 @@ const { error } = require("console");
 const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6JfLvff3Qiy7vBdmvtrImAeNL9guVQoZ2taVCQG0jInH2K4i0OTq00Tj1QZyPI");
 // const { error } = require("console");
 
-app.use(express.json());
+ app.use(express.json());
 
-app.use(cors());
+ app.use(cors());
+
+
+
+
 
 
 //API creation
@@ -101,9 +105,6 @@ app.post('/payment', async (req, res) => {
 mongoose.connect("mongodb+srv://abhishek88414:abhishek233@cluster0.pg8tz4y.mongodb.net/ecommrance");
 
 
-
-
-
 //Image storage engine
 
 const storage = multer.diskStorage({
@@ -116,7 +117,7 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage: storage })
-// Creating imagem ind point
+// Creating imagems ind point
 
 app.use('/images', express.static('upload/images'))
 
@@ -392,22 +393,57 @@ app.post('/addtocart',featchUser, async (req, res) => {
 
 //Creating endpoint for remove product from cartdata
 
-app.post('/removefromCart',featchUser,async(req,res)=>{
+// Endpoint to remove an item from the cart
+app.post('/removefromCart', featchUser, async (req, res) => {
+    try {
+        console.log("remove", req.body.itemId);
+        let userData = await Users.findOne({ _id: req.user.id });
+        if (userData && userData.cartData[req.body.itemId] > 0) {
+            userData.cartData[req.body.itemId] -= 1;
+            await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
+        }
+        res.send("remove");
+    } catch (error) {
+        console.error("Error removing item from cart:", error);
+        res.status(500).send("Error removing item from cart");
+    }
+});
 
-    console.log("remove",req.body.itemId);
-    let userData=await Users.findOne({_id:req.user.id});
-    if(userData.cartData[req.body.itemId]>0)
-    userData.cartData[req.body.itemId]-=1;
-    await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("remove")
-})
+// Endpoint to get cart data
+app.post('/getcart', featchUser, async (req, res) => {
+    try {
+        console.log("GetCart");
+        let userData = await Users.findOne({ _id: req.user.id });
+        res.json(userData.cartData);
+    } catch (error) {
+        console.error("Error getting cart data:", error);
+        res.status(500).send("Error getting cart data");
+    }
+});
 
-// creating endpoint for getting cartdata
-app.post('/getcart',featchUser,async (req,res)=>{
-    console.log("GetCart")
-    let userData=await Users.findOne({_id:req.user.id});
-    res.json(userData.cartData)
-})
+
+
+
+
+
+
+
+// app.post('/removefromCart',featchUser,async(req,res)=>{
+
+//     console.log("remove",req.body.itemId);
+//     let userData=await Users.findOne({_id:req.user.id});
+//     if(userData.cartData[req.body.itemId]>0)
+//     userData.cartData[req.body.itemId]-=1;
+//     await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
+//     res.send("remove")
+// })
+
+// // creating endpoint for getting cartdata
+// app.post('/getcart',featchUser,async (req,res)=>{
+//     console.log("GetCart")
+//     let userData=await Users.findOne({_id:req.user.id});
+//     res.json(userData.cartData)
+// })
 
 
 

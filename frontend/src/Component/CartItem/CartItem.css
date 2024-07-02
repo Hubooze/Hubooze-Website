@@ -1,13 +1,17 @@
-
 .cartitem {
     margin: 0 75px;
-   padding-top: 50px;
+    padding-top: 50px;
 }
 
 .cartitem hr {
     height: 3px;
     background: #e2e2e2;
     border: 0;
+}
+
+.checkoutbtn {
+    border-radius: 5px solid;
+    background: wheat;
 }
 
 .cart-format-main {
@@ -35,6 +39,11 @@
     width: 15px;
     margin: 0px 30px;
     cursor: pointer;
+}
+
+.hello msg {
+    color: blueviolet;
+    margin-left: -100px;
 }
 
 .cartim-button {

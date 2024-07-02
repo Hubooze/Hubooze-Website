@@ -3,7 +3,7 @@ import "./CartItem.css";
 import remove_icon from "../Assets/cart_cross_icon.png";
 import { ShopContext } from "../../Context/ShopContext";
 import { useNavigate } from "react-router-dom";
- import {loadStripe} from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 // import carts from '../Assets/all_product';
 import axios from 'axios';
 const CartItem = () => {
@@ -26,10 +26,10 @@ const CartItem = () => {
   //     quantity: 2
   //   }
   // ];
-  
+
   // // Example usage:
   // console.log(carts);
-  
+
   // payment intergection
 
   // const makePayment = async () => {
@@ -58,15 +58,16 @@ const CartItem = () => {
   //   }
   // }
 
-  const buyfunction = async () =>{
+  const buyfunction = async () => {
 
     let response = await axios.post('http://localhost:4000/payment')
 
-    if(response && response.status === 200 ){
+    if (response && response.status === 200) {
 
       window.location.href = response.data.url
-      
-      console.log(response.data)}
+
+      console.log(response.data)
+    }
   }
 
 
@@ -82,7 +83,7 @@ const CartItem = () => {
           <p>Remove</p>
         </div>
         <hr />
-        {all_product.map((e,i) => {
+        {all_product.map((e, i) => {
           if (cartItem[e.id] > 0) {
             return (
               <div>
@@ -102,7 +103,7 @@ const CartItem = () => {
         })}
         <div className="cartitem-down">
           <div className="cartitem-total">
-            <h1>cart Totals</h1>
+            <h1>Cart totals</h1>
             <div>
               <div className="cartitem-total-item">
                 <p>Subtotal</p>
@@ -119,7 +120,7 @@ const CartItem = () => {
                 <h3>₹{getTotalCartAmount()}</h3>
               </div>
             </div>
-            <button onClick={buyfunction} > CHECKOUT</button>
+            <button className="checkoutbtn" onClick={buyfunction} > CHECKOUT</button>
           </div>
           <div className="cartitem-promocode">
             <p>I You have a promo code,Enter it here</p>
@@ -131,7 +132,7 @@ const CartItem = () => {
         </div>
       </div>
       <div>
-        <h1>hello</h1>
+        <h1 className="hello msg">hello</h1>
       </div>
     </div>
   );

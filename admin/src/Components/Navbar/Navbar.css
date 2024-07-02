@@ -14,6 +14,19 @@
     width: 75px;
 }
 
+@media (max-width: 1280px) {
+    .navbar{
+        padding: 15px 30px;
+    }
+    .nav-Logo{
+        width: 150px;
+    }
+    .navprofile{
+        width: 60px;
+    }
+    
+}
+
 @media (max-width: 800px) {
     .navbar{
         padding: 15px 30px;
