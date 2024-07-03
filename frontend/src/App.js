@@ -6,7 +6,7 @@ import ShopItem from './Pages/ShopCategory';
 import Shop from './Pages/Shop'
 import Product from './Pages/Product';
 import Cart from './Pages/Cart';
-import Login_Singup from './Pages/Login_Singup';
+import LoginSignup from './Pages/Login_Singup';
 import Footer from './Component/Footer/Footer';
 import men_banner from './Component/Assets/banner_mens.png';
 import woman_banner from './Component/Assets/banner_women.png';
@@ -42,7 +42,7 @@ function App() {
           </Route>
 
         
-          <Route path='/login' element={<Login_Singup />} />
+          <Route path='/login' element={<LoginSignup />} />
           <Route path='/cart' element={<Cart />} />
 
         </Routes>
