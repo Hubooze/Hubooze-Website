@@ -25,7 +25,7 @@ const Navbar = () => {
           <img src={logo} alt="" />
         </Link>
         <Link to='/' style={{ textDecoration: 'none' }}>
-          <p>StyleHub</p>
+          <p>Hubooze</p>
         </Link>
       </div>
       <div className="serach_icons">
