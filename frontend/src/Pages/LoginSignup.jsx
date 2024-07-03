@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './CSS/Loginsignup.css'
-const Login_Singup = () => {
+const LoginSignup = () => {
   const [state, setState] = useState("Login");
   const [formData, setFormData] = useState({
     username: "",
@@ -81,4 +81,4 @@ const Login_Singup = () => {
   )
 }
 
-export default Login_Singup
+export default LoginSignup
