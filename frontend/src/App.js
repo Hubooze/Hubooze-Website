@@ -28,8 +28,8 @@ function App() {
         </Routes>
         <Routes >
           <Route path='/latestcollection' element={<LatestCollectionspage/>} />
-          <Route path='/success' element={success} />
-          <Route path='/cancle' element={Cancle} />
+          <Route path='/success' element={<Success />} />
+          <Route path='/cancle' element={<Cancle />} />
         </Routes>
         <Routes>
           <Route path='/' element={<Shop />} />
