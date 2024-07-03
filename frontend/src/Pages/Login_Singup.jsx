@@ -15,7 +15,7 @@ const Login_Singup = () => {
     await fetch('http://localhost:4000/login', {
       method: 'POST',
       headers: {
-        Accecpt: 'application/form-data',
+        Accept: 'application/form-data',
         'Content-type': 'application/json'
       },
       body: JSON.stringify(formData),
