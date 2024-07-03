@@ -1,9 +1,9 @@
 import React from 'react'
 
-const success = () => {
+const Success = () => {
   return (
     <div>success</div>
   )
 }
 
-export default success
+export default Success
