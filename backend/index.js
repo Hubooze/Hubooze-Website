@@ -13,11 +13,15 @@ const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6
 
  app.use(express.json());
 
- app.use(cors());
+// Configure CORS
 
+app.use(cors());
 
-
-
+app.use(cors({
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
+}));
 
 
 //API creation
