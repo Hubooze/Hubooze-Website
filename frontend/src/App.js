@@ -6,14 +6,14 @@ import ShopItem from './Pages/ShopCategory';
 import Shop from './Pages/Shop'
 import Product from './Pages/Product';
 import Cart from './Pages/Cart';
-import LoginSignup from './Pages/Login_Singup';
+import LoginSignup from './Pages/LoginSignup';
 import Footer from './Component/Footer/Footer';
 import men_banner from './Component/Assets/banner_mens.png';
 import woman_banner from './Component/Assets/banner_women.png';
 import kid_banner from './Component/Assets/banner_kids.png';
 import mencat from './Subcagory/subcateman'
 import Cancle from './Pages/Cancle';
-import success from './Pages/success';
+import Success from './Pages/Success';
 import LatestCollectionspage from './Pages/LatestCollectionspage';
 import Exclusiveoffer from './Pages/Exclusiveoffer';
 
