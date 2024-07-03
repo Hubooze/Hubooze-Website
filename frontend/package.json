@@ -23,7 +23,9 @@
     "react-spinners": "^0.13.8",
     "redux": "^5.0.1",
     "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.0"
+
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,5 +50,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-transform-private-property-in-object"
+  ]
   }
 }
