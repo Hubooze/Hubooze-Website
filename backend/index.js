@@ -11,17 +11,18 @@ const { error } = require("console");
 const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6JfLvff3Qiy7vBdmvtrImAeNL9guVQoZ2taVCQG0jInH2K4i0OTq00Tj1QZyPI");
 // const { error } = require("console");
 
- app.use(express.json());
-
 // Configure CORS
-
-app.use(cors());
 
 app.use(cors({
   origin: '*', // Allow all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
   allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
 }));
+
+// Other Middlewares
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 //API creation
