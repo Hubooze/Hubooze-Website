@@ -60,7 +60,7 @@ const CartItem = () => {
 
   const buyfunction = async () => {
 
-    let response = await axios.post('http://localhost:3000/payment')
+    let response = await axios.post('http://localhost:4000/payment')
 
     if (response && response.status === 200) {
 
