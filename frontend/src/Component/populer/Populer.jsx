@@ -8,7 +8,15 @@ const Populer = () => {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/popularinwoman');
+      const response = await fetch('http://localhost:3000/popularinwoman',  {
+        mode: 'cors',
+        headers: {
+        'Access-Control-Allow-Origin': '*'
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
       }
