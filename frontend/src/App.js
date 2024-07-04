@@ -12,7 +12,7 @@ import men_banner from './Component/Assets/banner_mens.png';
 import woman_banner from './Component/Assets/banner_women.png';
 import kid_banner from './Component/Assets/banner_kids.png';
 import mencat from './Subcagory/subcateman'
-import Cancle from './Pages/Cancle';
+import Cancel from './Pages/Cancel';
 import Success from './Pages/Success';
 import LatestCollectionspage from './Pages/LatestCollectionspage';
 import Exclusiveoffer from './Pages/Exclusiveoffer';
