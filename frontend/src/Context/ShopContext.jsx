@@ -23,7 +23,7 @@ const ShopContextProvider = (props) => {
 
     if(localStorage.getItem('auth-token')){
       fetch('http://localhost:4000/getcart',{
-        method: 'POST',
+        method: 'GET',
         headers: {
           Accept:'application/form-data',
           'auth-token':`${localStorage.getItem('auth-token')}`,
