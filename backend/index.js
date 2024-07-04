@@ -16,7 +16,9 @@ const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6
 app.use(cors({
   origin: '*', // Allow all origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
-  allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+  credentials: true,
+  optionsSuccessStatus: 204
 }));
 
 
