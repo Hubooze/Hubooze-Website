@@ -6,10 +6,27 @@ const Newcollection = () => {
 
   const [new_collection,setNew_collection]=useState([]);
 
-  useEffect(()=>{
-        fetch('http://localhost:4000/newcollections').then((response)=>response.json())
-        .then((data)=>setNew_collection(data));
-  },[])
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/newcollections');
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
+      }
+      const data = await response.json();
+      setNew_collection(data);
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
+  fetchData();
+}, []);
+
+
+  // useEffect(()=>{
+  //       fetch('http://localhost:4000/newcollections').then((response)=>response.json())
+  //       .then((data)=>setNew_collection(data));
+  // },[])
 
   return (
     
