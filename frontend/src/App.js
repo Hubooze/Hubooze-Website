@@ -29,7 +29,7 @@ function App() {
         <Routes >
           <Route path='/latestcollection' element={<LatestCollectionspage/>} />
           <Route path='/success' element={<Success />} />
-          <Route path='/cancle' element={<Cancel />} />
+          <Route path='/cancel' element={<Cancel />} />
         </Routes>
         <Routes>
           <Route path='/' element={<Shop />} />
