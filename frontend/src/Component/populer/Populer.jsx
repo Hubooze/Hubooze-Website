@@ -4,10 +4,27 @@ import Item from "../Item/item";
 // import data_product from "../Assets/data";
 const Populer = () => {
   const [populerproduct,setPOPularproduct]=useState([]);
-  useEffect(()=>{
-      fetch ('http://localhost:4000/popularinwoman')
-      .then((respones)=>respones.json()).then((data)=>setPOPularproduct(data))
-  },[])
+  
+  useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/popularinwoman');
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
+      }
+      const data = await response.json();
+      setPOPularproduct(data);
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
+  fetchData();
+}, []);
+
+  // useEffect(()=>{
+  //     fetch ('http://localhost:4000/popularinwoman')
+  //     .then((respones)=>respones.json()).then((data)=>setPOPularproduct(data))
+  // },[])
   
   return (
     <div className="populer">
