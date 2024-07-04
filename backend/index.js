@@ -423,7 +423,7 @@ app.post('/removefromCart', featchUser, async (req, res) => {
 });
 
 // Endpoint to get cart data
-app.post('/getcart', featchUser, async (req, res) => {
+app.get('/getcart', featchUser, async (req, res) => {
     try {
         console.log("GetCart");
         let userData = await Users.findOne({ _id: req.user.id });
