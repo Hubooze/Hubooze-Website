@@ -16,7 +16,7 @@ const Footer = () => {
           <img src={footer_logo_img} alt='' />
         </Link>
         <Link to='/' style={{ textDecoration: 'none' }}>
-          <p>StyleHub</p>
+          <p>Hubooze</p>
 
         </Link>
 
@@ -27,6 +27,8 @@ const Footer = () => {
         <li>Offices</li>
         <li>About</li>
         <li>Contact</li>
+        <li>Company Policy</li>
+        <li>Terms & Conditions</li>
       </ul>
       <div className="footer-social-icon">
         <div className="footer-icon-container">
@@ -43,7 +45,7 @@ const Footer = () => {
       </div>
       <div className="footer-copyright">
         <hr />
-        <p> Copyright @ 2023 -All Right Reserved.</p>
+        <p> Copyright @ 2024 -All Right Reserved.</p>
       </div>
     </div>
   )
