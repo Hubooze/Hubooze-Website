@@ -9,7 +9,7 @@ const Newcollection = () => {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:4000/newcollections');
+      const response = await fetch('http://192.168.1.109:3000/newcollections');
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
       }
