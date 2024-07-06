@@ -12,7 +12,7 @@ const LoginSignup = () => {
     console.log("Login Function Executed", formData)
 
     let responesData;
-    await fetch('http://localhost:4000/login', {
+    await fetch('http://192.168.1.109:3000/login', {
       method: 'POST',
       headers: {
         Accept: 'application/form-data',
@@ -33,7 +33,7 @@ const LoginSignup = () => {
   const Signup = async () => {
     console.log("Signup Function Executed", formData)
     let responesData;
-    await fetch('http://localhost:4000/signup', {
+    await fetch('http://192.168.1.109:3000/signup', {
       method: 'POST',
       headers: {
         Accecpt: 'application/form-data',
