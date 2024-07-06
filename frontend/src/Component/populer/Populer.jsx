@@ -8,7 +8,7 @@ const Populer = () => {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/popularinwoman',  {
+      const response = await fetch('http://192.168.1.109:3000/popularinwoman',  {
         mode: 'cors',
         headers: {
         'Access-Control-Allow-Origin': '*'
