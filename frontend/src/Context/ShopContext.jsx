@@ -137,7 +137,7 @@ const ShopContextProvider = (props) => {
   const [cartItem, setCartItem] = useState(getDefaultCart());
 
   useEffect(() => {
-    fetch('http://localhost:4000/allproducts')
+    fetch('http://192.168.1.109:3000/allproducts')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok ' + response.statusText);
@@ -148,7 +148,7 @@ const ShopContextProvider = (props) => {
       .catch((error) => console.error('Error fetching all products:', error));
 
     if (localStorage.getItem('auth-token')) {
-      fetch('http://localhost:4000/getcart', {
+      fetch('http://192.168.1.109:3000/getcart', {
         method: 'GET',
         headers: {
           Accept: 'application/form-data',
@@ -171,7 +171,7 @@ const ShopContextProvider = (props) => {
     setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
 
     if (localStorage.getItem('auth-token')) {
-      fetch('http://localhost:4000/addtocart', {
+      fetch('http://192.168.1.109:3000/addtocart', {
         method: 'POST',
         headers: {
           'auth-token': `${localStorage.getItem('auth-token')}`,
@@ -194,7 +194,7 @@ const ShopContextProvider = (props) => {
     setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
 
     if (localStorage.getItem('auth-token')) {
-      fetch('http://localhost:4000/removefromcart', {
+      fetch('http://192.168.1.109:3000/removefromcart', {
         method: 'POST',
         headers: {
           Accept: 'application/form-data',
