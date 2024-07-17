@@ -7,7 +7,7 @@ const Exclusiveoffer = () => {
     const [offers, setOffers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:4000/offers')
+        fetch('http://192.168.1.109:3000/offers')
             .then(response => response.json())
             .then(data => setOffers(data));
     }, []);
