@@ -22,13 +22,12 @@ const Footer = () => {
 
       </div>
       <ul className="footer-link">
-        <li>Company</li>
-        <li>Products</li>
-        <li>Offices</li>
         <li>About</li>
-        <li>Contact</li>
+        <li>Press Release</li>
         <li>Company Policy</li>
         <li>Terms & Conditions</li>
+        <li>Contact</li>
+        
       </ul>
       <div className="footer-social-icon">
         <div className="footer-icon-container">
