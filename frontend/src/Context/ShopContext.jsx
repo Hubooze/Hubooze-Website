@@ -144,8 +144,8 @@ const ShopContextProvider = (props) => {
         }
         return response.json();
       })
-      .then((data) => setAll_product(data))
-      .catch((error) => console.error('Error fetching all products:', error));
+        .then((data) => setAll_product(data))
+        .catch((error) => console.error('Error fetching all products:', error));
 
     if (localStorage.getItem('auth-token')) {
       fetch('http://192.168.1.109:3000/getcart', {

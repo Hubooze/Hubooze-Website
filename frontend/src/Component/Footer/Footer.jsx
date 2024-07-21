@@ -1,54 +1,70 @@
 import React from 'react'
 import './Footer.css';
+import { Link, Route, Routes } from 'react-router-dom';
 import footer_logo_img from '../Assets/logo_big.png'
 import instagram_icon from '../Assets/instagram_icon.png';
-import pintester_icon from '../Assets/pintester_icon.png';
 import whatsapp_icon from '../Assets/whatsapp_icon.png';
-import { Link } from 'react-router-dom';
+
+import About from '../../Pages/About';
+import Contact from '../../Pages/Contact';
+import CompanyPolicy from '../../Pages/CompanyPolicy';
+import TermsAndConditions from '../../Pages/TermsAndConditions';
+import PressRelease from '../../Pages/PressRelease'
 
 
 const Footer = () => {
   return (
-    <div className='footer'>
-      <div className="footerlogo">
+    <>
 
-        <Link to='/' style={{ textDecoration: 'none' }}>
-          <img src={footer_logo_img} alt='' />
-        </Link>
-        <Link to='/' style={{ textDecoration: 'none' }}>
-          <p>Hubooze</p>
+    <Routes>
+    <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/company-policy" element={<CompanyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/press-releases" element={<PressRelease />} />
+    </Routes>
 
-        </Link>
+      <div className='footer'>
+        <div className="footerlogo">
 
-      </div>
-      <ul className="footer-link">
-        <li>Company</li>
-        <li>Products</li>
-        <li>Offices</li>
-        <li>About</li>
-        <li>Contact</li>
-        <li>Company Policy</li>
-        <li>Terms & Conditions</li>
-      </ul>
-      <div className="footer-social-icon">
-        <div className="footer-icon-container">
-          <img src={instagram_icon} alt='' />
+          <Link to='/' style={{ textDecoration: 'none' }}>
+            <p>Hubooze</p>
+          </Link>
+
         </div>
 
-        <div className="footer-icon-container">
-          <img src={pintester_icon} alt='' />
+        <div className="footer-links">
+          <Link to="/about">ABOUT US</Link>
+          <Link to="/contact">CONTACT</Link>
+          <Link to="/press-releases">PRESS RELEASES</Link>
+          <Link to="/terms-and-conditions">TERMS AND CONDITIONS</Link> 
+          <Link to="/company-policy">COMPANY POLICY</Link>
         </div>
 
-        <div className="footer-icon-container">
-          <img src={whatsapp_icon} alt='' />
+      
+        <div className="social-icons">
+          <div className="footer-icon-container">
+            <img src={instagram_icon} alt='' />
+          </div>
+
+          {/* <div className="footer-icon-container">
+            <img src={linkedin_icon} alt='' />
+          </div> */}
+
+          <div className="footer-icon-container">
+            <img src={whatsapp_icon} alt='' />
+          </div>
         </div>
-      </div>
-      <div className="footer-copyright">
-        <hr />
-        <p> Copyright @ 2024 -All Right Reserved.</p>
-      </div>
+         
+
+        <div className="footer-copyright">
+          <hr />
+          <p> Copyright @ 2024 -All Right Reserved.</p>
+        </div>
     </div>
-  )
-}
+
+  </>
+  );
+};
 
 export default Footer

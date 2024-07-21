@@ -352,6 +352,7 @@ app.get('/allproducts', async (req, res) => {
 app.get('/newcollections', async (req, res) => {
     let products = await Product.find({});
     let newcollections = products.slice(1).slice(-8);
+    res.setHeader('Content-Type', 'application/json');
     console.log("New collection Fetched");
     res.send(newcollections);
 })
@@ -359,6 +360,7 @@ app.get('/newcollections', async (req, res) => {
 app.get('/latestcollection',async(req,res)=>{
     let products = await Product.find({});
     let latestcollection = products.slice(4).slice(12);
+    res.setHeader('Content-Type', 'application/json');
     console.log("New collection Fetched");
     res.send(latestcollection);
 })
@@ -373,6 +375,7 @@ app.get('/offers', async (req, res) => {
 app.get('/popularinwoman', async (req, res) => {
     let products = await Product.find({ category: "women" });
     let popularinwoman = products.slice(0, 4);
+    res.setHeader('Content-Type', 'application/json');
     console.log("Popular in woman Fetched");
     res.send(popularinwoman);
 })
@@ -460,7 +463,26 @@ app.get('/getcart', featchUser, async (req, res) => {
 //     res.json(userData.cartData)
 // })
 
+// About || Policy || Terms & Conditions || Press Release
 
+app.get('/about-us', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+  
+app.get('/policy', (req, res) => {
+res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
+
+
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.json({
+      error: {
+        message: err.message
+      }
+    });
+  });
 
 
 app.listen(port, (error) => {

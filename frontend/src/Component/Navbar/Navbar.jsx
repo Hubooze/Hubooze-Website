@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import SearchIcon from '@mui/icons-material/Search';
 // import { IoIosArrowDropdownCircle } from "react-icons/io";
+
 const Navbar = () => {
   const [menu, setMenu] = useState("shop");
   const { getTotalcartItem } = useContext(ShopContext);
@@ -28,7 +29,7 @@ const Navbar = () => {
           <p>Hubooze</p>
         </Link>
       </div>
-      <div className="serach_icons">
+      <div className="search_name">
       <input placeholder='Search ' className='search_icon' />
       </div>
       <SearchIcon className='search_name' />

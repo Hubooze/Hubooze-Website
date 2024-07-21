@@ -1,6 +1,7 @@
 
 import './App.css';
 import Navbar from './Component/Navbar/Navbar';
+// import NewNavbar from './Component/NewNavbar/NewNavbar'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ShopItem from './Pages/ShopCategory';
 import Shop from './Pages/Shop'
@@ -20,9 +21,10 @@ import Exclusiveoffer from './Pages/Exclusiveoffer';
 
 function App() {
   return (
-    <div >
+    <div>
       <BrowserRouter>
         <Navbar />
+        {/* <NewNavbar/> */}
         <Routes>
         <Route path='/offers' element={<Exclusiveoffer/>} />
         </Routes>
