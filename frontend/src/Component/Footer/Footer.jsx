@@ -14,15 +14,16 @@ import PressRelease from '../../Pages/PressRelease'
 
 const Footer = () => {
   return (
+
     <>
 
-    <Routes>
-    <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/company-policy" element={<CompanyPolicy />} />
-        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-        <Route path="/press-releases" element={<PressRelease />} />
-    </Routes>
+      <Routes>
+      <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/company-policy" element={<CompanyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/press-releases" element={<PressRelease />} />
+      </Routes>
 
       <div className='footer'>
         <div className="footerlogo">
@@ -31,21 +32,11 @@ const Footer = () => {
             <p>Hubooze</p>
           </Link>
 
-        </div>
-
-        <div className="footer-links">
-          <Link to="/about">ABOUT US</Link>
-          <Link to="/contact">CONTACT</Link>
-          <Link to="/press-releases">PRESS RELEASES</Link>
-          <Link to="/terms-and-conditions">TERMS AND CONDITIONS</Link> 
-          <Link to="/company-policy">COMPANY POLICY</Link>
-        </div>
-
       
-        <div className="social-icons">
-          <div className="footer-icon-container">
-            <img src={instagram_icon} alt='' />
-          </div>
+      <div className="footer-social-icon">
+        <div className="footer-icon-container">
+          <img src={instagram_icon} alt='' />
+        </div>
 
           {/* <div className="footer-icon-container">
             <img src={linkedin_icon} alt='' />
@@ -63,8 +54,12 @@ const Footer = () => {
         </div>
     </div>
 
-  </>
+    </> 
+
   );
+
 };
 
-export default Footer
+
+export default Footer;
+  

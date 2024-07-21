@@ -8,7 +8,7 @@ const LatestCollectionspage = () => {
   const [new_latestcollection,setNew_latestcollection]=useState([]);
 
   useEffect(()=>{
-        fetch('http://localhost:4000/latestcollection').then((response)=>response.json())
+        fetch('http://192.168.1.109:3000/latestcollection').then((response)=>response.json())
         .then((data)=>setNew_latestcollection(data));
   },[])
     return (
