@@ -17,6 +17,11 @@ import Cancel from './Pages/Cancel';
 import Success from './Pages/Success';
 import LatestCollectionspage from './Pages/LatestCollectionspage';
 import Exclusiveoffer from './Pages/Exclusiveoffer';
+import About from './Pages/About';
+import Contact from './Pages/Contact';
+import CompanyPolicy from './Pages/CompanyPolicy';
+import TermsAndConditions from './Pages/TermsAndConditions';
+import PressRelease from './Pages/PressRelease'
 
 
 function App() {
@@ -48,6 +53,13 @@ function App() {
           <Route path='/cart' element={<Cart />} />
 
         </Routes>
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/company-policy" element={<CompanyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/press-releases" element={<PressRelease />} />
+      </Routes>
         <Footer />
 
       </BrowserRouter>
