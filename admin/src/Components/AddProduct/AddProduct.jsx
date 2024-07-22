@@ -28,7 +28,7 @@ const AddProduct = () => {
 
   const Add_Product = async () => {
     console.log(productDetails);
-    let responeData;
+    let responseData;
     let product = productDetails
 
     let formData = new FormData();
@@ -42,10 +42,10 @@ const AddProduct = () => {
       body: formData,
     }).then((resp) =>
       resp.json()).then((data) => {
-        responeData = data
+        responseData = data
       })
 
-    if (responeData.success) {
+    if (responseData.success) {
    
 
       product.image=responeData.image_url;
@@ -88,7 +88,7 @@ const AddProduct = () => {
         <select value={productDetails.category} onChange={ChangeHandler} name='category' className='add-product-selector'>
           <option value='women'>Women</option>
           <option value='men'>Men</option>
-          <option value='kid'>KidS</option
+          <option value='kid'>Kids</option>
         </select>
       </div>
       <div className="addProduct-itemfield">
