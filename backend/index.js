@@ -1,11 +1,12 @@
-const port = 4000;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const jwt = require("jsonwebtoken")
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+require('dotenv').config();
 const { type } = require("os");
 const { error } = require("console");
 const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6JfLvff3Qiy7vBdmvtrImAeNL9guVQoZ2taVCQG0jInH2K4i0OTq00Tj1QZyPI");
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+
 
 
 //API creation
@@ -117,7 +119,15 @@ app.post('/payment', async (req, res) => {
 
 // database connection with mongoosedb
 
-mongoose.connect("mongodb+srv://abhishek88414:abhishek233@cluster0.pg8tz4y.mongodb.net/ecommrance");
+// mongoose.connect("mongodb+srv://abhishek88414:abhishek233@cluster0.pg8tz4y.mongodb.net/ecommrance");
+
+mongoose.connect(process.env.MONGODB_URI
+    ).then(() => {
+        console.log('Db connected successfully');
+    }).catch((err) => {
+        console.log('Error:', err.message);
+    });
+
 
 
 //Image storage engine
@@ -202,6 +212,201 @@ const Product = mongoose.model("Product", {
         default: true,
     },
 });
+
+// Women database schema 
+
+const Women = mongoose.model("Women Collection", {
+    id: {
+        type: Number,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        required: true,
+    },
+    size: {
+        type: Number,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+    },
+    HIN_No: {
+        type: Number,
+        required: true,
+    },
+    date_of_upload: {
+        type: Date,
+        default: Date.now,
+    },
+    date_of_sale: {
+        type: Date,
+        default: Date.now
+    },
+    available: {
+        type: Boolean,
+        default: true,
+    },
+    market_price: {
+        type: Number,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    selling_price: {
+        type: Number,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+});
+
+const Men = mongoose.model("Men Collection", {
+    id: {
+        type: Number,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        required: true,
+    },
+    size: {
+        type: Number,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+    },
+    HIN_No: {
+        type: Number,
+        required: true,
+    },
+    date_of_upload: {
+        type: Date,
+        default: Date.now,
+    },
+    date_of_sale: {
+        type: Date,
+        default: Date.now
+    },
+    available: {
+        type: Boolean,
+        default: true,
+    },
+    market_price: {
+        type: Number,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    selling_price: {
+        type: Number,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+});
+
+const Kids = mongoose.model("Kids Collection", {
+    id: {
+        type: Number,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        required: true,
+    },
+    size: {
+        type: Number,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+    },
+    HIN_No: {
+        type: Number,
+        required: true,
+    },
+    date_of_upload: {
+        type: Date,
+        default: Date.now,
+    },
+    date_of_sale: {
+        type: Date,
+        default: Date.now
+    },
+    available: {
+        type: Boolean,
+        default: true,
+    },
+    market_price: {
+        type: Number,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    selling_price: {
+        type: Number,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+});
+
+
+
+
 
 
 // Shema creating for user model 
@@ -463,17 +668,6 @@ app.get('/getcart', featchUser, async (req, res) => {
 //     res.json(userData.cartData)
 // })
 
-// About || Policy || Terms & Conditions || Press Release
-
-app.get('/about-us', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-  
-app.get('/policy', (req, res) => {
-res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
-
 
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
@@ -485,9 +679,9 @@ app.use((err, req, res, next) => {
   });
 
 
-app.listen(port, (error) => {
+app.listen(process.env.PORT, (error) => {
     if (!error) {
-        console.log("server is running " + port)
+        console.log("server is running " + process.env.PORT)
     }
     else {
         console.log("Error :" + error)
