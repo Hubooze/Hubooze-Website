@@ -51,7 +51,7 @@ const AddProduct = () => {
       product.image=responeData.image_url;
       console.log(product);
 
-      await fetch('http://192.168.1.109:3000/addproduct', {
+      await fetch('http:localhost:3000/addproduct', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

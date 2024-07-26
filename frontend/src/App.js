@@ -1,8 +1,7 @@
 
 import './App.css';
 import Navbar from './Component/Navbar/Navbar';
-// import NewNavbar from './Component/NewNavbar/NewNavbar'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ShopItem from './Pages/ShopCategory';
 import Shop from './Pages/Shop'
 import Product from './Pages/Product';
@@ -21,20 +20,47 @@ import About from './Pages/About';
 import Contact from './Pages/Contact';
 import CompanyPolicy from './Pages/CompanyPolicy';
 import TermsAndConditions from './Pages/TermsAndConditions';
-import PressRelease from './Pages/PressRelease'
+import PressRelease from './Pages/PressRelease';
 
+import AdminLogin from './Component/AdminLogin';
+import AdminDashboard from './Component/AdminDashboard';
+import WomenCRUD from './Component/WomenCRUD';
+import MenCRUD from './Component/MenCRUD';
+import KidsCRUD from './Component/KidsCRUD';
 
 function App() {
+
+  const isAuthenticated = () => {
+    return !!localStorage.getItem('token');
+  };
+
   return (
     <div>
       <BrowserRouter>
         <Navbar />
-        {/* <NewNavbar/> */}
         <Routes>
-        <Route path='/offers' element={<Exclusiveoffer/>} />
-        </Routes>
+
+          <Route path="/adminlogin" element={<AdminLogin />} />
+          <Route
+            path="/admin/dashboard"
+            element={isAuthenticated() ? <AdminDashboard /> : <Navigate to="/adminlogin" />}
+          />
+          <Route
+            path="/admin/women"
+            element={isAuthenticated() ? <WomenCRUD /> : <Navigate to="/adminlogin" />}
+          />
+          <Route
+            path="/admin/men"
+            element={isAuthenticated() ? <MenCRUD /> : <Navigate to="/adminlogin" />}
+          />
+          <Route
+            path="/admin/kids"
+            element={isAuthenticated() ? <KidsCRUD /> : <Navigate to="/adminlogin" />}
+          />
+        <Route path="/adminlogin" element={<Navigate to="/adminlogin" />} />
+      </Routes>
+        
         <Routes >
-          <Route path='/latestcollection' element={<LatestCollectionspage/>} />
           <Route path='/success' element={<Success />} />
           <Route path='/cancel' element={<Cancel />} />
         </Routes>
@@ -60,7 +86,7 @@ function App() {
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/press-releases" element={<PressRelease />} />
       </Routes>
-        <Footer />
+        {/* <Footer /> */}
 
       </BrowserRouter>
 

@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const bodyParser = require('body-parser');
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
@@ -10,6 +12,7 @@ require('dotenv').config();
 const { type } = require("os");
 const { error } = require("console");
 const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6JfLvff3Qiy7vBdmvtrImAeNL9guVQoZ2taVCQG0jInH2K4i0OTq00Tj1QZyPI");
+const adminRoutes = require('./routes/admin');
 // const { error } = require("console");
 
 // Configure CORS
@@ -35,13 +38,23 @@ app.use((req, res, next) => {
   next();
 });
 
-
+app.use(bodyParser.json());
 
 //API creation
 
 app.get("/", (req, res) => {
     res.send("Express App is Running")
 })
+
+// res.cookie('userToken', token, {
+//     maxAge: 3600000, // Set an appropriate expiration time
+//     httpOnly: true, // Important for security
+//     secure: true, // Only send over HTTPS
+//     sameSite: 'none', // For cross-site requests
+// });
+
+
+
 
 // payment intergection
 
@@ -117,6 +130,10 @@ app.post('/payment', async (req, res) => {
  
 // })
 
+
+// Routes
+app.use('/api/admin', adminRoutes);
+
 // database connection with mongoosedb
 
 // mongoose.connect("mongodb+srv://abhishek88414:abhishek233@cluster0.pg8tz4y.mongodb.net/ecommrance");
@@ -127,6 +144,7 @@ mongoose.connect(process.env.MONGODB_URI
     }).catch((err) => {
         console.log('Error:', err.message);
     });
+
 
 
 
@@ -149,7 +167,7 @@ app.use('/images', express.static('upload/images'))
 app.post("/upload", upload.single('product'), (req, res) => {
     res.json({
         success: 1,
-        image_url: `http://localhost:${port}/images/${req.file.filename}`
+        image_url: `http://localhost:${process.env.PORT}/images/${req.file.filename}`
     })
 })
 
@@ -215,198 +233,194 @@ const Product = mongoose.model("Product", {
 
 // Women database schema 
 
-const Women = mongoose.model("Women Collection", {
-    id: {
-        type: Number,
-        required: true,
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    category: {
-        type: String,
-        required: true,
-    },
-    color: {
-        type: String,
-        required: true,
-    },
-    size: {
-        type: Number,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: true,
-    },
-    HIN_No: {
-        type: Number,
-        required: true,
-    },
-    date_of_upload: {
-        type: Date,
-        default: Date.now,
-    },
-    date_of_sale: {
-        type: Date,
-        default: Date.now
-    },
-    available: {
-        type: Boolean,
-        default: true,
-    },
-    market_price: {
-        type: Number,
-        required: true,
-    },
-    price: {
-        type: Number,
-        required: true,
-    },
-    selling_price: {
-        type: Number,
-        required: true,
-    },
-    image: {
-        type: String,
-        required: true,
-    },
-});
+// const Women = mongoose.model("Women Collection", {
+//     id: {
+//         type: Number,
+//         required: true,
+//     },
+//     name: {
+//         type: String,
+//         required: true,
+//     },
+//     category: {
+//         type: String,
+//         required: true,
+//     },
+//     color: {
+//         type: String,
+//         required: true,
+//     },
+//     size: {
+//         type: Number,
+//         required: true,
+//     },
+//     description: {
+//         type: String,
+//         required: true,
+//     },
+//     quantity: {
+//         type: Number,
+//         required: true,
+//     },
+//     HIN_No: {
+//         type: Number,
+//         required: true,
+//     },
+//     date_of_upload: {
+//         type: Date,
+//         default: Date.now,
+//     },
+//     date_of_sale: {
+//         type: Date,
+//         default: Date.now
+//     },
+//     available: {
+//         type: Boolean,
+//         default: true,
+//     },
+//     market_price: {
+//         type: Number,
+//         required: true,
+//     },
+//     price: {
+//         type: Number,
+//         required: true,
+//     },
+//     selling_price: {
+//         type: Number,
+//         required: true,
+//     },
+//     image: {
+//         type: String,
+//         required: true,
+//     },
+// });
 
-const Men = mongoose.model("Men Collection", {
-    id: {
-        type: Number,
-        required: true,
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    category: {
-        type: String,
-        required: true,
-    },
-    color: {
-        type: String,
-        required: true,
-    },
-    size: {
-        type: Number,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: true,
-    },
-    HIN_No: {
-        type: Number,
-        required: true,
-    },
-    date_of_upload: {
-        type: Date,
-        default: Date.now,
-    },
-    date_of_sale: {
-        type: Date,
-        default: Date.now
-    },
-    available: {
-        type: Boolean,
-        default: true,
-    },
-    market_price: {
-        type: Number,
-        required: true,
-    },
-    price: {
-        type: Number,
-        required: true,
-    },
-    selling_price: {
-        type: Number,
-        required: true,
-    },
-    image: {
-        type: String,
-        required: true,
-    },
-});
+// const Men = mongoose.model("Men Collection", {
+//     id: {
+//         type: Number,
+//         required: true,
+//     },
+//     name: {
+//         type: String,
+//         required: true,
+//     },
+//     category: {
+//         type: String,
+//         required: true,
+//     },
+//     color: {
+//         type: String,
+//         required: true,
+//     },
+//     size: {
+//         type: Number,
+//         required: true,
+//     },
+//     description: {
+//         type: String,
+//         required: true,
+//     },
+//     quantity: {
+//         type: Number,
+//         required: true,
+//     },
+//     HIN_No: {
+//         type: Number,
+//         required: true,
+//     },
+//     date_of_upload: {
+//         type: Date,
+//         default: Date.now,
+//     },
+//     date_of_sale: {
+//         type: Date,
+//         default: Date.now
+//     },
+//     available: {
+//         type: Boolean,
+//         default: true,
+//     },
+//     market_price: {
+//         type: Number,
+//         required: true,
+//     },
+//     price: {
+//         type: Number,
+//         required: true,
+//     },
+//     selling_price: {
+//         type: Number,
+//         required: true,
+//     },
+//     image: {
+//         type: String,
+//         required: true,
+//     },
+// });
 
-const Kids = mongoose.model("Kids Collection", {
-    id: {
-        type: Number,
-        required: true,
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    category: {
-        type: String,
-        required: true,
-    },
-    color: {
-        type: String,
-        required: true,
-    },
-    size: {
-        type: Number,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: true,
-    },
-    HIN_No: {
-        type: Number,
-        required: true,
-    },
-    date_of_upload: {
-        type: Date,
-        default: Date.now,
-    },
-    date_of_sale: {
-        type: Date,
-        default: Date.now
-    },
-    available: {
-        type: Boolean,
-        default: true,
-    },
-    market_price: {
-        type: Number,
-        required: true,
-    },
-    price: {
-        type: Number,
-        required: true,
-    },
-    selling_price: {
-        type: Number,
-        required: true,
-    },
-    image: {
-        type: String,
-        required: true,
-    },
-});
-
-
-
-
+// const Kids = mongoose.model("Kids Collection", {
+//     id: {
+//         type: Number,
+//         required: true,
+//     },
+//     name: {
+//         type: String,
+//         required: true,
+//     },
+//     category: {
+//         type: String,
+//         required: true,
+//     },
+//     color: {
+//         type: String,
+//         required: true,
+//     },
+//     size: {
+//         type: Number,
+//         required: true,
+//     },
+//     description: {
+//         type: String,
+//         required: true,
+//     },
+//     quantity: {
+//         type: Number,
+//         required: true,
+//     },
+//     HIN_No: {
+//         type: Number,
+//         required: true,
+//     },
+//     date_of_upload: {
+//         type: Date,
+//         default: Date.now,
+//     },
+//     date_of_sale: {
+//         type: Date,
+//         default: Date.now
+//     },
+//     available: {
+//         type: Boolean,
+//         default: true,
+//     },
+//     market_price: {
+//         type: Number,
+//         required: true,
+//     },
+//     price: {
+//         type: Number,
+//         required: true,
+//     },
+//     selling_price: {
+//         type: Number,
+//         required: true,
+//     },
+//     image: {
+//         type: String,
+//         required: true,
+//     },
+// });
 
 
 // Shema creating for user model 
@@ -554,36 +568,36 @@ app.get('/allproducts', async (req, res) => {
 
 // creating endpoint of api
 
-app.get('/newcollections', async (req, res) => {
-    let products = await Product.find({});
-    let newcollections = products.slice(1).slice(-8);
-    res.setHeader('Content-Type', 'application/json');
-    console.log("New collection Fetched");
-    res.send(newcollections);
-})
+// app.get('/newcollections', async (req, res) => {
+//     let products = await Product.find({});
+//     let newcollections = products.slice(1).slice(-8);
+//     res.setHeader('Content-Type', 'application/json');
+//     console.log("New collection Fetched");
+//     res.send(newcollections);
+// })
 
-app.get('/latestcollection',async(req,res)=>{
-    let products = await Product.find({});
-    let latestcollection = products.slice(4).slice(12);
-    res.setHeader('Content-Type', 'application/json');
-    console.log("New collection Fetched");
-    res.send(latestcollection);
-})
+// app.get('/latestcollection',async(req,res)=>{
+//     let products = await Product.find({});
+//     let latestcollection = products.slice(4).slice(12);
+//     res.setHeader('Content-Type', 'application/json');
+//     console.log("New collection Fetched");
+//     res.send(latestcollection);
+// })
 
-app.get('/offers', async (req, res) => {
-    let products = await Product.find({ category: "women" });
-    let offers = products.slice(1, 8);
-    console.log("Popular in woman Fetched");
-    res.send(offers);
-})
+// app.get('/offers', async (req, res) => {
+//     let products = await Product.find({ category: "women" });
+//     let offers = products.slice(1, 8);
+//     console.log("Popular in woman Fetched");
+//     res.send(offers);
+// })
 
-app.get('/popularinwoman', async (req, res) => {
-    let products = await Product.find({ category: "women" });
-    let popularinwoman = products.slice(0, 4);
-    res.setHeader('Content-Type', 'application/json');
-    console.log("Popular in woman Fetched");
-    res.send(popularinwoman);
-})
+// app.get('/popularinwoman', async (req, res) => {
+//     let products = await Product.find({ category: "women" });
+//     let popularinwoman = products.slice(0, 4);
+//     res.setHeader('Content-Type', 'application/json');
+//     console.log("Popular in woman Fetched");
+//     res.send(popularinwoman);
+// })
 
 // Creating middelware to featch user
 
