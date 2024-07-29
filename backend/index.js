@@ -3,7 +3,6 @@ const app = express();
 const mongoose = require("mongoose");
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const jwt = require("jsonwebtoken");
-const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const multer = require("multer");
 const path = require("path");
@@ -14,6 +13,14 @@ const { error } = require("console");
 const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6JfLvff3Qiy7vBdmvtrImAeNL9guVQoZ2taVCQG0jInH2K4i0OTq00Tj1QZyPI");
 const adminRoutes = require('./routes/admin');
 // const { error } = require("console");
+
+
+// Other Middlewares
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 // Configure CORS
 
@@ -26,11 +33,6 @@ app.use(cors({
 }));
 
 
-// Other Middlewares
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
@@ -38,7 +40,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
 
 //API creation
 
@@ -46,18 +47,8 @@ app.get("/", (req, res) => {
     res.send("Express App is Running")
 })
 
-// res.cookie('userToken', token, {
-//     maxAge: 3600000, // Set an appropriate expiration time
-//     httpOnly: true, // Important for security
-//     secure: true, // Only send over HTTPS
-//     sameSite: 'none', // For cross-site requests
-// });
-
-
-
 
 // payment intergection
-
 
 app.post('/payment', async (req, res) => {
 
@@ -134,9 +125,8 @@ app.post('/payment', async (req, res) => {
 // Routes
 app.use('/api/admin', adminRoutes);
 
-// database connection with mongoosedb
 
-// mongoose.connect("mongodb+srv://abhishek88414:abhishek233@cluster0.pg8tz4y.mongodb.net/ecommrance");
+// database connection with mongoosedb
 
 mongoose.connect(process.env.MONGODB_URI
     ).then(() => {
@@ -196,44 +186,7 @@ app.post("/upload", upload.single('product'), (req, res) => {
 //schema for product creating
 
 
-const Product = mongoose.model("Product", {
-    id: {
-        type: Number,
-        required: true,
-    },
-    name: {
-        type: String,
-        required: true,
-    },
-    image: {
-        type: String,
-        required: true,
-    },
-    category: {
-        type: String,
-        required: true,
-    },
-    new_price: {
-        type: Number,
-        required: true,
-    },
-    old_price: {
-        type: Number,
-        required: true,
-    },
-    date: {
-        type: Date,
-        default: Date.now,
-    },
-    available: {
-        type: Boolean,
-        default: true,
-    },
-});
-
-// Women database schema 
-
-// const Women = mongoose.model("Women Collection", {
+// const Product = mongoose.model("Product", {
 //     id: {
 //         type: Number,
 //         required: true,
@@ -242,66 +195,7 @@ const Product = mongoose.model("Product", {
 //         type: String,
 //         required: true,
 //     },
-//     category: {
-//         type: String,
-//         required: true,
-//     },
-//     color: {
-//         type: String,
-//         required: true,
-//     },
-//     size: {
-//         type: Number,
-//         required: true,
-//     },
-//     description: {
-//         type: String,
-//         required: true,
-//     },
-//     quantity: {
-//         type: Number,
-//         required: true,
-//     },
-//     HIN_No: {
-//         type: Number,
-//         required: true,
-//     },
-//     date_of_upload: {
-//         type: Date,
-//         default: Date.now,
-//     },
-//     date_of_sale: {
-//         type: Date,
-//         default: Date.now
-//     },
-//     available: {
-//         type: Boolean,
-//         default: true,
-//     },
-//     market_price: {
-//         type: Number,
-//         required: true,
-//     },
-//     price: {
-//         type: Number,
-//         required: true,
-//     },
-//     selling_price: {
-//         type: Number,
-//         required: true,
-//     },
 //     image: {
-//         type: String,
-//         required: true,
-//     },
-// });
-
-// const Men = mongoose.model("Men Collection", {
-//     id: {
-//         type: Number,
-//         required: true,
-//     },
-//     name: {
 //         type: String,
 //         required: true,
 //     },
@@ -309,116 +203,21 @@ const Product = mongoose.model("Product", {
 //         type: String,
 //         required: true,
 //     },
-//     color: {
-//         type: String,
-//         required: true,
-//     },
-//     size: {
+//     new_price: {
 //         type: Number,
 //         required: true,
 //     },
-//     description: {
-//         type: String,
-//         required: true,
-//     },
-//     quantity: {
+//     old_price: {
 //         type: Number,
 //         required: true,
 //     },
-//     HIN_No: {
-//         type: Number,
-//         required: true,
-//     },
-//     date_of_upload: {
+//     date: {
 //         type: Date,
 //         default: Date.now,
-//     },
-//     date_of_sale: {
-//         type: Date,
-//         default: Date.now
 //     },
 //     available: {
 //         type: Boolean,
 //         default: true,
-//     },
-//     market_price: {
-//         type: Number,
-//         required: true,
-//     },
-//     price: {
-//         type: Number,
-//         required: true,
-//     },
-//     selling_price: {
-//         type: Number,
-//         required: true,
-//     },
-//     image: {
-//         type: String,
-//         required: true,
-//     },
-// });
-
-// const Kids = mongoose.model("Kids Collection", {
-//     id: {
-//         type: Number,
-//         required: true,
-//     },
-//     name: {
-//         type: String,
-//         required: true,
-//     },
-//     category: {
-//         type: String,
-//         required: true,
-//     },
-//     color: {
-//         type: String,
-//         required: true,
-//     },
-//     size: {
-//         type: Number,
-//         required: true,
-//     },
-//     description: {
-//         type: String,
-//         required: true,
-//     },
-//     quantity: {
-//         type: Number,
-//         required: true,
-//     },
-//     HIN_No: {
-//         type: Number,
-//         required: true,
-//     },
-//     date_of_upload: {
-//         type: Date,
-//         default: Date.now,
-//     },
-//     date_of_sale: {
-//         type: Date,
-//         default: Date.now
-//     },
-//     available: {
-//         type: Boolean,
-//         default: true,
-//     },
-//     market_price: {
-//         type: Number,
-//         required: true,
-//     },
-//     price: {
-//         type: Number,
-//         required: true,
-//     },
-//     selling_price: {
-//         type: Number,
-//         required: true,
-//     },
-//     image: {
-//         type: String,
-//         required: true,
 //     },
 // });
 

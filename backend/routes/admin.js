@@ -6,14 +6,41 @@ const Admin = require('../models/Admin');
 const Women = require('../models/Women');
 const Men = require('../models/Men');
 const Kids = require('../models/Kids');
+require('dotenv').config();
+
+const secret = process.env.JWT_SECRET;
+
+// Admin registration route
+router.post('/adminregister', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const existingAdmin = await Admin.findOne({ username });
+    if (existingAdmin) {
+      return res.status(400).json({ message: 'Admin already exists' });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newAdmin = new Admin({ username, password: hashedPassword });
+    await newAdmin.save();
+    res.status(201).json({ message: 'Admin registered successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 // Admin login
 router.post('/adminlogin', async (req, res) => {
     const { username, password } = req.body;
     try {
       const admin = await Admin.findOne({ username });
-      if (!admin || !(await admin.comparePassword(password))) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+      if (!admin) {
+        console.log('Admin not found');
+        return res.status(401).json({ message: 'Invalid username' });
+      }
+      console.log('Admin found:', admin);
+      const isMatch = await admin.comparePassword(password);
+      console.log('Password match:', isMatch);
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid password' });
       }
       const token = jwt.sign({ id: admin._id }, secret, { expiresIn: '1h' });
       res.json({ token });

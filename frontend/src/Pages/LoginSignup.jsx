@@ -36,7 +36,7 @@ const LoginSignup = () => {
     await fetch('http://192.168.1.109:3000/signup', {
       method: 'POST',
       headers: {
-        Accecpt: 'application/form-data',
+        Accept: 'application/form-data',
         'Content-type': 'application/json'
       },
       body: JSON.stringify(formData),
@@ -74,7 +74,7 @@ const LoginSignup = () => {
         }
         <div className="loginsingup-agree">
           <input type='checkbox' name='' id='' />
-          <p>By continuing, i agree to the terms of use & privacy.</p>
+          <p>By continuing, I agree to the terms of use & privacy.</p>
         </div>
       </div>
     </div>
