@@ -6,7 +6,6 @@ const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  // const history = useHistory();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,7 +19,6 @@ const AdminLogin = () => {
     try {
         const res = await axios.post('http://localhost:4000/api/admin/adminlogin', { username, password });
         localStorage.setItem('token', res.data.token);
-        // history.push('/admin/dashboard');
         navigate('/admin/dashboard');
     } catch (err) {
         if (err.response) {
