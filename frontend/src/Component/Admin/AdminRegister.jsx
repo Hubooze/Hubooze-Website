@@ -10,7 +10,7 @@ const AdminRegister = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/admin/adminregister', { username, password });
+      await axios.post('http://192.168.1.109:3000/api/admin/adminregister', { username, password });
       navigate('/adminlogin');
     } catch (err) {
       console.error('Registration failed', err);

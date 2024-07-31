@@ -36,6 +36,10 @@
   .admin-dashboard ul li a:hover {
     background-color: #0056b3;
   }
+
+  .admin-dashboard button:hover {
+    background-color: #0056b3;
+  }
   
   /* Additional styling for CRUD components */
   

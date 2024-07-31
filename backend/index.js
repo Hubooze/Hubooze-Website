@@ -31,14 +31,12 @@ app.use(cors({
   optionsSuccessStatus: 204
 }));
 
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-
 
 
 //API creation
@@ -230,6 +228,7 @@ app.get('/getcart', fetchUser, async (req, res) => {
         res.status(500).send("Error getting cart data");
     }
 });
+
 
 // payment intergection
 

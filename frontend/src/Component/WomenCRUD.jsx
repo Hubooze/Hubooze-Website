@@ -8,7 +8,7 @@ const WomenCRUD = () => {
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
-    const res = await axios.get('http://localhost:4000/api/admin/women', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await axios.get('http://192.168.1.109:3000/api/admin/women', { headers: { Authorization: `Bearer ${token}` } });
     setWomen(res.data);
   };
 
@@ -18,19 +18,19 @@ const WomenCRUD = () => {
 
   const handleAdd = async () => {
     const token = localStorage.getItem('token');
-    await axios.post('http://localhost:4000/api/admin/women', newItem, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.post('http://192.168.1.109:3000/api/admin/women', newItem, { headers: { Authorization: `Bearer ${token}` } });
     fetchData();
   };
 
   const handleUpdate = async (id, updatedItem) => {
     const token = localStorage.getItem('token');
-    await axios.put(`http://localhost:4000/api/admin/women/${id}`, updatedItem, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.put(`http://192.168.1.109:3000/api/admin/women/${id}`, updatedItem, { headers: { Authorization: `Bearer ${token}` } });
     fetchData();
   };
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
-    await axios.delete(`http://localhost:4000/api/admin/women/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.delete(`http://192.168.1.109:3000/api/admin/women/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchData();
   };
 

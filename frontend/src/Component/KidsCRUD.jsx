@@ -8,7 +8,7 @@ const KidsCRUD = () => {
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
-    const res = await axios.get('http://localhost:4000/api/admin/kids', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await axios.get('http://192.168.1.109:3000/api/admin/kids', { headers: { Authorization: `Bearer ${token}` } });
     setKids(res.data);
   };
 
@@ -18,19 +18,19 @@ const KidsCRUD = () => {
 
   const handleAdd = async () => {
     const token = localStorage.getItem('token');
-    await axios.post('http://localhost:4000/api/admin/kids', newItem, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.post('http://192.168.1.109:3000/api/admin/kids', newItem, { headers: { Authorization: `Bearer ${token}` } });
     fetchData();
   };
 
   const handleUpdate = async (id, updatedItem) => {
     const token = localStorage.getItem('token');
-    await axios.put(`http://localhost:4000/api/admin/kids/${id}`, updatedItem, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.put(`http://192.168.1.109:3000/api/admin/kids/${id}`, updatedItem, { headers: { Authorization: `Bearer ${token}` } });
     fetchData();
   };
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
-    await axios.delete(`http://localhost:4000/api/admin/kids/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.delete(`http://192.168.1.109:3000/api/admin/kids/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchData();
   };
 
