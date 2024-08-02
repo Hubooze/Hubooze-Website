@@ -10,8 +10,12 @@ const cors = require("cors");
 require('dotenv').config();
 const { type } = require("os");
 const { error } = require("console");
-// const stripe = require("stripe")("sk_test_51PAVq2SAtSBHIsrz3h8gHqE4z9WQU6rY6AYJ6JfLvff3Qiy7vBdmvtrImAeNL9guVQoZ2taVCQG0jInH2K4i0OTq00Tj1QZyPI");
 const adminRoutes = require('./routes/admin');
+const womenRoutes = require('./routes/women');
+const menRoutes = require('./routes/men');
+const kidsRoutes = require('./routes/kids');
+const authRoutes = require('./routes/auth');
+const cartRoutes = require('./routes/cart');
 
 
 // Other Middlewares
@@ -24,9 +28,9 @@ app.use(bodyParser.json());
 // Configure CORS
 
 app.use(cors({
-  origin: '*', // Allow all origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
   credentials: true,
   optionsSuccessStatus: 204
 }));
@@ -56,8 +60,16 @@ mongoose.connect(process.env.MONGODB_URI
     });
 
 
-// Routes
+// Routes Admin
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin/women', womenRoutes);
+app.use('/api/admin/men', menRoutes);
+app.use('/api/admin/kids', kidsRoutes);
+
+
+// Routes User and Cart
+app.use('/api/auth', authRoutes);
+app.use('/api/cart', cartRoutes);
 
 
 //Image storage engine
@@ -83,189 +95,6 @@ app.post("/upload", upload.single('product'), (req, res) => {
     })
 })
 
-
-// Shema creating for user model 
-
-
-const Users = mongoose.model('Users', {
-    name: {
-        type: String,
-    },
-    email: {
-        type: String,
-        unique: true,
-    },
-    password: {
-        type: String,
-    },
-    cartData: {
-        type: Object,
-    },
-    date: {
-        type: Date,
-        default: Date.now,
-    }
-
-})
-
-// Creating endpoint of user registions
-
-app.post('/signup', async (req, res) => {
-
-    let check = await Users.findOne({ email: req.body.email })
-
-    if (check) {
-        return res.status(400).json({ success: false, error: "exiting user found with email id and addresss" })
-    }
-
-    let cart = {};
-    for (let i = 0; i < 300; i++) {
-        cart[i] = 0;
-    }
-
-    const user = new Users({
-        name: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        cartData: cart,
-    })
-
-    await user.save();
-
-    const data = {
-        user: {
-            id: user.id
-        }
-    }
-    const token = jwt.sign(data, 'secret_ecom');
-    res.json({ success: true, token })
-
-})
-
-// Creating endpoint for user login
-
-app.post('/login', async (req, res) => {
-
-    let user = await Users.findOne({ email: req.body.email });
-    if (user) {
-        const passwordCompare = req.body.password === user.password;
-
-        if (passwordCompare) {
-            const data = {
-                user: {
-                    id: user.id
-                }
-            }
-            const token = jwt.sign(data, 'secret_ecom');
-            res.json({ success: true, token })
-        }
-        else {
-            res.json({ success: false, errors: "wrong password" })
-        }
-    }
-    else {
-        res.json({ success: false, errors: "worng Email Id" })
-    }
-
-})
-
-
-// Creating middelware to fetch user
-
-const fetchUser = async (req, res, next) => {
-    const token = req.header('auth-token');
-    if (!token) {
-        res.status(401).send({ errors: "please authenicate using valid token" })
-    }
-    else {
-        try {
-            const data = jwt.verify(token, 'secret_ecom');
-            req.user = data.user;
-            next();
-        }
-        catch (error) {
-            res.status(401).send({ errors: "Plz authentications" })
-        }
-    }
-}
-
-
-// Creating endpoint for adding to cart
-app.post('/addtocart',fetchUser, async (req, res) => {
-    console.log("Added",req.body.itemId);
-    let userData=await Users.findOne({_id:req.user.id}) ;
-    userData.cartData[req.body.itemId]+=1;
-    await Users.findOneAndUpdate({_id:req.user.id},{cartData:userData.cartData});
-    res.send("Added")
-})
-
-//Creating endpoint for remove product from cartdata
-
-// Endpoint to remove an item from the cart
-app.post('/removefromCart', fetchUser, async (req, res) => {
-    try {
-        console.log("remove", req.body.itemId);
-        let userData = await Users.findOne({ _id: req.user.id });
-        if (userData && userData.cartData[req.body.itemId] > 0) {
-            userData.cartData[req.body.itemId] -= 1;
-            await Users.findOneAndUpdate({ _id: req.user.id }, { cartData: userData.cartData });
-        }
-        res.send("remove");
-    } catch (error) {
-        console.error("Error removing item from cart:", error);
-        res.status(500).send("Error removing item from cart");
-    }
-});
-
-// Endpoint to get cart data
-app.get('/getcart', fetchUser, async (req, res) => {
-    try {
-        console.log("GetCart");
-        let userData = await Users.findOne({ _id: req.user.id });
-        res.json(userData.cartData);
-    } catch (error) {
-        console.error("Error getting cart data:", error);
-        res.status(500).send("Error getting cart data");
-    }
-});
-
-
-// payment intergection
-
-app.post('/payment', async (req, res) => {
-
-    const product = await stripe.products.create({
-        name:"T-Shirt"
-    });
-
-    
-    if(product){
-        var price = await stripe.prices.create({
-            product: `${product.id}`,
-            unit_amount: 300 * 100,
-            currency:'inr',
-        });
-    }
-
-
-    if(price.id){
-       var session = await stripe.checkout.sessions.create({
-        line_items: [
-            {
-                price: `${price.id}`,
-                quantity: 1,
-            }
-        ],
-        mode:'payment',
-        success_url: 'http://localhost:3000/success',
-        cancel_url: 'http://localhost:3000/cancel',
-        customer_email:'demo@gmail.com'
-
-       }) 
-    }
-
-    res.json(session)
-});
 
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
@@ -403,3 +232,40 @@ app.listen(process.env.PORT, (error) => {
 //      res.json({id:session.id})
  
 // })
+
+// payment intergection
+
+// app.post('/payment', async (req, res) => {
+
+//     const product = await stripe.products.create({
+//         name:"T-Shirt"
+//     });
+
+    
+//     if(product){
+//         var price = await stripe.prices.create({
+//             product: `${product.id}`,
+//             unit_amount: 300 * 100,
+//             currency:'inr',
+//         });
+//     }
+
+
+//     if(price.id){
+//        var session = await stripe.checkout.sessions.create({
+//         line_items: [
+//             {
+//                 price: `${price.id}`,
+//                 quantity: 1,
+//             }
+//         ],
+//         mode:'payment',
+//         success_url: 'http://localhost:3000/success',
+//         cancel_url: 'http://localhost:3000/cancel',
+//         customer_email:'demo@gmail.com'
+
+//        }) 
+//     }
+
+//     res.json(session)
+// });

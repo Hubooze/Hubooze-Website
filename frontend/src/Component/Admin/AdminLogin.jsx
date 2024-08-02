@@ -19,7 +19,9 @@ const AdminLogin = () => {
     try {
         const res = await axios.post('http://192.168.1.109:3000/api/admin/adminlogin', { username, password });
         localStorage.setItem('token', res.data.token);
+        console.log('Token set in local storage:', res.data.token);
         navigate('/admin/dashboard');
+        console.log('Navigated to /admin/dashboard');
     } catch (err) {
         if (err.response) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx

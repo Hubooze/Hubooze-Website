@@ -10,10 +10,15 @@ const AdminDashboard = () => {
     navigate('/adminlogin');
   };
 
+  const handleRegister = () => {
+    navigate('/adminregister');
+  };
+
   return (
     <div>
       <h1>Admin Dashboard</h1>
       <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleRegister}>Register</button>
       <div>
       <ul>
         <li><Link to="/admin/women">Manage Women</Link></li>

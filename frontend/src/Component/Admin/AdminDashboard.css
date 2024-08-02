@@ -40,6 +40,10 @@
   .admin-dashboard button:hover {
     background-color: #0056b3;
   }
+
+  button + button {
+    margin-left: 10px;
+  }
   
   /* Additional styling for CRUD components */
   

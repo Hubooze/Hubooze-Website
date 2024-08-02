@@ -28,6 +28,7 @@ import AdminDashboard from './Component/Admin/AdminDashboard';
 import WomenCRUD from './Component/WomenCRUD';
 import MenCRUD from './Component/MenCRUD';
 import KidsCRUD from './Component/KidsCRUD';
+import './axiosConfig';
 
 function App() {
 
@@ -58,11 +59,11 @@ function App() {
         </Routes>
 
         <Routes>
-          {/* <Route path='/*' element={<AdminLogin />} /> */}
-          
-          <Route path='/adminlogin' element={<AdminLogin />} />
-          
-          <Route path="/adminregister" element={<AdminRegister />} />
+          <Route path='/adminlogin' element={<AdminLogin />} />  
+          <Route
+            path='/adminregister'
+            element={isAuthenticated() ? <AdminRegister /> : <Navigate to="/adminlogin" />}
+          />       
           <Route
             path='/admin/dashboard'
             element={isAuthenticated() ? <AdminDashboard /> : <Navigate to="/adminlogin" />}
@@ -79,7 +80,6 @@ function App() {
             path='/admin/kids'
             element={isAuthenticated() ? <KidsCRUD /> : <Navigate to="/adminlogin" />}
           />
-          {/* <Route path='/*' element={<Navigate to="/adminlogin" />} />  */}
         </Routes>
 
         {/* <Routes>

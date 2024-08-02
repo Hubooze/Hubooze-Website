@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './Admin/AdminDashboard.css'
 
 const WomenCRUD = () => {
   const [women, setWomen] = useState([]);
   const [newItem, setNewItem] = useState({ name: '', description: '', price: ''});
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
@@ -34,9 +36,14 @@ const WomenCRUD = () => {
     fetchData();
   };
 
+  const handleBackToDashboard = () => {
+    navigate('/admin/dashboard');
+  };
+
   return (
     <div className="crud-container">
       <h1>Manage Women</h1>
+      <button onClick={handleBackToDashboard}>Admin Dashboard</button>
       <ul>
         {women.map(item => (
           <li key={item._id}>
