@@ -1,138 +1,33 @@
-import React, { useContext } from "react";
-import "./CartItem.css";
-import remove_icon from "../Assets/cart_cross_icon.png";
-import { ShopContext } from "../../Context/ShopContext";
-import { useNavigate } from "react-router-dom";
-import { loadStripe } from '@stripe/stripe-js';
-// import carts from '../Assets/all_product';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ShopContext } from '../../Context/ShopContext';
 import axios from 'axios';
+import './CartItem.css';
+
+
 const CartItem = () => {
-  const { getTotalCartAmount, all_product, cartItem, removeaddToCart } = useContext(ShopContext);
+  const { cartData, addToCart, removeFromCart, totalAmount } = useContext(ShopContext);
+  const navigate = useNavigate();
 
-  // const carts = [
-  //   {
-  //     name: "Product 1",
-  //     price: 29.99,
-  //     quantity: 3
-  //   },
-  //   {
-  //     name: "Product 2",
-  //     price: 49.99,
-  //     quantity: 5
-  //   },
-  //   {
-  //     name: "Product 3",
-  //     price: 19.99,
-  //     quantity: 2
-  //   }
-  // ];
-
-  // // Example usage:
-  // console.log(carts);
-
-  // payment intergection
-
-  // const makePayment = async () => {
-  //   const stripe = await loadStripe("pk_test_51PAVq2SAtSBHIsrzk80oszvp7IUtIWNCruS1o9hfzrc9bG9goUiOt5xkN0mqTB7tHob8rzFqxkmH8HjK3GCxmVcu00E9qE2Z0D");
-
-  //   const body = {
-  //     products: carts
-  //   }
-  //   const headers = {
-  //     "Content-Type": "application/json"
-  //   }
-  //   const response = await fetch("http://localhost:4000/api/create-checkout-session", {
-  //     method: "POST",
-  //     headers: headers,
-  //     body: JSON.stringify(body)
-  //   });
-
-  //   const session = await response.json();
-
-  //   const result = stripe.redirectToCheckout({
-  //     sessionId: session.id
-  //   });
-
-  //   if (result.error) {
-  //     console.log(result.error);
-  //   }
-  // }
-
-  const buyfunction = async () => {
-
-    let response = await axios.post('http://192.168.1.109:3000/payment')
-
-    if (response && response.status === 200) {
-
-      window.location.href = response.data.url
-
-      console.log(response.data)
-    }
-  }
-
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
 
   return (
-    <div >
-      <div className="cartitem">
-        <div className="cart-format-main">
-          <p>Product</p>
-          <p>Title</p>
-          <p className="prices-para">Prices</p>
-          <p>Quantify</p>
-          <p>Total</p>
-          <p>Remove</p>
-        </div>
-        <hr />
-        {all_product.map((e, i) => {
-          if (cartItem[e.id] > 0) {
-            return (
-              <div>
-                <div className="cartitem-format cart-format-main">
-                  <img src={e.image} key={i.e} alt="" className="carticon-product-icon " />
-                  <p>{e.name}</p>
-                  <p>₹{e.new_price}</p>
-                  <button className="cartim-button">{cartItem[e.id]}</button>
-                  <p className="total-prices-para">{e.new_price * cartItem[e.id]}</p>
-                  <img className='cart-remove-icon' src={remove_icon} onClick={() => removeaddToCart(e.id)} alt="" />
-                </div>
-                <hr />
-              </div>
-            );
-          }
-          return null;
-        })}
-        <div className="cartitem-down">
-          <div className="cartitem-total">
-            <h1>Cart totals</h1>
-            <div>
-              <div className="cartitem-total-item">
-                <p>Subtotal</p>
-                <p>₹{getTotalCartAmount()}</p>
-              </div>
-              <hr />
-              <div className="cartitem-total-item">
-                <p>Shipping Fee </p>
-                <p>Free</p>
-              </div>
-              <hr />
-              <div className="cartitem-total-item">
-                <h3>Total</h3>
-                <h3>₹{getTotalCartAmount()}</h3>
-              </div>
-            </div>
-            <button className="checkoutbtn" onClick={buyfunction} > CHECKOUT</button>
+    <div className="cart-container">
+      <div className="cart-items">
+        {Object.entries(cartData).map(([itemId, quantity]) => (
+          <div key={itemId} className="cart-item">
+            <p>Item ID: {itemId}</p>
+            <p>Quantity: {quantity}</p>
+            <button onClick={() => addToCart(itemId)}>Add</button>
+            <button onClick={() => removeFromCart(itemId)}>Remove</button>
           </div>
-          <div className="cartitem-promocode">
-            <p>I You have a promo code,Enter it here</p>
-            <div className="cartitem-promobox">
-              <input type="text" placeholder="promo code" />
-              <button className="input-button">Submit</button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-      <div>
-        <h1 className="hello msg">hello</h1>
+      <div className="cart-summary">
+        <h3>Total Amount: ₹{totalAmount}</h3>
+        <button onClick={handleCheckout}>Proceed to Checkout</button>
       </div>
     </div>
   );

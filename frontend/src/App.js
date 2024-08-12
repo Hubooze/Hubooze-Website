@@ -5,7 +5,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ShopItem from './Pages/ShopCategory';
 import Shop from './Pages/Shop'
 import Product from './Pages/Product';
-import Cart from './Pages/Cart';
+import CartItem from './Component/CartItem/CartItem';
+import Checkout from './Pages/Checkout';
+// import Cart from './Pages/Cart';
 import LoginSignup from './Pages/LoginSignup';
 import Footer from './Component/Footer/Footer';
 import men_banner from './Component/Assets/banner_mens.png';
@@ -55,7 +57,7 @@ function App() {
 
         <Routes>
           <Route path='/login' element={<LoginSignup />} />
-          <Route path='/cart' element={<Cart />} />
+          {/* <Route path='/cart' element={<Cart />} /> */}
         </Routes>
 
         <Routes>
@@ -80,6 +82,11 @@ function App() {
             path='/admin/kids'
             element={isAuthenticated() ? <KidsCRUD /> : <Navigate to="/adminlogin" />}
           />
+        </Routes>
+
+        <Routes>
+          <Route path="/cart" element={<CartItem />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
 
         {/* <Routes>

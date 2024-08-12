@@ -4,7 +4,7 @@ const { addToCart, removeFromCart, getCart } = require('../controllers/cartContr
 const fetchUser = require('../middlewares/fetchUser');
 
 router.post('/addtocart', fetchUser, addToCart);
-router.post('/removefromCart', fetchUser, removeFromCart);
+router.post('/removefromcart', fetchUser, removeFromCart);
 router.get('/getcart', fetchUser, getCart);
 
 module.exports = router;

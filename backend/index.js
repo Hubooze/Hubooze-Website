@@ -14,8 +14,9 @@ const adminRoutes = require('./routes/admin');
 const womenRoutes = require('./routes/women');
 const menRoutes = require('./routes/men');
 const kidsRoutes = require('./routes/kids');
-const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 const cartRoutes = require('./routes/cart');
+const orderRoutes = require('./routes/order')
 
 
 // Other Middlewares
@@ -52,8 +53,10 @@ app.get("/", (req, res) => {
 
 // database connection with mongoosedb
 
-mongoose.connect(process.env.MONGODB_URI
-    ).then(() => {
+mongoose.connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+    }).then(() => {
         console.log('Db connected successfully');
     }).catch((err) => {
         console.log('Error:', err.message);
@@ -68,8 +71,11 @@ app.use('/api/admin/kids', kidsRoutes);
 
 
 // Routes User and Cart
-app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/cart', cartRoutes);
+
+// Routes Order/Payment
+app.use('/api/payment', orderRoutes);
 
 
 //Image storage engine

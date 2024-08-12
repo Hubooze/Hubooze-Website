@@ -7,8 +7,12 @@ const WomenSchema = mongoose.Schema({
     name: {
         type: String,
     },
+    HIN_No: {
+        type: Number,
+    },
     category: {
         type: String,
+        enum: ['Ethnic', 'Western', 'Sports'],
     },
     sub_category: {
         type: String,
@@ -17,15 +21,19 @@ const WomenSchema = mongoose.Schema({
         type: String,
     },
     size: {
+        type: String,
+        enum: ['S', 'M', 'L', 'XL'],
+    },
+    quantity: {
         type: Number,
     },
     description: {
         type: String,
     },
-    quantity: {
+    market_price: {
         type: Number,
     },
-    HIN_No: {
+    selling_price: {
         type: Number,
     },
     date_of_upload: {
@@ -38,19 +46,11 @@ const WomenSchema = mongoose.Schema({
     },
     available: {
         type: Boolean,
+        enum: [true, false],
         default: true,
-    },
-    market_price: {
-        type: Number,
-    },
-    price: {
-        type: Number,
-    },
-    selling_price: {
-        type: Number,
-    },
+    },    
     image: {
-        type: String,
+        type: [String],
     },
 });
 

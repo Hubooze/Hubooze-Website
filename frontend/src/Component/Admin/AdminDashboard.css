@@ -113,4 +113,35 @@
   .crud-container .add-item button:hover {
     background-color: #0056b3;
   }
+
+  table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f4f4f4;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+button {
+  padding: 5px 10px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
   

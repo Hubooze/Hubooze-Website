@@ -12,7 +12,7 @@ exports.createWomen = async (req, res) => {
     }
   };
 
-  
+
 exports.getWomen = async (req, res) => {
     try {
       const women = await Women.find();
@@ -54,3 +54,16 @@ exports.deleteWomen = async (req, res) => {
       res.status(500).json({ message: err.message });
     }
   };
+
+
+exports.getEnum =  async (req, res) => {
+  try {
+    const categoryEnum = Women.schema.path('category').enumValues;
+    const sizeEnum = Women.schema.path('size').enumValues;
+    const availabilityEnum = Women.schema.path('available').enumValues;
+    
+    res.json({ categoryEnum, sizeEnum, availabilityEnum });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
