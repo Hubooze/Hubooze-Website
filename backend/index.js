@@ -17,6 +17,7 @@ const kidsRoutes = require('./routes/kids');
 const userRoutes = require('./routes/user');
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order')
+const shippingRoutes = require('./routes/shipping')
 
 
 // Other Middlewares
