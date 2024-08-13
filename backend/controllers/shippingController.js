@@ -1,5 +1,6 @@
 const Shipping = require('../models/Shipping');
 const axios = require('axios');
+require('dotenv').config();
 
 exports.createShipment = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ exports.createShipment = async (req, res) => {
     // Create shipment with Delhivery
     const response = await axios.post('https://api.delhivery.com/cmu/push/json/', {
       // Your payload for Delhivery API
-      pickup_location: "35 wamanrao Mahadik andheri west mumbai 400053",
+      pickup_location: process.env.DROP_LOCATION,
       shipment_details: [{
         consignee: address.recipientName,
         consignee_address1: address.street,

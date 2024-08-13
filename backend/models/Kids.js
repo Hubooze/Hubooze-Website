@@ -14,6 +14,9 @@ const KidsSchema = new mongoose.Schema({
     sub_category: {
         type: String,
     },
+    brand: {
+        type: String,
+    },
     color: {
         type: String,
     },
