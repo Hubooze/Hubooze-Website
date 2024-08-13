@@ -21,7 +21,7 @@ const Checkout = () => {
         key: 'YOUR_RAZORPAY_KEY_ID',
         amount: response.data.amount,
         currency: response.data.currency,
-        name: 'Ecommerce Website',
+        name: 'Hubooze',
         description: 'Order Payment',
         order_id: response.data.id,
         handler: async function (response) {

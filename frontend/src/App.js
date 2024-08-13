@@ -20,7 +20,7 @@ import Success from './Pages/Success';
 // import Exclusiveoffer from './Pages/Exclusiveoffer';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
-import CompanyPolicy from './Pages/CompanyPolicy';
+import CompanyPolicy from './Pages/Policy';
 import TermsAndConditions from './Pages/TermsAndConditions';
 import PressRelease from './Pages/PressRelease';
 
@@ -30,6 +30,11 @@ import AdminDashboard from './Component/Admin/AdminDashboard';
 import WomenCRUD from './Component/WomenCRUD';
 import MenCRUD from './Component/MenCRUD';
 import KidsCRUD from './Component/KidsCRUD';
+// Mr. Ravinders files
+import WomenSection from './Pages/WomenSection';
+// import MenSection from './Pages/MenSection';
+// import KidsSection from './Pages/KidSection';
+
 import './axiosConfig';
 
 function App() {
@@ -45,9 +50,10 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Shop />} />
-          <Route path='/mens' element={<ShopItem banner={men_banner} subcate={mencat} category="men" />} />
-          <Route path='/womens' element={<ShopItem banner={woman_banner} category="women" />} />
-          <Route path='/kids' element={<ShopItem banner={kid_banner} category="kid" />} />
+          {/* Routes by Mr. Ravinder - women, men, kids*/}
+          <Route path='/womens' element={<WomenSection></WomenSection>} />
+          {/* <Route path='/mens' element={<MenSection></MenSection>} />
+          <Route path='/kids' element={<KidsSection></KidsSection>} /> */}
         </Routes>
 
         {/* <Routes>

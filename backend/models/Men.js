@@ -9,6 +9,7 @@ const MenSchema = new mongoose.Schema({
     },
     category: {
         type: String,
+        enum: ['Ethnic', 'Western', 'Sports'],
     },
     sub_category: {
         type: String,
@@ -18,6 +19,7 @@ const MenSchema = new mongoose.Schema({
     },
     size: {
         type: Number,
+        enum: ['S', 'M', 'L', 'XL'],
     },
     description: {
         type: String,
@@ -38,6 +40,7 @@ const MenSchema = new mongoose.Schema({
     },
     available: {
         type: Boolean,
+        enum: [true, false],
         default: true,
     },
     market_price: {
@@ -50,7 +53,7 @@ const MenSchema = new mongoose.Schema({
         type: Number,
     },
     image: {
-        type: String,
+        type: [String],
     },
 });
 

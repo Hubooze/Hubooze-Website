@@ -77,6 +77,9 @@ app.use('/api/cart', cartRoutes);
 // Routes Order/Payment
 app.use('/api/payment', orderRoutes);
 
+// Routes Shipping
+app.use('/api/shipping', shippingRoutes);
+
 
 //Image storage engine
 

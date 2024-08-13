@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
-import axios from 'axios';
 import './CartItem.css';
 
 
