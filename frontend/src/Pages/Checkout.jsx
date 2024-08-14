@@ -1,13 +1,41 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ShopContext } from '../Context/ShopContext';
 import axios from 'axios';
 import './CSS/Checkout.css';
 
 const Checkout = () => {
   const { cartData, totalAmount } = useContext(ShopContext);
+  const [userId, setUserId] = useState('')
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [pincode, setPincode] = useState('');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://192.168.1.109:3000/api/user/profile', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+          },
+        });
+        
+        const user = response.data;
+        setUserId(user._id);
+        setName(user.name || '');
+        setEmail(user.email || '');
+        setAddress(user.address || '');
+        setPhone(user.phone || '');
+        setPincode(user.pincode || '');
+        
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handlePayment = async () => {
     try {
@@ -18,7 +46,7 @@ const Checkout = () => {
       });
 
       const options = {
-        key: 'YOUR_RAZORPAY_KEY_ID',
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
         amount: response.data.amount,
         currency: response.data.currency,
         name: 'Hubooze',
@@ -29,14 +57,32 @@ const Checkout = () => {
             order_id: response.razorpay_order_id,
             payment_id: response.razorpay_payment_id,
             signature: response.razorpay_signature,
-            userId: 'USER_ID',  // Replace with actual user ID
+            userId,  // Replace with actual user ID
             cartData,
           });
-          console.log(verificationResponse.data);
-        },
+        //   console.log(verificationResponse.data);
+        // },
+        const delhiveryResponse = await axios.post('http://192.168.1.109:3000/api/shipping/create-shipment', {
+          address,
+          phone,
+          pincode,
+          cartData,
+          orderId: response.razorpay_order_id,
+        });
+
+        await axios.post('http://192.168.1.109:3000/api/shipping/send-confirmation-email', {
+          userId,
+          orderId: response.razorpay_order_id,
+          email: email, // Assuming email is also fetched with user data
+          address,
+          pincode,
+          phone,
+          shippingDetails: delhiveryResponse.data,
+        });
+      },
         prefill: {
-          name: 'John Doe',
-          email: 'john.doe@example.com',
+          name: name,
+          email: email,
           contact: phone,
         },
         notes: {

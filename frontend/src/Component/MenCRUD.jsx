@@ -9,6 +9,7 @@ const MenCRUD = () => {
   const [editedItem, setEditedItem] = useState({});
   const [newItem, setNewItem] = useState({
     name: '',
+    HIN_No: '',
     category: '',
     sub_category: '',
     color: '',
@@ -55,6 +56,7 @@ const MenCRUD = () => {
       setMen([...men, res.data]);
       setNewItem({
         name: '',
+        HIN_No: '',
         category: '',
         sub_category: '',
         color: '',
@@ -106,6 +108,7 @@ const MenCRUD = () => {
       <h2>Add New Product</h2>
       <form onSubmit={handleAddSubmit}>
         <input name="name" value={newItem.name} onChange={handleAddChange} placeholder="Name" required />
+        <input name="HIN_No" value={newItem.HIN_No} onChange={handleAddChange} placeholder="HIN_No" required />
         <input name="category" value={newItem.category} onChange={handleAddChange} placeholder="Category" required />
         <input name="sub_category" value={newItem.sub_category} onChange={handleAddChange} placeholder="Sub-Category" required />
         <input name="color" value={newItem.color} onChange={handleAddChange} placeholder="Color" required />
@@ -126,6 +129,7 @@ const MenCRUD = () => {
         <thead>
           <tr>
             <th>Name</th>
+            <th>HIN No</th>
             <th>Category</th>
             <th>Sub-Category</th>
             <th>Color</th>
@@ -136,6 +140,7 @@ const MenCRUD = () => {
             <th>Price</th>
             <th>Selling Price</th>
             <th>Availability</th>
+            <th>Images</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -144,6 +149,7 @@ const MenCRUD = () => {
           {men.map((item, index) => (
             <tr key={item._id}>
               <td>{item.name}</td>
+              <td>{item.HIN_No}</td>
               <td>{editingIndex === index ? <input name="category" value={editedItem.category} onChange={handleChange} /> : item.category}</td>
               <td>{item.sub_category}</td>
               <td>{editingIndex === index ? <input name="color" value={editedItem.color} onChange={handleChange} /> : item.color}</td>
@@ -154,6 +160,7 @@ const MenCRUD = () => {
               <td>{item.price}</td>
               <td>{editingIndex === index ? <input name="selling_price" value={editedItem.selling_price} onChange={handleChange} type="number" /> : item.selling_price}</td>
               <td>{item.available ? 'True' : 'False'}</td>
+              <td>{item.image}</td>
               <td>
                 {editingIndex === index ? (
                   <button onClick={() => handleSave(item._id)}>Save</button>

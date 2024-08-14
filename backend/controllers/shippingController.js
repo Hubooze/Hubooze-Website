@@ -61,3 +61,31 @@ exports.getShippingStatus = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.sendEmail = async (req, res) => {
+  const { userId, orderId, email, address, pincode, phone, shippingDetails } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'your-email@gmail.com',
+      pass: 'your-email-password',
+    },
+  });
+
+  const mailOptions = {
+    from: 'your-email@gmail.com',
+    to: email,
+    subject: 'Order Confirmation',
+    text: `Thank you for your purchase! Your order ID is ${orderId}. Your items will be shipped to ${address}, ${pincode}.`,
+    html: `<h1>Order Confirmation</h1><p>Your order ID is <strong>${orderId}</strong>.</p><p>Your items will be shipped to <strong>${address}, ${pincode}</strong>.</p><p>Tracking ID: ${shippingDetails.tracking_id}</p>`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.send('Confirmation email sent');
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).send('Failed to send confirmation email');
+  }
+};

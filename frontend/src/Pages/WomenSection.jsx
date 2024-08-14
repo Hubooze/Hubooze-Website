@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ImageSlider from '../Component/ImageSlider/ImageSlider';
-import Item from '../Component/Item/item';
+import Item from '../Component/Item/Item';
 import img1 from "../Component/Assets/p1_product_i1.png";
 import img2 from "../Component/Assets/p1_product_i2.png";
 import img3 from "../Component/Assets/p1_product_i3.png";
@@ -15,7 +16,7 @@ import './CSS/WomenSection.css';
 const WomenSection = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isOpen, setIsOpen] = useState(false); 
-
+    const [products, setProducts] = useState([]); // State to store fetched products
 
 
     const toggleDropdown = (dropdown) => {
@@ -25,6 +26,20 @@ const WomenSection = () => {
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
       };
+
+    useEffect(() => {
+        // Fetch products from the backend
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://192.168.1.109:3000/api/admin/women'); // Update with your correct endpoint
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
 
     const images = [
         'https://via.placeholder.com/800x400.png?text=Sale+Up+to+50%25+Off',
@@ -276,14 +291,14 @@ const WomenSection = () => {
         </div>
       )}
                 <div className="shopCategory-product">
-                    {sampleItem.map(item => (
+                    {products.map(product => (
                         <Item
-                            key={item.id}
-                            id={item.id}
-                            name={item.name}
-                            images={item.images}
-                            new_price={item.new_price}
-                            old_price={item.old_price}
+                            key={product.id}
+                            id={product.HIN_No}
+                            name={product.name}
+                            images={product.image}
+                            new_price={product.market_price}
+                            old_price={product.selling_price}
                         />
                     ))}
                 </div>

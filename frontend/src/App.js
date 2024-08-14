@@ -50,7 +50,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Shop />} />
-          {/* Routes by Mr. Ravinder - women, men, kids*/}
+          {/* Routes by Mr. Ravinder - women*/}
           <Route path='/womens' element={<WomenSection></WomenSection>} />
           {/* <Route path='/mens' element={<MenSection></MenSection>} />
           <Route path='/kids' element={<KidsSection></KidsSection>} /> */}
