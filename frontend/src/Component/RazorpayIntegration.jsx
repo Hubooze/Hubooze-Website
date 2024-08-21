@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const RazorpayIntegration = ({ amount, currency, receipt }) => {
   const handlePayment = async () => {
-    const { data } = await axios.post('/api/orders/create', { amount, currency, receipt, paymentMethod: 'Prepaid' });
+    const { data } = await axios.post('http://192.168.1.109:3000/api/payment/create', { amount, currency, receipt, paymentMethod: 'Prepaid' });
 
     const options = {
       key: process.env.REACT_APP_RAZORPAY_KEY_ID,
@@ -14,7 +14,7 @@ const RazorpayIntegration = ({ amount, currency, receipt }) => {
       description: 'Test Transaction',
       order_id: data.order.id,
       handler: async (response) => {
-        const paymentResult = await axios.post('/api/orders/verify', {
+        const paymentResult = await axios.post('http://192.168.1.109:3000/api/payment/verify', {
           order_id: response.razorpay_order_id,
           payment_id: response.razorpay_payment_id,
           signature: response.razorpay_signature,

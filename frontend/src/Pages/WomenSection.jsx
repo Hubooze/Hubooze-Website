@@ -11,7 +11,7 @@ import './CSS/WomenSection.css';
 
 
 // Assuming you have a Navbar component
-// import Navbar from '../Component/Navbar/Navbar';
+import Navbar from '../Component/Navbar/Navbar';
 
 const WomenSection = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -31,7 +31,7 @@ const WomenSection = () => {
         // Fetch products from the backend
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://192.168.1.109:3000/api/admin/women'); // Update with your correct endpoint
+                const response = await axios.get('http://192.168.1.109:3000/api/products'); // Update with your correct endpoint
                 setProducts(response.data);
             } catch (error) {
                 console.error('Error fetching products:', error);
