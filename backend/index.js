@@ -5,14 +5,17 @@ const bodyParser = require('body-parser');
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const adminRoutes = require('./routes/admin');
 const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
+const wishlistRoutes = require('./routes/wishlist')
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order')
 const shippingRoutes = require('./routes/shipping')
+
 
 
 // Other Middlewares
@@ -39,6 +42,13 @@ app.use((req, res, next) => {
   next();
 });
 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: 'Too many requests, please try again later.',
+  });
+
+app.use(limiter);
 
 app.get("/", (req, res) => {
     res.send("Express App is Running")
@@ -65,6 +75,7 @@ app.use('/api/products', productRoutes);
 
 // Routes User and Cart
 app.use('/api/user', userRoutes);
+app.use('api/wishlist', wishlistRoutes);
 app.use('/api/cart', cartRoutes);
 
 // Routes Order/Payment

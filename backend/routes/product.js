@@ -8,16 +8,17 @@ const {
     deleteProduct,
 } = require('../controllers/productController');
 const authenticateAdmin = require('../middlewares/authenticateAdmin');
+const cacheMiddleware = require('../middlewares/cachingMiddleware')
 
 const router = express.Router();
 
 // Route for getting all products with optional filters, sorting, and pagination
-router.get('/', getAllProducts);
+router.get('/', cacheMiddleware, getAllProducts);
 
-router.get('/category/:category', getProductsByCategory);
+router.get('/category/:category', cacheMiddleware, getProductsByCategory);
 
 // Route for getting a single product by ID
-router.get('/:id', getProductById);
+router.get('/:id', cacheMiddleware, getProductById);
 
 // Route for creating a new product
 router.post('/', authenticateAdmin, createProduct);

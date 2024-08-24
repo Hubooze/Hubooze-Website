@@ -1,64 +1,62 @@
-const User = require('../models/User');
-const redis = require('redis');
-const redisClient = redis.createClient();
+const Cart = require('../models/Cart');
+const Product = require('../models/Product');
 
-redisClient.on('error', (err) => {
-  console.error('Redis error:', err);
-});
-
-exports.addToCart = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const { itemId } = req.body;
-
-    let user = await User.findById(userId);
-    user.cartData.set(itemId, (user.cartData.get(itemId) || 0) + 1);
-    await user.save();
-
-    redisClient.setex(`cart:${userId}`, 3600, JSON.stringify(Object.fromEntries(user.cartData)));
-    res.send("Added to cart");
-  } catch (error) {
-    console.error("Error adding to cart:", error);
-    res.status(500).send("Error adding to cart");
-  }
-};
-
-exports.removeFromCart = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const { itemId } = req.body;
-
-    let user = await User.findById(userId);
-    if (user.cartData.has(itemId)) {
-      user.cartData.set(itemId, Math.max(user.cartData.get(itemId) - 1, 0));
-      if (user.cartData.get(itemId) === 0) {
-        user.cartData.delete(itemId);
-      }
-      await user.save();
-      redisClient.setex(`cart:${userId}`, 3600, JSON.stringify(Object.fromEntries(user.cartData)));
-    }
-    res.send("Removed from cart");
-  } catch (error) {
-    console.error("Error removing item from cart:", error);
-    res.status(500).send("Error removing item from cart");
-  }
-};
-
+// Get User Cart
 exports.getCart = async (req, res) => {
-  try {
-    const userId = req.user.id;
+  const userId = req.user.id;
 
-    redisClient.get(`cart:${userId}`, async (err, data) => {
-      if (data) {
-        res.json(JSON.parse(data));
-      } else {
-        let user = await User.findById(userId);
-        redisClient.setex(`cart:${userId}`, 3600, JSON.stringify(Object.fromEntries(user.cartData)));
-        res.json(Object.fromEntries(user.cartData));
-      }
-    });
-  } catch (error) {
-    console.error("Error getting cart data:", error);
-    res.status(500).send("Error getting cart data");
+  try {
+    const cart = await Cart.findOne({ userId }).populate('items.productId');
+    if (cart) {
+      res.status(200).json({ cart });
+    } else {
+      res.status(404).json({ message: 'Cart not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+// Add Product to Cart
+exports.addToCart = async (req, res) => {
+  const userId = req.user.id;
+  const { productId, quantity } = req.body;
+
+  try {
+    let cart = await Cart.findOne({ userId });
+    if (!cart) {
+      cart = new Cart({ userId, items: [] });
+    }
+
+    const existingItem = cart.items.find(item => item.productId.toString() === productId);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.items.push({ productId, quantity });
+    }
+
+    await cart.save();
+    res.status(201).json({ message: 'Product added to cart' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+// Remove Product from Cart
+exports.removeFromCart = async (req, res) => {
+  const userId = req.user.id;
+  const { productId } = req.body;
+
+  try {
+    const cart = await Cart.findOne({ userId });
+    if (cart) {
+      cart.items = cart.items.filter(item => item.productId.toString() !== productId);
+      await cart.save();
+      res.status(200).json({ message: 'Product removed from cart' });
+    } else {
+      res.status(404).json({ message: 'Cart not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 };

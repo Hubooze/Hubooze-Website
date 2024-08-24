@@ -1,11 +1,11 @@
 const express = require('express');
 const { createOrder, updateOrderStatus, verifyPayment } = require('../controllers/paymentController');
-const { authMiddleware } = require('../middlewares/authMiddleware');
+const authenticateToken = require('../middlewares/authToken');
 
 const router = express.Router();
 
-router.post('/create', authMiddleware, createOrder);
-router.put('/update-status', authMiddleware, updateOrderStatus);
-router.post('/verify', authMiddleware, verifyPayment);
+router.post('/create', authenticateToken, createOrder);
+router.put('/update-status', authenticateToken, updateOrderStatus);
+router.post('/verify', authenticateToken, verifyPayment);
 
 module.exports = router;

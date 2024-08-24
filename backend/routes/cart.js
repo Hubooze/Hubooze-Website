@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { addToCart, removeFromCart, getCart } = require('../controllers/cartController');
-const fetchUser = require('../middlewares/fetchUser');
+const authenticateToken = require('../middlewares/authToken');
+const cacheMiddleware = require('../middlewares/cachingMiddleware');
 
-router.post('/addtocart', fetchUser, addToCart);
-router.post('/removefromcart', fetchUser, removeFromCart);
-router.get('/getcart', fetchUser, getCart);
+router.post('/addtocart', authenticateToken, cacheMiddleware, addToCart);
+router.post('/removefromcart', authenticateToken, cacheMiddleware, removeFromCart);
+router.get('/getcart', authenticateToken, cacheMiddleware, getCart);
 
 module.exports = router;

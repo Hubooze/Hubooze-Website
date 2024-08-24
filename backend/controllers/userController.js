@@ -73,3 +73,25 @@ exports.userInfo = async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   };
+
+exports.updateProfile = async (req, res) => {
+    const { name, address, phone, pincode } = req.body;
+  
+    try {
+      const user = await User.findById(req.user.id);
+  
+      if (user) {
+        user.name = name || user.name;
+        user.address = address || user.address;
+        user.phone = phone || user.phone;
+        user.pincode = pincode || user.pincode;
+  
+        await user.save();
+        res.json({ message: 'Profile updated successfully' });
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (err) {
+      res.status(500).json({ message: 'Server error', error: err.message });
+    }
+  };
