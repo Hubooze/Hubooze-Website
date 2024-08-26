@@ -6,6 +6,8 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const rateLimit = require('express-rate-limit');
+const errorHandler = require('./middlewares/errorHandler');
+const { errors } = require('celebrate');
 require('dotenv').config();
 
 const adminRoutes = require('./routes/admin');
@@ -15,7 +17,6 @@ const wishlistRoutes = require('./routes/wishlist')
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order')
 const shippingRoutes = require('./routes/shipping')
-
 
 
 // Other Middlewares
@@ -108,12 +109,8 @@ app.post("/upload", upload.single('product'), (req, res) => {
     })
 })
 
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
-});
+app.use(errors());  // Celebrate Error Handling Middleware
+app.use(errorHandler);  // Centralized error handling
 
 app.listen(process.env.PORT, (error) => {
     if (!error) {

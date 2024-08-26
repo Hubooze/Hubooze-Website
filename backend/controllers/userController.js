@@ -1,68 +1,70 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { celebrate, Joi } = require('celebrate');
 require('dotenv').config();
 
 const secret = process.env.JWT_SECRET;
 
-exports.signup = async (req, res) => {
-    try {
-        let check = await User.findOne({ email: req.body.email });
-
-        if (check) {
-            return res.status(400).json({ success: false, error: "Existing user found with email id and address" });
+exports.signup = [ celebrate({
+    body: Joi.object({
+      username: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().min(8).required(),
+    }),
+}), async (req, res) => {
+        try {
+        let userExists = await User.findOne({ email: req.body.email });
+    
+        if (userExists) {
+          return res.status(400).json({ success: false, error: "User already exists with this email." });
         }
-
-        let cart = {};
-        for (let i = 0; i < 300; i++) {
-            cart[i] = 0;
-        }
-
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    
         const user = new User({
-            name: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            cartData: cart,
+          name: req.body.username,
+          email: req.body.email,
+          password: hashedPassword,
+          address: req.body.address,
+          phone: req.body.phone,
+          pincode: req.body.pincode,
         });
-
+    
         await user.save();
-
-        const data = {
-            user: {
-                id: user.id
-            }
-        };
-        const token = jwt.sign(data, secret);
-        res.json({ success: true, token });
-    } catch (error) {
+    
+        const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
+        res.status(201).json({
+            message: 'User signed up successfully!',
+            user: { username, email },
+        });
+        } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, error: "Server error" });
+      }
     }
-};
+];
+    
 
 exports.login = async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email });
-        if (user) {
-            const passwordCompare = req.body.password === user.password;
 
-            if (passwordCompare) {
-                const data = {
-                    user: {
-                        id: user.id
-                    }
-                };
-                const token = jwt.sign(data, secret);
-                res.json({ success: true, token });
-            } else {
-                res.json({ success: false, errors: "Wrong password" });
-            }
-        } else {
-            res.json({ success: false, errors: "Wrong Email Id" });
+        if (!user) {
+          return res.status(400).json({ success: false, error: "Invalid email." });
         }
-    } catch (error) {
+    
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!passwordMatch) {
+          return res.status(400).json({ success: false, error: "Invalid password." });
+        }
+    
+        const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
+        res.json({ success: true, token });
+      } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, error: "Server error" });
-    }
+      }
 };
 
 exports.userInfo = async (req, res) => {

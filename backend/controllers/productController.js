@@ -1,25 +1,5 @@
 const Product = require('../models/Product');
-// const redisClient = require('../cache');
 
-// Function to set cache with a TTL (Time To Live)
-const setCache = (key, data, ttl = 3600) => {
-    redisClient.set(key, JSON.stringify(data), 'EX', ttl);
-  };
-  
-// Function to get data from cache
-const getCache = async (key) => {
-const data = await redisClient.get(key);
-return data ? JSON.parse(data) : null;
-};
-
-// Function to invalidate cache
-const invalidateCache = async (pattern) => {
-    const keys = await redisClient.keys(pattern);
-    if (keys.length) {
-      redisClient.del(keys);
-    }
-  };
-  
 
 // Get all products with filtering, sorting, and pagination
 exports.getAllProducts = async (req, res) => {
@@ -49,20 +29,10 @@ exports.getAllProducts = async (req, res) => {
         const pageNumber = parseInt(page) || 1;
         const pageSize = parseInt(limit) || 10;
 
-        // Generate a cache key based on all the query parameters
-        // const cacheKey = `products_${JSON.stringify(req.query)}`;
-        // const cachedData = await getCache(cacheKey);
-
-        // if (cachedData) {
-        //     return res.status(200).json({ products: cachedData });
-        // }
-
         const products = await Product.find(query)
             .sort(sortOptions)
             .skip((pageNumber - 1) * pageSize)
             .limit(pageSize);
-
-        // setCache(cacheKey, products);
 
         const totalProducts = await Product.countDocuments(query);
 
@@ -148,8 +118,6 @@ exports.createProduct = async (req, res) => {
         const newProduct = new Product(req.body);
         const product = await newProduct.save();
 
-        // Invalidate relevant caches
-        // redisClient.del('products_all');
         res.status(201).json({ success: true, product });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -168,10 +136,6 @@ exports.updateProduct = async (req, res) => {
             return res.status(404).json({ success: false, message: 'Product not found' });
         }
 
-        // Invalidate relevant caches
-        // redisClient.del('products_all');
-        // redisClient.del(`product_${id}`);
-
         res.status(200).json({ success: true, updatedProduct });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -186,10 +150,6 @@ exports.deleteProduct = async (req, res) => {
         if (!deletedProduct) {
             return res.status(404).json({ success: false, message: 'Product not found' });
         }
-
-        // Invalidate relevant caches
-        // redisClient.del('products_all');
-        // redisClient.del(`product_${id}`);
 
         res.status(200).json({ success: true, message: 'Product deleted successfully' });
     } catch (error) {

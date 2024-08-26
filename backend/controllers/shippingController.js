@@ -62,19 +62,99 @@ exports.getShippingStatus = async (req, res) => {
   }
 };
 
+
+exports.fetchWaybill = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    // Fetch waybill logic here...
+    const waybill = await axios.get(`https://external.shipping.api/waybill/${orderId}`);
+    res.json(waybill.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching waybill' });
+  }
+};
+
+exports.updateShipment = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const updateData = req.body;
+    // Shipment update logic here...
+    const result = await axios.post(`https://external.shipping.api/shipment/${orderId}`, updateData);
+    res.json(result.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating shipment' });
+  }
+};
+
+exports.generateShippingLabel = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    // Generate shipping label logic here...
+    const label = await axios.post(`https://external.shipping.api/shipping-label/${orderId}`);
+    res.json(label.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error generating shipping label' });
+  }
+};
+
+exports.createPickupRequest = async (req, res) => {
+  try {
+    const requestData = req.body;
+    // Pickup request creation logic here...
+    const result = await axios.post(`https://external.shipping.api/pickup-request`, requestData);
+    res.json(result.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error creating pickup request' });
+  }
+};
+
+exports.createWarehouse = async (req, res) => {
+  try {
+    const warehouseData = req.body;
+    // Warehouse creation logic here...
+    const result = await axios.post(`https://external.shipping.api/warehouse`, warehouseData);
+    res.json(result.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error creating warehouse' });
+  }
+};
+
+exports.updateWarehouse = async (req, res) => {
+  try {
+    const { warehouseId } = req.params;
+    const updateData = req.body;
+    // Warehouse updating logic here...
+    const result = await axios.put(`https://external.shipping.api/warehouse/${warehouseId}`, updateData);
+    res.json(result.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating warehouse' });
+  }
+};
+
+exports.checkPincodeServiceability = async (req, res) => {
+  try {
+    const { pincode } = req.params;
+    // Pincode serviceability check logic here...
+    const result = await axios.get(`https://external.shipping.api/serviceability/${pincode}`);
+    res.json(result.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Error checking pincode serviceability' });
+  }
+};
+
 exports.sendEmail = async (req, res) => {
   const { userId, orderId, email, address, pincode, phone, shippingDetails } = req.body;
 
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: 'your-email@gmail.com',
-      pass: 'your-email-password',
+      user: process.env.HUBOOZE_EMAIL,
+      pass: process.env.HUBOOZE_EMAIL_PASSWORD,
     },
   });
 
   const mailOptions = {
-    from: 'your-email@gmail.com',
+    from: process.env.HUBOOZE_EMAIL,
     to: email,
     subject: 'Order Confirmation',
     text: `Thank you for your purchase! Your order ID is ${orderId}. Your items will be shipped to ${address}, ${pincode}.`,
