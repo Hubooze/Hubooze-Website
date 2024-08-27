@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useTheme, useMediaQuery } from '@mui/material/styles';
 
 const WishlistPage = () => {
   const [wishlist, setWishlist] = useState([]);

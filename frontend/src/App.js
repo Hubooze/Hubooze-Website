@@ -4,14 +4,14 @@ import './axiosConfig';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './Component/Navbar/Navbar';
+import VideoSection from './Component/Video/Video';
+import Collection from './Component/Collection/Collection';
 
 import AdminRegister from './Component/Admin/AdminRegister'
 import AdminLogin from './Component/Admin/AdminLogin';
 import AdminDashboard from './Component/Admin/AdminDashboard';
 
-import ShopItem from './Pages/ShopCategory';
 import HomePage from './Pages/Home'
-import Product from './Pages/Product';
 
 import LoginSignup from './Pages/LoginSignup';
 
@@ -29,6 +29,7 @@ import Success from './Pages/Success';
 
 import CartItem from './Component/CartItem/CartItem';
 import Checkout from './Pages/Checkout';
+import Features from './Component/Features/Features';
 import Footer from './Component/Footer/Footer';
 
 // Mr. Ravinders files
@@ -46,11 +47,14 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        {/* <Navbar /> */}
+        <Navbar />
+        <VideoSection />
+        < Collection />
 
         <Routes>
           <Route path='/' element={<HomePage />} />
-          {/* <Route path='/products' element={<WomenSection />} /> */}
+          <Route path='/products' element={<WomenSection />} />
+          {/* <Route path='/collection' element={<Collection />} /> */}
           
         </Routes>
 
@@ -95,8 +99,9 @@ function App() {
           <Route path='/Product' element={<Product />}/>
           <Route path=":ProductId" element={<Product />} />
         </Routes> */}
-      
-        {/* <Footer /> */}
+
+        < Features />
+        <Footer />
 
       </BrowserRouter>
 

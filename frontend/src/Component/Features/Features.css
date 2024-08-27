@@ -1,0 +1,28 @@
+/* Features section styles */
+.features-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 0;
+    background-color: #f9f9f9;
+  }
+  
+  .feature {
+    text-align: center;
+    max-width: 300px;
+  }
+  
+  .feature img {
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .feature h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  

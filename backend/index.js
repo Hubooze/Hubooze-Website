@@ -51,6 +51,8 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
+app.set('trust proxy', 1); // trust first proxy
+
 app.get("/", (req, res) => {
     res.send("Express App is Running")
 })

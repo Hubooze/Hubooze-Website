@@ -1,56 +1,36 @@
-import React from 'react'
-import './Footer.css';
-import { Link } from 'react-router-dom';
-import footer_logo_img from '../Assets/logo_big.png'
-import instagram_icon from '../Assets/instagram_icon.png';
-import whatsapp_icon from '../Assets/whatsapp_icon.png';
+import React from "react";
+import "./Footer.css";
 
+// Importing images
+import facebookIcon from '../Assets/images/youtube.png';
+import twitterIcon from '../Assets/images/twitter.png';
+import instagramIcon from '../Assets/images/instagram_icon.png';
+import whatsappIcon from '../Assets/images/whatsapp_icon.png'; // Example additional icon
 
-const Footer = () => {
+function Footer() {
   return (
-
-      <div className='footer'>
-        <div className="footerlogo">
-
-          <Link to='/' style={{ textDecoration: 'none' }}>
-            <p>Hubooze</p>
-          </Link>
-      </div>
-
-      <div className="footer-links">
-        <Link to="/about" style={{ textDecoration: 'none' }}>About</Link>
-        <Link to="/contact" style={{ textDecoration: 'none' }}>Contact</Link>
-        <Link to="/company-policy" style={{ textDecoration: 'none' }}>Company Policy</Link>
-        <Link to="/terms-and-conditions" style={{ textDecoration: 'none' }}>Terms and Conditions</Link>
-        <Link to="/press-releases" style={{ textDecoration: 'none' }}>Press Releases</Link>
-      </div>
-
-      <div className="footer-links">
-        <div className="social-icons">
-          <div className="footer-icon-container">
-            <img src={instagram_icon} alt='' />
-          </div>
-
-            {/* <div className="footer-icon-container">
-              <img src={linkedin_icon} alt='' />
-            </div> */}
-
-            <div className="footer-icon-container">
-              <img src={whatsapp_icon} alt='' />
-            </div>
-          </div>
+    <footer>
+      <div className="footer-section">
+        <div className="footer-logo">
+          {/* <img src={footerLogo} alt="Footer logo" /> */}
         </div>
-
-        <div className="footer-copyright">
-          <hr />
-          <p> Copyright @ 2024 -All Right Reserved.</p>
+        <div className="footer-nav">
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+          </ul>
         </div>
-    </div>
-
+        <div className="footer-social">
+          <a href="#"><img src={facebookIcon} alt="Facebook" /></a>
+          <a href="#"><img src={twitterIcon} alt="Twitter" /></a>
+          <a href="#"><img src={instagramIcon} alt="Instagram" /></a>
+          <a href="#"><img src={whatsappIcon} alt="WhatsApp" /></a> {/* Example additional social icon */}
+        </div>
+      </div>
+    </footer>
   );
-
-};
-
+}
 
 export default Footer;
-  

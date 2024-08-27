@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import './CSS/ShopCategory.css'
 import Item from '../Component/Item/Item';
-import dropdown_icone from '../Component/Assets/dropdown_icon.png';
+// import dropdown_icone from '../Component/Assets/dropdown_icon.png';
 import { ShopContext } from '../Context/ShopContext'
 const ShopCategory = (props) => {
   const {all_product}=useContext(ShopContext);
@@ -14,7 +14,7 @@ const ShopCategory = (props) => {
           </p>
           
           <div className="Shopcategory-sort">
-            Sort by <img src={dropdown_icone}  />
+            {/* Sort by <img src={dropdown_icone}  /> */}
           </div>
 
       </div>

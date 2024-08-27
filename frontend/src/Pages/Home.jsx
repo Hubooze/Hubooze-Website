@@ -7,7 +7,7 @@ const HomePage = () => (
       {/* Embed your advertisement video here */}
     </div>
     
-    <h2>Women</h2>
+    {/* <h2>Women</h2>
     <div className="row">
       <Link to="/category/Women?sub_category=T-Shirts and Jeans"><div className="card">T-Shirts and Jeans</div></Link>
       <Link to="/category/Women?sub_category=Ethnic"><div className="card">Ethnic</div></Link>
@@ -29,7 +29,7 @@ const HomePage = () => (
       <Link to="/category/Kids?sub_category=Girls Clothing"><div className="card">Girls</div></Link>
       <Link to="/category/Kids?sub_category=Baby Wear"><div className="card">Baby</div></Link>
       <Link to="/category/Kids?sub_category=Sports"><div className="card">Sports</div></Link>
-    </div>
+    </div> */}
   </div>
 
 

@@ -1,339 +1,94 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    box-sizing: 0 1px 3px -2px;
-    align-items: center;
+/* Navbar styles */
+.header {
     position: fixed;
-    padding-top: 0;
-    background-color: #f3f3f3;
-    width: fit-content;
-}
-
-.search_icon {
-    width: 400px;
-    height: 37px;
-    border-radius: 40px;
-    padding-left: 20px;
-    position: relative;
-    left: 120px;
-    border-color: black;
-    background: transparent;
-}
-
-.search_name {
-    position: relative;
-    left: 86px;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.search_icon::placeholder {
-    color: #515151;
-
-}
-
-.nav-logo p {
-    color: #171717;
-    font-size: 30px;
-    font-weight: 600;
-}
-
-.nav-menu {
-    display: flex;
-    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.10s ease;
+    z-index: 1000;
+    height: 10.9rem;
+    padding: 0 5.8rem;
+  }
+  
+  .header.scrolled {
+    background-color: white;
+    height: 11rem;
+  }
+  
+  .logo {
+    height: 85px;
+    width: 110px;
+    z-index: 1000;
+  }
+  
+  .main-nav-list {
     list-style: none;
-    gap: 35px;
-    color: #626262;
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 234px;
-    padding: 20px;
-    margin-top: 0;
-}
-
-.nav-menu li {
     display: flex;
-    flex-direction: column;
+    gap: 3.2rem;
     align-items: center;
-    justify-content: center;
-    gap: 3px;
-    cursor: pointer;
-}
-
-.nav-menu hr {
-    border: none;
-    width: 80%;
-    height: 3px;
-    border-radius: 10px;
-    background: #FF4141;
-}
-
-.nav-login-cart {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-Link {
-    list-style: none;
+  }
+  
+  .main-nav-link {
     text-decoration: none;
-    color: brown;
-}
-
-.nav-login-cart button {
-    width: 157px;
-    height: 50px;
-    outline: none;
-    border: 1px solid #7a7a7a;
-    border-radius: 75px;
-    color: #515151;
-    font-size: 20px;
+    color: black;
     font-weight: 500;
-    background: white;
-    cursor: pointer;
-}
-
-.nav-login-cart button :active {
-    background: #f3f3f3;
-}
-
-.nav-cart-count {
-    width: 22px;
-    height: 22px;
+    font-size: 2.0rem;
+  }
+  
+  .straight-line,
+  .search,
+  .person,
+  .cart {
+    height: 30px;
+    width: 30px;
+  }
+  
+  /* Search and login containers */
+  .search-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: -35px;
-    margin-left: -55px;
-    border-radius: 11px;
-    font-size: 14px;
-    background: red;
-    color: white;
-}
-
-.nav-drop-dwon {
+    padding: 5px 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-right: 8px;
+    background-color: #fff;
+  }
+  
+  .search-container input {
+    border: none;
+    outline: none;
+    width: 200px;
+  }
+  
+  .search-container.hidden {
     display: none;
-}
-
-@media (max-width:1280px) {
-    .navbar {
-        margin-top: 0;
-        padding: 0px 50px;
-        margin-bottom: 0px;
-        height: 100px;
-
-    }
-
-    .nav-logo img {
-        width: 40px;
-    }
-
-    .nav-logo p {
-        font-size: 25px;
-    }
-
-    .search_icon {
-        width: 300px;
-        height: 37px;
-        border-radius: 40px;
-        padding-left: 25px;
-        position: relative;
-        left: 70px;
-        border-color: black;
-        background: transparent;
-    }
-
-    .search_name {
-        position: relative;
-        left: 30px;
-    }
-
-    .nav-menu {
-        gap: 30px;
-        font-size: 16px;
-        margin-left: 100px;
-    }
-
-    .nav-login-cart {
-        margin-left: 15px;
-
-    }
-
-    .nav-cart-count {
-        gap: 30px;
-    }
-
-    .nav-login-cart bottom {
-        width: 120px;
-        height: 45px;
-        font-size: 16px;
-    }
-
-    .nav-cart-count {
-        margin-left: -40px;
-        font-size: 12px;
-    }
-}
-
-@media (max-width:1150px){
-
-    .navbar {
-        margin-top: 0;
-        padding: 0px 50px;
-        margin-bottom: 0px;
-        height: 100px;
-    }
-
-    .nav-logo img {
-        width: 40px;
-    }
-
-    .nav-logo p {
-        font-size: 25px;
-    }
-
-    .search_icon {
-        width: 200px;
-        height: 37px;
-        border-radius: 40px;
-        padding-left: 25px;
-        position: relative;
-        left: 70px;
-        border-color: black;
-        background: transparent;
-    }
-
-    .search_name {
-        position: relative;
-        left: -150px;
-    }
-
-    .nav-menu {
-        gap: 30px;
-        font-size: 16px;
-        margin-left: -30px;
-        
-    }
-
-    .nav-login-cart {
-        margin-left: -100px;
-        padding-left: 100px;
-
-    }
-
-    .nav-cart-count {
-        gap: 30px;
-    }
-
-    .nav-login-cart bottom {
-        width: 120px;
-        height: 45px;
-        font-size: 16px;
-    }
-
-    .nav-cart-count {
-        margin-left: -40px;
-        font-size: 12px;
-    }
-}
-
-@media(max-width:1024px) {
-    .navbar {
-        padding: 12px 30px;
-    }
-    .nav-menu {
-        gap: 25px;
-        font-size: 14px;
-        margin-left: 125px;
-    }
-
-    .nav-login-cart button {
-        width: 80px;
-        height: 35px;
-        font-size: 14px;
-    }
-
-    .nav-login-cart img {
-        width: 30px;
-    }
-
-    .nav-cart-count {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-@media(max-width:800px) {
-    .navbar {
-        padding: 10px 0px;
-      
-    }
-
-    .nav-drop-dwon {
-        display: block;
-        width: 30px;
-        rotate: -90deg;
-        transition: 0.5s;
-    }
-    .search_name {
-        position: relative;
-        left: -180px;
-    }
-
-    .nav-menu {
-        display: none;
-        height: 75px;
-        width: 100%;
-        position: absolute;
-        background-color: white;
-        justify-content: center;
-        top: 50px;
-        left: -300px;
-    }
-    .search_icon{
-        padding-left: 60px;
-    }
-
-    .nav-login-cart{
-        padding-left: 260px;
-    }
-    .nav-login-cart{
-        position: relative;
-        left: -80px;
-    }
-
-    .nav-menu-visible {
-        display: flex;
-
-    }
-
-    .nav-drop-dwon.open {
-        transform: rotate(90deg);
-    }
-    
-}
-
-@media(max-width:500px) {
-    .navbar {
-        padding: 8px 0px;
-    }
-
-    .nav-menu {
-        height: 70px;
-        top: 50px;
-    }
-
-    .nav-logo {
-        transform: scale(0.8);
-    }
-
-    .nav-login-cart {
-        transform: scale(0.8);
-    }
-
-}
+  }
+  
+  .search-container.visible {
+    display: flex;
+  }
+  
+  .containerforlogin {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 7px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .containerforlogin li {
+    list-style: none;
+    margin-bottom: 5px;
+  }
+  
+  .containerforlogin li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+    font-family: serif;
+  }
+  
