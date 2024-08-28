@@ -4,8 +4,6 @@ import './axiosConfig';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './Component/Navbar/Navbar';
-import VideoSection from './Component/Video/Video';
-import Collection from './Component/Collection/Collection';
 
 import AdminRegister from './Component/Admin/AdminRegister'
 import AdminLogin from './Component/Admin/AdminLogin';
@@ -29,7 +27,6 @@ import Success from './Pages/Success';
 
 import CartItem from './Component/CartItem/CartItem';
 import Checkout from './Pages/Checkout';
-import Features from './Component/Features/Features';
 import Footer from './Component/Footer/Footer';
 
 // Mr. Ravinders files
@@ -48,9 +45,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Navbar />
-        <VideoSection />
-        < Collection />
-
+       
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/products' element={<WomenSection />} />
@@ -100,7 +95,6 @@ function App() {
           <Route path=":ProductId" element={<Product />} />
         </Routes> */}
 
-        < Features />
         <Footer />
 
       </BrowserRouter>
