@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ImageSlider from '../Component/ImageSlider/ImageSlider';
 import Item from '../Component/Item/Item';
-// import img1 from "../Component/Assets/p1_product_i1.png";
-// import img2 from "../Component/Assets/p1_product_i2.png";
-// import img3 from "../Component/Assets/p1_product_i3.png";
-// import img4 from "../Component/Assets/p1_product_i4.png";
-// import img from "../Component/Assets/p1_product.png";
 import './CSS/WomenSection.css';
 
 
@@ -52,69 +47,9 @@ const WomenSection = () => {
         'https://via.placeholder.com/800x400.png?text=Shop+Now',
     ];
 
-    // const sampleItem = [
-    //     {
-    //         id: 'item1',
-    //         name: 'Item 1',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 19.99,
-    //         old_price: 29.99,
-    //     },
-    //     {
-    //         id: 'item2',
-    //         name: 'Item 2',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 24.99,
-    //         old_price: 34.99,
-    //     },
-    //     {
-    //         id: 'item1',
-    //         name: 'Item 1',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 19.99,
-    //         old_price: 29.99,
-    //     },
-    //     {
-    //         id: 'item2',
-    //         name: 'Item 2',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 24.99,
-    //         old_price: 34.99,
-    //     },
-    //     {
-    //         id: 'item1',
-    //         name: 'Item 1',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 19.99,
-    //         old_price: 29.99,
-    //     },
-    //     {
-    //         id: 'item2',
-    //         name: 'Item 2',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 24.99,
-    //         old_price: 34.99,
-    //     },
-    //     {
-    //         id: 'item1',
-    //         name: 'Item 1',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 19.99,
-    //         old_price: 29.99,
-    //     },
-    //     {
-    //         id: 'item2',
-    //         name: 'Item 2',
-    //         images: [img, img1, img2, img3, img4],
-    //         new_price: 24.99,
-    //         old_price: 34.99,
-    //     },
-    //     // Add more items as needed
-    // ];
-
     return (
         <div>
-            {/* <Navbar /> */}
+            <Navbar />
             <ImageSlider images={images} />
             <h1 className='womensection-heading'>New Arrivals: Sale up to 50% Off!</h1>
             <button className=" btn relative" onClick={toggleNavbar}>
@@ -217,13 +152,9 @@ const WomenSection = () => {
                             Category <span>{openDropdown === 'category' ? '−' : '+'}</span>
                         </h1>
                         <div className="dropdown-content">
-                            <label><input type="checkbox" /> Ethnic Wear <span>109537</span></label>
-                            {/* <label><input type="checkbox" /> Swim & Beachwear <span>1485</span></label>
-                            <label><input type="checkbox" /> Inner & Nightwear <span>39856</span></label> */}
-                            <label><input type="checkbox" /> Western wear <span>129081</span></label>
-                            {/* <label><input type="checkbox" /> Formal Wear <span>1417</span></label> */}
+                            <label><input type="checkbox" /> Ethnic Wear <span>109537</span></label>                          
+                            <label><input type="checkbox" /> Western Wear <span>129081</span></label>
                             <label><input type="checkbox" /> Sports Wear <span>13665</span></label>
-                            {/* <label><input type="checkbox" /> Maternity Wear <span>1505</span></label> */}
                         </div>
                     </div>
                     <hr />
@@ -232,13 +163,14 @@ const WomenSection = () => {
                             Brand <span>{openDropdown === 'brand' ? '−' : '+'}</span>
                         </h1>
                         <div className="dropdown-content">
-                        <label><input type="checkbox" />  Option 1</label>
-                            <label><input type="checkbox" />  Option 2 </label>
-                            <label><input type="checkbox" />  Option 3</label>
-                            <label><input type="checkbox" /> Option 4</label>
-                            <label><input type="checkbox" /> Option 5 </label>
-                            <label><input type="checkbox" /> Option 6 </label>
-                            <label><input type="checkbox" /> Option 7 </label>
+                            <label><input type="checkbox" /> Zara</label>
+                            <label><input type="checkbox" /> Vero Moda </label>
+                            <label><input type="checkbox" /> Mast & Harbour</label>
+                            <label><input type="checkbox" /> Libas</label>
+                            <label><input type="checkbox" /> H&M </label>
+                            <label><input type="checkbox" /> Levis </label>
+                            <label><input type="checkbox" /> Roadster </label>
+                            <label><input type="checkbox" /> HRX </label>
                         </div>
                     </div>
                     <hr />
@@ -247,12 +179,11 @@ const WomenSection = () => {
                             Sizes <span> {openDropdown === 'size' ? '−' : '+'}</span>
                         </h1>
                         <div className="dropdown-content">
-                        <label><input type="checkbox" />  Option 2 </label>
-                            <label><input type="checkbox" />  Option 3</label>
-                            <label><input type="checkbox" /> Option 4</label>
-                            <label><input type="checkbox" /> Option 5 </label>
-                            <label><input type="checkbox" /> Option 6 </label>
-                            <label><input type="checkbox" /> Option 7 </label>
+                            <label><input type="checkbox" /> S </label>
+                            <label><input type="checkbox" /> M</label>
+                            <label><input type="checkbox" /> L</label>
+                            <label><input type="checkbox" /> XL </label>
+                            <label><input type="checkbox" /> One Size </label>
                         </div>
                     </div>
                     <hr />
@@ -261,12 +192,12 @@ const WomenSection = () => {
                             Type <span>{openDropdown === 'type' ? '−' : '+'}</span>
                         </h1>
                         <div className="dropdown-content">
-                        <label><input type="checkbox" />  Option 2 </label>
-                            <label><input type="checkbox" />  Option 3</label>
-                            <label><input type="checkbox" /> Option 4</label>
-                            <label><input type="checkbox" /> Option 5 </label>
-                            <label><input type="checkbox" /> Option 6 </label>
-                            <label><input type="checkbox" /> Option 7 </label>
+                            <label><input type="checkbox" />  Tops & Tshirts </label>
+                            <label><input type="checkbox" />  Shirts</label>
+                            <label><input type="checkbox" /> Kurta-Sets</label>
+                            <label><input type="checkbox" /> Jeans & Trousers </label>
+                            <label><input type="checkbox" /> Sarees </label>
+                            <label><input type="checkbox" /> Sports Wear  </label>
                         </div>
                     </div>
                     <hr />
@@ -275,12 +206,20 @@ const WomenSection = () => {
                             Colour <span>{openDropdown === 'type' ? '−' : '+'}</span>
                         </h1>
                         <div className="dropdown-content">
-                        <label><input type="checkbox" />  Option 2 </label>
-                            <label><input type="checkbox" />  Option 3</label>
-                            <label><input type="checkbox" /> Option 4</label>
-                            <label><input type="checkbox" /> Option 5 </label>
-                            <label><input type="checkbox" /> Option 6 </label>
-                            <label><input type="checkbox" /> Option 7 </label>
+                            <label><input type="checkbox" /> Violet </label>
+                            <label><input type="checkbox" /> White</label>
+                            <label><input type="checkbox" /> Black</label>
+                            <label><input type="checkbox" /> Orange </label>
+                            <label><input type="checkbox" /> Yellow </label>
+                            <label><input type="checkbox" /> Red </label>
+                            <label><input type="checkbox" /> Blue </label>
+                            <label><input type="checkbox" /> Green </label>
+                            <label><input type="checkbox" /> Pink </label>
+                            <label><input type="checkbox" /> Purple </label>
+                            <label><input type="checkbox" /> Brown </label>
+                            <label><input type="checkbox" /> Beige </label>
+
+
                         </div>
                     </div>
                     <div className='btn-filters'>

@@ -13,12 +13,12 @@ const cacheMiddleware = require('../middlewares/cachingMiddleware')
 const router = express.Router();
 
 // Route for getting all products with optional filters, sorting, and pagination
-router.get('/', cacheMiddleware, getAllProducts);
+router.get('/', getAllProducts);
 
-router.get('/category/:category', cacheMiddleware, getProductsByCategory);
+router.get('/category/:category', getProductsByCategory);
 
 // Route for getting a single product by ID
-router.get('/:id', cacheMiddleware, getProductById);
+router.get('/:id', getProductById);
 
 // Route for creating a new product
 router.post('/', authenticateAdmin, createProduct);

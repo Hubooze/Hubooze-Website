@@ -68,6 +68,7 @@
   .search-container.visible {
     display: flex;
   }
+
   
   .containerforlogin {
     display: none;

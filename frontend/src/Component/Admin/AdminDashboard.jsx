@@ -244,6 +244,7 @@ const AdminDashboard = () => {
             <thead>
               <tr>
                 <th>Name</th>
+                <th>HIN No</th>
                 <th>Category</th>
                 <th>Sub-category</th>
                 <th>Type</th>
@@ -267,6 +268,7 @@ const AdminDashboard = () => {
                       product.name
                     )}
                   </td>
+                  <td>{product.HIN_No}</td>
                   <td>{product.category}</td>
                   <td>{product.sub_category}</td>
                   <td>{product.type}</td>
@@ -312,39 +314,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-
-
-
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
-
-// const AdminDashboard = () => {
-//   const navigate = useNavigate();
-
-//   const handleLogout = () => {
-//     localStorage.removeItem('token');
-//     navigate('/adminlogin');
-//   };
-
-//   const handleRegister = () => {
-//     navigate('/adminregister');
-//   };
-
-//   return (
-//     <div>
-//       <h1>Admin Dashboard</h1>
-//       <button onClick={handleLogout}>Logout</button>
-//       <button onClick={handleRegister}>Register</button>
-//       <div>
-//       <ul>
-//         <li><Link to="/admin/women">Manage Women</Link></li>
-//         <li><Link to="/admin/men">Manage Men</Link></li>
-//         <li><Link to="/admin/kids">Manage Kids</Link></li>
-//       </ul>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AdminDashboard;

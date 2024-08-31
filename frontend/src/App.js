@@ -5,11 +5,16 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './Component/Navbar/Navbar';
 
+import HomePage from './Pages/Home'
+// Mr. Ravinders files
+// import WomenSection from './Pages/WomenSection';
+// import MenSection from './Pages/MenSection';
+// import KidsSection from './Pages/KidsSection';
+import { WomenSection, MenSection, KidsSection } from './Component/ProductSection/Sections'; // Adjust the import path based on your project structure
+
 import AdminRegister from './Component/Admin/AdminRegister'
 import AdminLogin from './Component/Admin/AdminLogin';
 import AdminDashboard from './Component/Admin/AdminDashboard';
-
-import HomePage from './Pages/Home'
 
 import LoginSignup from './Pages/LoginSignup';
 
@@ -29,11 +34,6 @@ import CartItem from './Component/CartItem/CartItem';
 import Checkout from './Pages/Checkout';
 import Footer from './Component/Footer/Footer';
 
-// Mr. Ravinders files
-import WomenSection from './Pages/WomenSection';
-// import MenSection from './Pages/MenSection';
-// import KidsSection from './Pages/KidSection';
-
 
 function App() {
 
@@ -48,8 +48,9 @@ function App() {
        
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/products' element={<WomenSection />} />
-          {/* <Route path='/collection' element={<Collection />} /> */}
+          <Route path='/women' element={<WomenSection />} />
+          <Route path='/men' element={<MenSection />} />
+          <Route path='/kids' element={<KidsSection />} />
           
         </Routes>
 
