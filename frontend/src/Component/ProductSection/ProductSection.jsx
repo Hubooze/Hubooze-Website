@@ -5,7 +5,7 @@ import Item from '../Item/Item';
 import Navbar from '../Navbar/Navbar';
 import './ProductSection.css'; // Rename the CSS file to be generic
 
-const ProductSection = ({ section }) => {
+const ProductSection = ({ category }) => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [products, setProducts] = useState([]); // State to store fetched products
@@ -19,9 +19,10 @@ const ProductSection = ({ section }) => {
     };
 
     useEffect(() => {
-        if (section) {
-            axios.get(`http://192.168.1.109:3000/api/products/category/${section}`)
+        if (category) {
+            axios.get(`http://192.168.1.109:3000/api/products/category/${category}`)
                 .then(response => {
+                    console.log('API Response:', response.data); // Log the response to check it
                     const data = response.data;
                     // Check if the response data is an array
                     if (Array.isArray(data)) {
@@ -36,9 +37,9 @@ const ProductSection = ({ section }) => {
                     setProducts([]);  // Set products to an empty array on error
                 });
         }
-    }, [section]);
+    }, [category]);
 
-    if (!section) {
+    if (!category) {
         return <div>Error: No section provided</div>;
     }
 
@@ -57,7 +58,7 @@ const ProductSection = ({ section }) => {
         <div>
             <Navbar />
             <ImageSlider images={images} />
-            <h1 className='section-heading'>{`New Arrivals in ${section.charAt(0).toUpperCase() + section.slice(1)}: Sale up to 50% Off!`}</h1>
+            <h1 className='section-heading'>{`New Arrivals in ${category.charAt(0).toUpperCase() + category.slice(1)}: Sale up to 50% Off!`}</h1>
             <button className="btn relative" onClick={toggleNavbar}>
                 {isOpen ? (
                     <span><h1>Filters -</h1></span>
@@ -93,10 +94,9 @@ const ProductSection = ({ section }) => {
                 <div className="shopCategory-product">
                     {products.map(product => (
                         <Item
-                            key={product.id}
-                            id={product.HIN_No}
+                            id={product._id}
                             name={product.name}
-                            images={product.image}
+                            image={product.image}
                             new_price={product.market_price}
                             old_price={product.selling_price}
                         />

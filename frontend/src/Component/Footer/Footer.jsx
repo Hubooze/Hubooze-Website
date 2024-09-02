@@ -2,34 +2,63 @@ import React from "react";
 import "./Footer.css";
 
 // Importing images
-import facebookIcon from '../Assets/images/youtube.png';
+// Importing images
+import linkedinIcon from '../Assets/images/linkdein.png';
 import twitterIcon from '../Assets/images/twitter.png';
 import instagramIcon from '../Assets/images/instagram_icon.png';
 import whatsappIcon from '../Assets/images/whatsapp_icon.png'; // Example additional icon
+import youtubeIcon from '../Assets/images/youtube.png'
 
 function Footer() {
   return (
-    <footer>
-      <div className="footer-section">
-        <div className="footer-logo">
-          {/* <img src={footerLogo} alt="Footer logo" /> */}
+    <>
+    
+  <footer>
+    <div className="wrapper">
+      <div className="footer">
+        <div className="social-icons">
+          <div className="footer-icon-container">
+            <a href="#"><img src={instagramIcon} alt="Instagram"/></a>
+          </div>
+          <div className="footer-icon-container">
+            <a href="#"><img src={whatsappIcon} alt="WhatsApp"/></a>
+          </div>
+          <div className="footer-icon-container">
+            <a href="#"><img src={twitterIcon} alt="Twitter"/></a>
+          </div>
+          <div className="footer-icon-container">
+            <a href="#"><img src={linkedinIcon} alt="facebook"/></a>
+          </div>
+          <div className="footer-icon-container">
+            <a href="#"><img src={youtubeIcon} alt="youtube"/></a>
+          </div>
         </div>
-        <div className="footer-nav">
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms & Conditions</a></li>
-          </ul>
+
+        <div className="footer-links">
+          <a href="/about">ABOUT US</a>
+          <a href="/contact">CAREERS</a>
+          <a href="/contact">EMPLOYEES</a>
+          <a href="/company-policy">PRESS RELEASES</a>
+          <a href="/terms-and-conditions">BLOGS</a>
+          <a href="/press-releases">POLICY</a>
         </div>
-        <div className="footer-social">
-          <a href="#"><img src={facebookIcon} alt="Facebook" /></a>
-          <a href="#"><img src={twitterIcon} alt="Twitter" /></a>
-          <a href="#"><img src={instagramIcon} alt="Instagram" /></a>
-          <a href="#"><img src={whatsappIcon} alt="WhatsApp" /></a> {/* Example additional social icon */}
+
+        <div className="footerlogo">
+          <a href="/" className="footer-logo-link">
+            <p>Hubooze.in</p>
+          </a>
         </div>
+
+        <div className="footer-copyright">
+          <hr />
+          <p>Copyright @ 2024 - All Rights Reserved.</p>
+          <p>Powered by hubooze</p>
+        </div>
+
       </div>
-    </footer>
+    </div>
+  </footer>
+    </>
   );
 }
 

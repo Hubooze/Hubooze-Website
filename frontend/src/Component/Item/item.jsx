@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import './Item.css';
 import { Link } from 'react-router-dom';
 
-const Item = (props) => {
+const Item = (products) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % props.images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % products.image.length);
   };
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + props.images.length) % props.images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + products.image.length) % products.image.length);
   };
 
   const calculateDiscountPercentage = (newPrice, oldPrice) => {
@@ -19,7 +19,7 @@ const Item = (props) => {
 
   return (
     <div className='item'>
-    <Link to={`/product/${props.id}`}>
+    <Link to={`/product/${products._id}`}>
      <div className='cart' >
      <span id='shopping_cart' className="material-symbols-outlined">add_shopping_cart</span>
      {/* <span id='like' className="material-symbols-outlined">favorite</span> */}
@@ -28,17 +28,17 @@ const Item = (props) => {
         <div id='arrow_back' className="material-symbols-outlined" onClick={handlePrevImage}>chevron_left</div>
         <div id='arrow_forward' className="material-symbols-outlined" onClick={handleNextImage}>chevron_right</div>
       </div>
-      <img className='imgehandler' src={props.images[currentImageIndex]} alt='' />
+      <img className='imagehandler' src={products.image[currentImageIndex]} alt='' />
       <div className="dots-container">
-        {props.images.map((_, index) => (
+        {products.image.map((_, index) => (
           <span key={index} className={`dot ${index === currentImageIndex ? 'active' : ''}`} onClick={() => setCurrentImageIndex(index)}></span>
         ))}
       </div>
-      <p className="item-name">{props.name}</p>
+      <p className="item-name">{products.name}</p>
       <div className="item-prices-row">
-        <div className="item-price-new font-size"><b>₹{props.new_price}</b></div>
-        <div className="item-price-old font-size">₹{props.old_price}</div>
-        <div className="discount-percentage font-size">{calculateDiscountPercentage(props.new_price, props.old_price)}% off</div>
+        <div className="item-price-new font-size"><b>₹{products.market_price}</b></div>
+        <div className="item-price-old font-size">₹{products.selling_price}</div>
+        <div className="discount-percentage font-size">{calculateDiscountPercentage(products.market_price, products.selling_price)}% off</div>
       </div>
       </Link>
     </div> 

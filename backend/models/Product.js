@@ -12,11 +12,11 @@ const ProductSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['Women', 'Men', 'Kids'], // Added top-level category
+        enum: ['women', 'men', 'kids'], // Added top-level category
     },
     type: {
         type: String,
-        enum: ['Ethnic', 'Western', 'Sports'], // Sub-type within each category
+        enum: ['ethnic', 'western', 'sports'], // Sub-type within each category
     },
     sub_category: {
         type: String,
@@ -60,6 +60,12 @@ const ProductSchema = mongoose.Schema({
         type: [String],
     },
 });
+
+// Middleware to convert category to lowercase before saving
+ProductSchema.pre('save', function (next) {
+    this.category = this.category.toLowerCase();
+    next();
+  });
 
 // Create indexes for efficient querying
 ProductSchema.index({ category: 1, sub_category: 1, type: 1, brand: 1, size: 1, price: 1 });

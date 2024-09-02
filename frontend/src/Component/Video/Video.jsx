@@ -1,21 +1,17 @@
 import React from "react";
 import Video from '../Assets/images/Video.mp4'
-import "./Video.css";
-
+import returnImg from "../Assets/images/Return.png"
+// import './Video.css';
+import '../CSS/Common.css'
 
 function VideoSection() {
   return (
-    <div className="hero-section">
-      <video autoPlay loop muted playsInline className="hero-video">
-        <source src={Video} type="video/mp4" />
-        {/* <source src="images/hero-video.mp4" type="video/mp4" /> */}
-        Your browser does not support the video tag.
-      </video>
-      <div className="content">
-        <h1>Your one stop shop</h1>
-        <p>Find the best deals on your favorite items!</p>
+    <section className="Video">
+      <div>
+        <video id="background-video" src={Video} autoPlay loop muted></video>
+        <img className="Return" alt="90-Day-Return" src={returnImg} />
       </div>
-    </div>
+    </section>
   );
 }
 

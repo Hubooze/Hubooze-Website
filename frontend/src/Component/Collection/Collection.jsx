@@ -11,7 +11,8 @@ import Ethnics from '../Assets/images/Ethnics.jpeg'
 import Western from '../Assets/images/Western.jpeg'
 import Sports from '../Assets/images/Sports.jpeg'
 // import Wethnics from '../Assets/images/Wethnics.jpeg'
-import "./Collection.css";
+// import "./Collection.css";
+import '../CSS/Common.css'
 
 function Collection() {
   return (
