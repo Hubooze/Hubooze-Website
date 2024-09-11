@@ -36,11 +36,12 @@ function Footer() {
 
         <div className="footer-links">
           <a href="/about">ABOUT US</a>
-          <a href="/contact">CAREERS</a>
-          <a href="/contact">EMPLOYEES</a>
-          <a href="/company-policy">PRESS RELEASES</a>
-          <a href="/terms-and-conditions">BLOGS</a>
-          <a href="/press-releases">POLICY</a>
+          <a href="/careers">CAREERS</a>
+          <a href="/employees">EMPLOYEES</a>
+          <a href="/policy">POLICY</a>
+          <a href="/terms-and-conditions">TERMS & CONDITIONS</a>
+          <a href="/press-releases">PRESS RELEASE</a>
+          <a href="/blogs">BLOGS</a>
         </div>
 
         <div className="footerlogo">

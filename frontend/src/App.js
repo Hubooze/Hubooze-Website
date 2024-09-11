@@ -7,9 +7,6 @@ import Navbar from './Component/Navbar/Navbar';
 
 import HomePage from './Pages/Home'
 // Mr. Ravinders files
-// import WomenSection from './Pages/WomenSection';
-// import MenSection from './Pages/MenSection';
-// import KidsSection from './Pages/KidsSection';
 import { WomenSection, MenSection, KidsSection } from './Component/ProductSection/Sections'; // Adjust the import path based on your project structure
 
 import AdminRegister from './Component/Admin/AdminRegister'
@@ -75,28 +72,23 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
         </Routes>
 
-        {/* <Routes>
+        <Routes>
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/company-policy' element={<CompanyPolicy />} />
+          <Route path='/policy' element={<CompanyPolicy />} />
           <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
           <Route path='/press-releases' element={<PressRelease />} />
           <Route path='/careers' element={<Careers />} />
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/employees' element={<Employees />} />
-        </Routes> */}
+        </Routes> 
 
         <Routes >
           <Route path='/success' element={<Success />} />
           <Route path='/cancel' element={<Cancel />} />
         </Routes>
 
-        {/* <Routes>
-          <Route path='/Product' element={<Product />}/>
-          <Route path=":ProductId" element={<Product />} />
-        </Routes> */}
-
-        <Footer />
+        {/* <Footer /> */}
 
       </BrowserRouter>
 

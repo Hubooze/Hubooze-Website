@@ -1,47 +1,83 @@
 .item {
-    width: 240px;
+    /* width: 240px;
     height: full;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
   
+    position: relative; */
+
+    /* Sakina's code */
+    width: 240px;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
     position: relative;
+    margin: 15px; /* Add some spacing between items */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 .item:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
 .item p {
-    margin: 10px 10px;
-    text-align: left;
+    /* margin: 10px 10px;
+    text-align: left; */
+
+    /* Sakina's code */
+    margin: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
 }
 
 .item img {
-    width: 240px;
+    /* width: 240px; */
+    width: 100%;
     height: 300px;
     object-fit: cover;
-
     border-radius: 10px;
+    /* Sakina's code */
+    transition: opacity 0.5s ease-in-out; /* Smooth image transition */
+
+}
+
+/* Sakina's code */
+.item:hover img {
+    opacity: 0.9; /* Slight fade on hover */
 }
 
 .item-prices-row {
-    display: flex;
+    /* display: flex;
     gap: 10px;
     font-size: 12px;
-    margin-left: 10px;
+    margin-left: 10px; */
+
+    /* Sakina's code */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 10px;
+    font-size: 12px;
 }
 
 .item-price-new {
     color: #374151;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
 }
 
 .item-price-old {
     color: #8c8c8c;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 12px;
+    /* font-weight: 500; */
     text-decoration: line-through;
 }
 
@@ -88,17 +124,34 @@
 }
 
 #shopping_cart {
-    top: 1rem;
+    /* top: 1rem;
    margin-right: 10px;
     display: flex;
-    float: left;
+    float: left; */
+
+    /* Sakina's code */
+    font-size: 24px;
+    color: black;
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 50%;
    
 }
 .cart{
-    display: flex;
+    /* display: flex;
    
-    justify-content: end;
+    justify-content: end; */
+
+    /* Sakina's code */
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    visibility: hidden;
     
+}
+
+.item:hover .cart {
+    visibility: visible;
 }
 
 #like {
@@ -118,11 +171,20 @@
 }
 
 
-.item:hover #arrow_back,
+/* .item:hover #arrow_back,
 .item:hover #arrow_forward,
 .item:hover #shopping_cart,
 .item:hover #like,
 .item:hover .dots-container {
+    visibility: visible;
+    color: black;
+    cursor: pointer;
+} */
+
+/* Sakina's code */
+.item:hover #arrow_back,
+.item:hover #arrow_forward,
+.item:hover #shopping_cart {
     visibility: visible;
     color: black;
     cursor: pointer;
@@ -172,7 +234,7 @@
     margin-top: 0.5rem;
 }
 
-.item-price-new {
+/* .item-price-new {
     color: black;
     font-size: larger;
 }
@@ -180,15 +242,15 @@
 .item-price-old {
     text-decoration: line-through;
     color: grey;
-}
+} */
 
 .discount-percentage {
     background-color: #f0f0f0;
     border-radius: 5px;
     padding: 2px 6px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: green;
-    margin: 0 0.5rem;
+    /* margin: 0 0.5rem; */
 }
 
 

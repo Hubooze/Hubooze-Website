@@ -8,7 +8,7 @@ exports.getAllProducts = async (req, res) => {
         const query = {};
 
         // Filtering
-        if (category) query.category = category;
+        if (category) query.category = category.toLowerCase();
         if (sub_category) query.sub_category = sub_category;
         if (type) query.type = type;
         if (brand) query.brand = brand;
@@ -97,13 +97,17 @@ exports.getProductsByCategory = async (req, res) => {
 };
 
 
-// Get a single product by ID
 exports.getProductById = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
 
         if (!product) {
             return res.status(404).json({ success: false, message: 'Product not found' });
+        }
+
+        // Ensure image is an array of properly formatted URLs
+        if (!Array.isArray(product.image)) {
+            product.image = product.image.split(',').map(url => url.trim());
         }
 
         res.status(200).json({ success: true, product });
@@ -115,19 +119,36 @@ exports.getProductById = async (req, res) => {
 // Create a new product
 exports.createProduct = async (req, res) => {
     try {
-        const newProduct = new Product(req.body);
-        const product = await newProduct.save();
+        console.log("Request Body: ", req.body);  // Log the request body for debugging
 
+        const { image, ...otherData } = req.body;
+
+        const newProduct = new Product({
+            ...otherData,
+            image,
+        });
+
+        const product = await newProduct.save();
         res.status(201).json({ success: true, product });
     } catch (error) {
+        console.error("Error creating product: ", error);  // Log the actual error message
         res.status(500).json({ success: false, message: error.message });
     }
 };
 
+
 // Update an existing product
 exports.updateProduct = async (req, res) => {
     try {
-        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        const { image, ...otherData } = req.body;
+
+        // Sanitize and ensure image is an array of valid URLs
+        const sanitizedImage = Array.isArray(image) ? image : image.split(',').map(url => url.trim());
+
+        const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
+            ...otherData,
+            image: sanitizedImage,
+        }, {
             new: true,
             runValidators: true,
         });

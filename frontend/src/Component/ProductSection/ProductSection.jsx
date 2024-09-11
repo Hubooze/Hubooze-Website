@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ImageSlider from '../ImageSlider/ImageSlider';
 import Item from '../Item/Item';
-import Navbar from '../Navbar/Navbar';
 import './ProductSection.css'; // Rename the CSS file to be generic
 
 const ProductSection = ({ category }) => {
@@ -25,8 +24,9 @@ const ProductSection = ({ category }) => {
                     console.log('API Response:', response.data); // Log the response to check it
                     const data = response.data;
                     // Check if the response data is an array
-                    if (Array.isArray(data)) {
-                        setProducts(data);
+                    if (data.success && Array.isArray(data.products)) {
+                        console.log(typeof data.products.image);                   
+                        setProducts(data.products);
                     } else {
                         console.error('Unexpected API response:', data);
                         setProducts([]);
@@ -56,49 +56,104 @@ const ProductSection = ({ category }) => {
 
     return (
         <div>
-            <Navbar />
             <ImageSlider images={images} />
-            <h1 className='section-heading'>{`New Arrivals in ${category.charAt(0).toUpperCase() + category.slice(1)}: Sale up to 50% Off!`}</h1>
-            <button className="btn relative" onClick={toggleNavbar}>
-                {isOpen ? (
-                    <span><h1>Filters -</h1></span>
-                ) : (
-                    <span><h1>Filters + </h1></span>
-                )}
-            </button>
+            <h1 className='heading'>New Arrivals: Sale up to 50% Off!</h1>
+            <button className=" btn relative" onClick={toggleNavbar}>
+            {isOpen ? (
+              <span>
+                <h1>Filters -</h1>
+              </span>
+            ) : (
+              <span>
+                <h1>Filters + </h1>
+              </span>
+            )}
+          </button>
             <div className="main-content">
-                <div className={`category-container ${isOpen ? "category-container-res" : "category-container-hide"}`}>
+          
+                <div className="category-container category-container-hide ">
                     <h1>Filters</h1>
                     <hr />
-                    {['category', 'brand', 'size', 'type', 'color'].map((filterType) => (
-                        <div key={filterType} className={`dropdown ${openDropdown === filterType ? 'active' : ''}`}>
-                            <h1 className='aside-options' onClick={() => toggleDropdown(filterType)}>
-                                {filterType.charAt(0).toUpperCase() + filterType.slice(1)} <span>{openDropdown === filterType ? '−' : '+'}</span>
-                            </h1>
-                            <div className="dropdown-content">
-                                {['Option 1', 'Option 2', 'Option 3'].map((option, index) => (
-                                    <label key={index}><input type="checkbox" /> {`${option} ${filterType}`} <span>12345</span></label>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                {isOpen && (
-                    <div className="main-toggle">
-                        <div className="btn-filters">
-                            <button className='btn-reset'>Reset All</button>
-                            <button className='btn-apply'>Apply</button>
+                    <div className={`dropdown ${openDropdown === 'category' ? 'active' : ''}`}>
+                        <h1 className='aside-options' onClick={() => toggleDropdown('category')}>
+                            Category <span>{openDropdown === 'category' ? '−' : '+'}</span>
+                        </h1>
+                        <div className="dropdown-content">
+                            <label> Ethnic <input type="checkbox" /></label>
+                            <label> Western  <input type="checkbox" /></label>
+                            <label> Sports  <input type="checkbox" /></label>
+            
                         </div>
                     </div>
-                )}
+                    <hr />
+                    <div className={`dropdown ${openDropdown === 'brand' ? 'active' : ''}`}>
+                        <h1 onClick={() => toggleDropdown('brand')}>
+                            Brand <span>{openDropdown === 'brand' ? '−' : '+'}</span>
+                        </h1>
+                        <div className="dropdown-content">
+                        
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className={`dropdown ${openDropdown === 'size' ? 'active' : ''}`}>
+                        <h1 onClick={() => toggleDropdown('size')}>
+                            Sizes <span> {openDropdown === 'size' ? '−' : '+'}</span>
+                        </h1>
+                        <div className="dropdown-content">         
+                            <label> S <input type="checkbox" /></label>
+                            <label> M <input type="checkbox" /></label>
+                            <label> L <input type="checkbox" /></label>
+                            <label> XL <input type="checkbox" /></label>
+                            <label> Onesize <input type="checkbox" /></label>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className={`dropdown ${openDropdown === 'type' ? 'active' : ''}`}>
+                        <h1 onClick={() => toggleDropdown('type')}>
+                            Type <span>{openDropdown === 'type' ? '−' : '+'}</span>
+                        </h1>
+                        <div className="dropdown-content">
+                        
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className={`dropdown ${openDropdown === 'color' ? 'active' : ''}`}>
+                        <h1 onClick={() => toggleDropdown('color')}>
+                            Colour <span>{openDropdown === 'type' ? '−' : '+'}</span>
+                        </h1>
+                        <div className="dropdown-content">
+                        
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                            <label> Ethnic Wear <input type="checkbox" /></label>
+                        </div>
+                    </div>
+                </div>
+                
                 <div className="shopCategory-product">
                     {products.map(product => (
                         <Item
-                            id={product._id}
+                            Product key={product._id}
+                            {...product}
                             name={product.name}
                             image={product.image}
-                            new_price={product.market_price}
-                            old_price={product.selling_price}
+                            market_price={product.market_price}
+                            selling_price={product.selling_price}
                         />
                     ))}
                 </div>

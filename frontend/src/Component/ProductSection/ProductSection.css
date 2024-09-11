@@ -1,7 +1,19 @@
-.womensection-heading {
+.heading {
     text-align: center;
     margin: 2rem;
   }
+
+  .product-section-container {
+    margin: 20px;
+    text-align: center;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
   
   .main-content {
     display: flex;
@@ -9,7 +21,7 @@
   }
   
   .category-container {
-    width: 300px;
+    width: 230px;
     height: 100%;
     margin: 20px;
     padding: 10px;
@@ -72,7 +84,6 @@
     display: none;
   }
   
-  /* WomenSection.css */
   
   /* Hide category container on screens less than 800px */
   @media (max-width: 800px) {

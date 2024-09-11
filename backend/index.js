@@ -1,14 +1,10 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
-const multer = require("multer");
-const path = require("path");
 const cors = require("cors");
 const rateLimit = require('express-rate-limit');
-const errorHandler = require('./middlewares/errorHandler');
-const { errors } = require('celebrate');
-require('dotenv').config();
+
+const mongoose = require("mongoose");
 
 const adminRoutes = require('./routes/admin');
 const productRoutes = require('./routes/product');
@@ -18,6 +14,9 @@ const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order')
 const shippingRoutes = require('./routes/shipping')
 
+const errorHandler = require('./middlewares/errorHandler');
+const { errors } = require('celebrate');
+require('dotenv').config();
 
 // Other Middlewares
 
@@ -54,7 +53,6 @@ app.get("/", (req, res) => {
 
 
 // database connection with mongoosedb
-
 mongoose.connect(process.env.MONGODB_URI, {
     serverSelectionTimeoutMS: 5000,
     socketTimeoutMS: 45000,
@@ -63,7 +61,6 @@ mongoose.connect(process.env.MONGODB_URI, {
     }).catch((err) => {
         console.log('Error:', err.message);
     });
-
 
 // Routes Admin
 app.use('/api/admin', adminRoutes);
@@ -82,30 +79,7 @@ app.use('/api/payment', orderRoutes);
 // Routes Shipping
 app.use('/api/shipping', shippingRoutes);
 
-
-//Image storage engine
-
-const storage = multer.diskStorage({
-
-    destination: './upload/images',
-    filename: (req, file, cb) => {
-        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
-        
-    }
-})
-
-const upload = multer({ storage: storage })
-// Creating images in point
-
-app.use('/images', express.static('upload/images'))
-
-app.post("/upload", upload.single('product'), (req, res) => {
-    res.json({
-        success: 1,
-        image_url: `http://localhost:${process.env.PORT}/images/${req.file.filename}`
-    })
-})
-
+// Error handling middlewares
 app.use(errors());  // Celebrate Error Handling Middleware
 app.use(errorHandler);  // Centralized error handling
 

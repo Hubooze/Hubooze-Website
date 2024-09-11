@@ -1,16 +1,17 @@
 import React from "react";
-import Wethnics from '../Assets/images/Wethnics.jpeg'
-import Wtraditional from '../Assets/images/WTraditional.jpeg'
-import Wwestern from '../Assets/images/Wwestern.jpeg'
+import Wethnics from '../Assets/images/saree.jpg'
+import Wtraditional from '../Assets/images/kurta_set.jpg'
+import Wwestern from '../Assets/images/black-geometric-satin-bell-sleeve-peplum-shirt.jpg'
 import Wsports from '../Assets/images/WSports.png'
-import Methnics from '../Assets/images/Methnics.jpeg'
-import Mtraditional from '../Assets/images/MTraditional.jpeg'
-import Mwestern from '../Assets/images/Mwestern.jpeg'
-import Msports from '../Assets/images/Msports.jpeg'
-import Ethnics from '../Assets/images/Ethnics.jpeg'
-import Western from '../Assets/images/Western.jpeg'
-import Sports from '../Assets/images/Sports.jpeg'
-// import Wethnics from '../Assets/images/Wethnics.jpeg'
+import Mtshirt from '../Assets/images/men-tshirt.jpeg'
+import Mshirt from '../Assets/images/HM_SHIRT_09 (2).jpg'
+import Mjeans from '../Assets/images/men-jeans.jpg'
+import Methnics from '../Assets/images/men-ethnic.jpg'
+
+import Boy from '../Assets/images/boy.jpg'
+import Girl from '../Assets/images/girl.jpg'
+import Sports from '../Assets/images/girl-sport.jpg'
+import Baby from '../Assets/images/baby.jpg'
 // import "./Collection.css";
 import '../CSS/Common.css'
 
@@ -51,26 +52,26 @@ function Collection() {
         <span className="subheading">Mens Collection</span>
         <div className="shop-images">
           <div className="shop-link">
-            <h3>Tshirt</h3>
-            <img src={Mwestern} alt="card" />
+            <h3>Tshirts </h3>
+            <img src={Mtshirt} alt="card" />
             {/* <img src="images/Methnics.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
           <div className="shop-link">
             <h3>Shirts</h3>
-            <img src={Mtraditional} alt="card" />
+            <img src={Mshirt} alt="card" />
             {/* <img src="images/MTraditional.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
           <div className="shop-link">
-            <h3>Jeans trouser</h3>
-            <img src={Methnics} alt="card" />
+            <h3>Jeans & Trousers</h3>
+            <img src={Mjeans} alt="card" />
             {/* <img src="images/Mwestern.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
           <div className="shop-link">
-            <h3>Ethnic wear</h3>
-            <img src={Msports} alt="card" />
+            <h3>Ethnic</h3>
+            <img src={Methnics} alt="card" />
             {/* <img src="images/Msports.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
@@ -81,26 +82,26 @@ function Collection() {
         <span className="subheading">Kids Collection</span>
         <div className="shop-images">
           <div className="shop-link">
-            <h3>Boys Clothing</h3>
-            <img src={Ethnics} alt="card" />
+            <h3>Boys</h3>
+            <img src={Boy} alt="card" />
             {/* <img src="images/Ethnics.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
           <div className="shop-link">
-            <h3>Girls Clothing</h3>
-            <img src={Ethnics} alt="card" />
+            <h3>Girls</h3>
+            <img src={Girl} alt="card" />
             {/* <img src="images/Ethnics.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
           <div className="shop-link">
-            <h3>Sports Wear</h3>
-            <img src={Western} alt="card" />
+            <h3>Sports</h3>
+            <img src={Sports} alt="card" />
             {/* <img src="images/Western.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
           <div className="shop-link">
-            <h3>Baby Wear</h3>
-            <img src={Sports} alt="card" />
+            <h3>Baby</h3>
+            <img src={Baby} alt="card" />
             {/* <img src="images/Sports.jpeg" alt="card" /> */}
             <a href="#">Shop now</a>
           </div>
