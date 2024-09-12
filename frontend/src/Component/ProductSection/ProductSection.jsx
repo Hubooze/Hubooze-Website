@@ -44,11 +44,6 @@ const ProductSection = ({ category }) => {
     }
 
     const images = [
-        'https://via.placeholder.com/800x400.png?text=Sale+Up+to+50%25+Off',
-        'https://via.placeholder.com/800x400.png?text=New+Arrivals',
-        'https://via.placeholder.com/800x400.png?text=Limited+Edition',
-        'https://via.placeholder.com/800x400.png?text=Summer+Collection',
-        'https://via.placeholder.com/800x400.png?text=Buy+One+Get+One+Free',
         'https://via.placeholder.com/800x400.png?text=Free+Shipping',
         'https://via.placeholder.com/800x400.png?text=Exclusive+Offer',
         'https://via.placeholder.com/800x400.png?text=Shop+Now',
@@ -145,7 +140,7 @@ const ProductSection = ({ category }) => {
                     </div>
                 </div>
                 
-                <div className="shopCategory-product">
+                <div className="shopCategory-product product-grid">
                     {products.map(product => (
                         <Item
                             Product key={product._id}

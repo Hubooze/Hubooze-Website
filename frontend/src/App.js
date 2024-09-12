@@ -41,7 +41,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
        
         <Routes>
           <Route path='/' element={<HomePage />} />

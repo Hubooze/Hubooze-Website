@@ -6,8 +6,14 @@ import Facility3 from '../Assets/images/Facility3.jpeg'
 
 function Features() {
   return (
+    
  
     <section className="section-how" id="how">
+
+    <div>
+      <hr style={{ height: '2px', backgroundColor: 'black', border: 'none', marginBottom: '50px' }} />
+    </div>
+
     <div className="container">
       <h2 className="heading-secondary">Enhance your shopping experience with our convenient features</h2>
     </div>
