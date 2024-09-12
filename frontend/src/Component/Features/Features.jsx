@@ -14,7 +14,7 @@ function Features() {
 
     <div className="container grid grid--3-cols grid--center-v">
     {/* Row 1 */}
-      <div className="step-number-box">
+      {/* <div className="step-number-box">
         <p className="step-number">01</p>
       </div>
       <div className="step-number-box">
@@ -22,7 +22,7 @@ function Features() {
       </div>
       <div className="step-number-box">
         <p className="step-number">03</p>
-      </div>
+      </div> */}
 
    {/*    <!-- Row 2: Headings --> */}
       <div className="step-text-box">
