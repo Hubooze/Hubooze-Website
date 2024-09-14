@@ -12,8 +12,7 @@ import Boy from '../Assets/images/boy.jpg'
 import Girl from '../Assets/images/girl.jpg'
 import Sports from '../Assets/images/girl-sport.jpg'
 import Baby from '../Assets/images/baby.jpg'
-// import "./Collection.css";
-import '../CSS/Common.css'
+import "./Collection.css";
 
 function Collection() {
   return (

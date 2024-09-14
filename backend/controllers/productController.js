@@ -119,22 +119,22 @@ exports.getProductById = async (req, res) => {
 // Create a new product
 exports.createProduct = async (req, res) => {
     try {
-        console.log("Request Body: ", req.body);  // Log the request body for debugging
-
+        // Ensure the image field is an array of strings
         const { image, ...otherData } = req.body;
+        const sanitizedImage = Array.isArray(image) ? image : image.split(',').map(url => url.trim());
 
         const newProduct = new Product({
             ...otherData,
-            image,
+            image: sanitizedImage,
         });
 
         const product = await newProduct.save();
         res.status(201).json({ success: true, product });
     } catch (error) {
-        console.error("Error creating product: ", error);  // Log the actual error message
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
 
 
 // Update an existing product

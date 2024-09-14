@@ -1,95 +1,469 @@
-/* Navbar styles */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Merriweather Sans", sans-serif;
+  font-optical-sizing: auto;
+  line-height: 1;
+  font-weight: 300;
+  font-style: normal;
+  color: #000000;
+  overflow-x: hidden;
+}
+
+.container {
+  /* 1140px */
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+
+
+.grid {
+  display: grid;
+  column-gap: 6.4rem;
+  row-gap: 9.6rem;
+}
+
+.heading-primary {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #333;
+  letter-spacing: -0.5px;
+  margin-bottom: 3.2rem;
+}
+
+h3 {
+  font-size: 2rem;
+  color: #333;
+  margin-top: 2rem;
+}
+
+
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    transition: background-color 0.10s ease;
-    z-index: 1000;
-    height: 10.9rem;
-    padding: 0 5.8rem;
-  }
-  
-  .header.scrolled {
-    background-color: white;
-    height: 11rem;
-  }
-  
-  .logo {
-    height: 85px;
-    width: 110px;
-    z-index: 1000;
-  }
-  
-  .main-nav-list {
-    list-style: none;
-    display: flex;
-    gap: 3.2rem;
-    align-items: center;
-  }
-  
-  .main-nav-link {
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-    font-size: 2.0rem;
-  }
-  
-  .straight-line,
-  .search,
-  .person,
-  .cart {
-    height: 30px;
-    width: 30px;
-  }
-  
-  /* Search and login containers */
-  .search-container {
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    margin-right: 8px;
-    background-color: #fff;
-  }
-  
-  .search-container input {
-    border: none;
-    outline: none;
-    width: 200px;
-  }
-  
-  .search-container.hidden {
-    display: none;
-  }
-  
-  .search-container.visible {
-    display: flex;
+  transition: background-color 0.3s ease;
+  background-color: transparent; /* Default background */
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  /* margin-top: -6rem; */
+}
+
+.header.navbar-scrolled {
+  background-color: white; /* Change to white when scrolled */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+}
+
+
+
+.header .logo {
+  height: 85px;
+  width: 110px;
+  z-index: 1000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  height: 9.6rem;
+  padding: 0 4.8rem;
+}
+
+.logo {
+  height: 95px;
+  width: 110px;
+}
+
+.main-nav-list {
+  list-style: none;
+  display: flex;
+  gap: 3.2rem;
+  align-items: center;
+}
+
+.main-nav-link:link,
+.main-nav-link:visited {
+  text-decoration: none;
+  color: black;
+  font-weight: 280;
+  font-size: 2.0rem;
+
+}
+
+
+.straight-line {
+  height: 30px;
+  width: 30px;
+}
+
+.search {
+  height: 30px;
+  width: 30px;
+}
+
+.person {
+  height: 30px;
+  width: 30px;
+}
+
+.cart {
+  height: 30px;
+  width: 30px;
+}
+
+
+/*Video*/
+
+.Video {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-right: 8px;
+  background-color: #fff;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  width: 200px;
+}
+
+.search-container.visible {
+  display: flex;
+}
+
+.main-nav-img {
+  width: 30px;
+  height: 30px;
+}
+
+.containerforlogin {
+  display: none;
+  /* Hide the container initially */
+  position: absolute;
+  top: 70px;
+  /* Adjust as needed */
+  right: 30px;
+  /* Adjust as needed */
+  background-color: white;
+  padding: 30px;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.containerforlogin li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.containerforlogin li a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  font-family: serif;
+
+}
+
+/* General Styling */
+
+@media (max-width: 1280px) {
+  .header {
+      height: 9rem;
   }
 
-  
-  .containerforlogin {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 30px;
-    background-color: white;
-    padding: 30px;
-    border-radius: 7px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  .logo {
+      height: 75px;
   }
-  
-  .containerforlogin li {
-    list-style: none;
-    margin-bottom: 5px;
+}
+
+@media (max-width: 1060px) {
+  .logo {
+      height: 70px;
+      width: 104px;
+
   }
-  
-  .containerforlogin li a {
-    text-decoration: none;
-    color: black;
-    font-size: 1.5rem;
-    font-family: serif;
+
+  .header {
+      height: 9rem;
   }
-  
+
+  .Video {
+      height: 597px !important;
+  }
+
+  .header.scrolled {
+      height: 9rem;
+  }
+
+  .shop-images {
+      max-width: 1000px;
+      gap: 16px;
+
+  }
+
+  .shop-section {
+      padding: 106px 7px 0px 7px;
+  }
+
+}
+@media (max-width: 997px){
+ .header {
+     height: 8rem !important;
+ }
+ .main-nav-list{
+     gap: 2.2rem !important;
+ }
+}
+
+@media (max-width: 800px) {
+  .header {
+      height: 6rem;
+  }
+
+  .header .logo {
+      height: 51px !important;
+      width: 74px !important;
+  }
+
+  .main-nav-list {
+      gap: 1.1rem !important;
+  }
+
+  .main-nav-link {
+      font-size: 1.8rem !important;
+  }
+
+}
+
+@media (max-width: 980px) {
+  .header .logo {
+      height: 70px;
+      width: 90px;
+      gap: 2rem;
+  }
+
+  .main-nav-list {
+      gap: 2rem;
+  }
+
+}
+
+@media (max-width: 630px) {
+ .header.scrolled {
+     height: 6rem;
+ }
+ .header {
+     height: 5rem;
+ }
+ .header .logo {
+     height: 46px !important;
+     width: 56px !important;
+ }
+ 
+}
+@media (max-width: 500px) {
+
+ .main-nav-img {
+   width: 23px;
+  }
+
+  .main-nav-link {
+      font-size: 12px !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .header {
+      height: 5rem;
+      padding-left: 7px;
+  }
+
+  .header .logo {
+      height: 40px !important;
+      width: 53px !important;
+  }
+
+  .main-nav-link {
+      font-size: 1.5rem !important;
+  }
+
+  .main-nav-img {
+      width: 25px;
+      height: 25px;
+  }
+
+  .main-nav-list {
+      padding-left: 22px;
+  }
+
+  .header.scrolled {
+      height: 5rem;
+  }
+
+  .search-container input {
+      width: 90px;
+  }
+
+}
+
+@media (max-width: 420px) {
+  .header .logo {
+      height: 35px !important;
+      width: 42px !important;
+  }
+
+  .header.scrolled {
+      height: 5rem;
+  }
+
+  .main-nav-list {
+      gap: 5px !important;
+  }
+
+  .main-nav-link {
+      font-size: 16px !important;
+  }
+
+  .header {
+      padding: 0 0.8rem;
+  }
+
+
+
+  .search-container {
+      padding: 2px 7px;
+  }
+
+  .search-container input {
+      width: 58px;
+  }
+
+  .main-nav-img {
+      width: 18px;
+      height: 18px;
+  }
+}
+
+@media (max-width: 440px) {
+  .main-nav-list {
+      gap: 5px !important;
+      padding-left: 18px;
+  }
+
+  .main-nav-link {
+      font-size: 12px !important;
+  }
+
+  .main-nav-img {
+      width: 22px;
+      height: 22px;
+  }
+
+  .search-container {
+      padding: 3px 6px;
+  }
+
+  .search-container input {
+      padding: 3px 6px;
+  }
+
+  .main-nav-img {
+      width: 20px;
+      height: 20px;
+  }
+}
+
+@media (max-width: 460px) {
+  .main-nav-link {
+      font-size: 12px !important;
+  }
+
+  .main-nav-list {
+      gap: 5px !important;
+  }
+
+  .search-container {
+      padding: 3px 7px;
+  }
+
+  .main-nav-img {
+      width: 23px;
+      height: 21px;
+  }
+}
+
+
+@media (max-width: 386px) {
+  .main-nav-link {
+      font-size: 12px !important;
+  }
+}
+
+@media (max-width: 380px) {
+ 
+
+  .main-nav-list {
+      gap: 10px;
+      padding-left: 7px;
+  }
+
+  .header {
+      height: 6rem;
+      padding-left: 4px;
+  }
+
+  .header .logo {
+      height: 30px !important;
+      width: 35px !important;
+
+  }
+
+  .main-nav-link {
+      font-size: 12px !important;
+  }
+
+  .main-nav-img {
+      width: 15px;
+      height: 18px;
+  }
+
+  .search-container {
+      padding: 0px 0px;
+  }
+
+  .search-container input {
+      width: 42px;
+  }
+
+  .header.scrolled {
+      height: 4rem;
+  }
+
+  .main-nav-list {
+      padding-left: 14px;
+  }
+
+}
+
+

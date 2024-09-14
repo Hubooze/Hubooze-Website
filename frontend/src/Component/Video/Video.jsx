@@ -1,8 +1,8 @@
 import React from "react";
 import Video from '../Assets/images/Video.mp4'
 import returnImg from "../Assets/images/Return.png"
-// import './Video.css';
-import '../CSS/Common.css'
+import './Video.css';
+// import '../CSS/Common.css'
 
 function VideoSection() {
   return (

@@ -1,5 +1,26 @@
 /* Video section styles */
-.hero-section {
+
+.Video {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.Video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.Video .Return {
+  display: block;
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
+}
+
+/* .hero-section {
     position: relative;
     overflow: hidden;
     height: 60vh;
@@ -29,4 +50,4 @@
   .content p {
     font-size: 1.5rem;
   }
-  
+   */

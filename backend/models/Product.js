@@ -8,7 +8,7 @@ const ProductSchema = mongoose.Schema({
         type: String,
     },
     HIN_No: {
-        type: Number,
+        type: String,
     },
     category: {
         type: String,
