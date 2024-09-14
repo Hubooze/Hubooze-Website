@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 // Configure CORS
 
 app.use(cors({
-    origin: 'http://3.111.119.80',
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
     allowedHeaders: ['Content-Type', 'Authorization'], 
     credentials: true,

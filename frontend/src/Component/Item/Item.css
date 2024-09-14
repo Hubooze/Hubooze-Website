@@ -146,16 +146,12 @@
    
 }
 .cart{
-    /* display: flex;
-   
-    justify-content: end; */
-
-    /* Sakina's code */
+    display: flex;   
+    justify-content: end;
     position: absolute;
     top: 1rem;
     right: 1rem;
-    visibility: hidden;
-    
+    visibility: hidden;    
 }
 
 .item:hover .cart {

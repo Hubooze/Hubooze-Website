@@ -10,11 +10,9 @@ html {
 }
 
 body {
-  font-family: "Merriweather Sans", sans-serif;
-  font-optical-sizing: auto;
+  font-family: 'Merriweather Sans', sans-serif;
   line-height: 1;
-  font-weight: 300;
-  font-style: normal;
+  font-weight: 400;
   color: #000000;
   overflow-x: hidden;
 }
@@ -97,7 +95,7 @@ h3 {
 .main-nav-link:visited {
   text-decoration: none;
   color: black;
-  font-weight: 280;
+  font-weight: 500;
   font-size: 2.0rem;
 
 }
@@ -118,7 +116,7 @@ h3 {
   width: 30px;
 }
 
-.cart {
+.cart-home-page {
   height: 30px;
   width: 30px;
 }
@@ -463,6 +461,7 @@ h3 {
   .main-nav-list {
       padding-left: 14px;
   }
+
 
 }
 
