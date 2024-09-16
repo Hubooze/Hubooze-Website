@@ -143,8 +143,7 @@ const ProductSection = ({ category }) => {
                 <div className="shopCategory-product product-grid">
                     {products.map(product => (
                         <Item
-                            Product key={product._id}
-                            {...product}
+                            key={product._id}
                             name={product.name}
                             image={product.image}
                             market_price={product.market_price}

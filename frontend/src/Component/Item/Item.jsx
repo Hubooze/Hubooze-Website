@@ -6,25 +6,26 @@ const Item = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
+  // Ensure that props.image is an array and not undefined or null
+  const images = props.image && Array.isArray(props.image) ? props.image : [];
+
   // Handle automatic image sliding when hovered
   useEffect(() => {
     let interval;
-    if (isHovered) {
+    if (isHovered && images.length > 0) {
       interval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % props.image.length);
-      }, 1500); // Slide every 1.5 seconds
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 1500); // Change image every 1.5 seconds
     } else {
       clearInterval(interval);
     }
-    return () => clearInterval(interval); // Clean up the interval on unmount or when not hovered
-  }, [isHovered, props.image.length]);
-
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + props.image.length) % props.image.length);
-  };
+    return () => clearInterval(interval); // Clean up the interval when not hovering or unmounting
+  }, [isHovered, images.length]);
+  
+ 
 
   return (
-    <div 
+    <div
       className='item'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -34,21 +35,13 @@ const Item = (props) => {
           <span id='shopping_cart' className="material-symbols-outlined">add_shopping_cart</span>
         </div>
 
-        {/* Image Display */}
-        <img className='imagehandler' src={props.image[currentImageIndex]} alt={props.name} />
+        {/* Display the current image based on the hover effect */}
+        {images.length > 0 ? (
+          <img className='imagehandler' src={images[currentImageIndex]} alt={props.name} />
+        ) : (
+          <div className="no-image-placeholder">No Image Available</div>
+        )}
 
-        {/* Dots Indicator */}
-        {/* <div className="dots-container">
-          {props.image.map((_img, index) => (
-            <span
-              key={index}
-              className={`dot ${index === currentImageIndex ? 'active' : ''}`}
-              onClick={() => setCurrentImageIndex(index)}
-            ></span>
-          ))}
-        </div> */}
-
-        {/* Item Details */}
         <p className="item-name">{props.name}</p>
         <div className="item-prices-row">
           <div className="item-price-old">
@@ -57,7 +50,6 @@ const Item = (props) => {
           <div className="item-price-new">
             <b>₹{props.selling_price}</b>
           </div>
-          
         </div>
       </Link>
     </div>

@@ -140,17 +140,21 @@ exports.createProduct = async (req, res) => {
 // Update an existing product
 exports.updateProduct = async (req, res) => {
     try {
-        const { image, ...otherData } = req.body;
+        const { name, selling_price, quantity } = req.body;
 
-        // Sanitize and ensure image is an array of valid URLs
-        const sanitizedImage = Array.isArray(image) ? image : image.split(',').map(url => url.trim());
+        // Check if required fields are provided
+        if (!name || !selling_price || !quantity) {
+            return res.status(400).json({ success: false, message: 'All fields (name, selling_price, quantity) are required' });
+        }
 
+        // Update only the allowed fields: name, selling_price, and quantity
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
-            ...otherData,
-            image: sanitizedImage,
+            name,
+            selling_price,
+            quantity
         }, {
-            new: true,
-            runValidators: true,
+            new: true,             // Return the updated document
+            runValidators: true,    // Ensure the updated data is valid
         });
 
         if (!updatedProduct) {
@@ -162,6 +166,8 @@ exports.updateProduct = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+
 
 // Delete a product
 exports.deleteProduct = async (req, res) => {

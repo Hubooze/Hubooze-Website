@@ -31,9 +31,14 @@ const AdminDashboard = () => {
       setIsLoading(true);
       try {
         const response = await axios.get('http://192.168.1.109:3000/api/products');
-        setProducts(response.data.products);
+        if (response.data.products) {
+          setProducts(response.data.products);
+        } else {
+          setProducts([]);  // Fallback to empty array if no products are returned
+        }
       } catch (error) {
         console.error('Error fetching products:', error);
+        setProducts([]);  // Ensure products is always an array
       } finally {
         setIsLoading(false);
       }
@@ -115,7 +120,12 @@ const AdminDashboard = () => {
     setIsLoading(true);
     try {
       const response = await axios.put(`http://192.168.1.109:3000/api/products/${productId}`, editProductData);
-      setProducts(products.map(product => product._id === productId ? response.data.product : product));
+      const updatedProduct = response.data.updatedProduct;
+  
+      setProducts(products.map(product =>
+        product._id === productId ? updatedProduct : product
+      ));
+  
       setEditProductId(null);
       setEditProductData({});
     } catch (error) {
@@ -124,6 +134,7 @@ const AdminDashboard = () => {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div>
