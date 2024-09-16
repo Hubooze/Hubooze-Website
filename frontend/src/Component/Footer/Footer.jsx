@@ -18,19 +18,19 @@ function Footer() {
       <div className="footer">
         <div className="social-icons">
           <div className="footer-icon-container">
-            <a href="#"><img src={instagramIcon} alt="Instagram"/></a>
+            <a href="https://www.instagram.com/hubooze.in/"><img src={instagramIcon} alt="Instagram"/></a>
           </div>
           <div className="footer-icon-container">
-            <a href="#"><img src={whatsappIcon} alt="WhatsApp"/></a>
+            <a href="https://wa.me/919004908382" ><img src={whatsappIcon} alt="WhatsApp" /></a>
           </div>
           <div className="footer-icon-container">
             <a href="#"><img src={twitterIcon} alt="Twitter"/></a>
           </div>
           <div className="footer-icon-container">
-            <a href="#"><img src={linkedinIcon} alt="facebook"/></a>
+            <a href="https://www.linkedin.com/company/hubooze/posts/?feedView=all"><img src={linkedinIcon} alt="facebook"/></a>
           </div>
           <div className="footer-icon-container">
-            <a href="#"><img src={youtubeIcon} alt="youtube"/></a>
+            <a href="https://www.bing.com/ck/a?!&&p=77b16271602701d6JmltdHM9MTcyNjQ0NDgwMCZpZ3VpZD0yYTY4MmUwMC04MGZmLTYwYzUtMmI3YS0zYWE0ODE2NDYxMDkmaW5zaWQ9NTE5NA&ptn=3&ver=2&hsh=3&fclid=2a682e00-80ff-60c5-2b7a-3aa481646109&psq=Hubooze+youtube&u=a1aHR0cHM6Ly93d3cueW91dHViZS5jb20vQGh1Ym9vemU&ntb=1"><img src={youtubeIcon} alt="youtube"/></a>
           </div>
         </div>
 

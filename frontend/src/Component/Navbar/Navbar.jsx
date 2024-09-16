@@ -56,8 +56,8 @@ function Navbar() {
           <li><img className="person main-nav-img" alt="Person-icon" src={personIcon} onClick={toggleLogin} /></li>
             <div className="containerforlogin" style={{ display: loginVisible ? "block" : "none" }}>
               <ul>
-                <li><Link to="/loginSignup">SIGN IN</Link></li>
-                <li><Link to="/loginSignup">LOGIN</Link></li>
+                <li><Link to="/login">SIGN UP</Link></li>
+                <li><Link to="/login">LOGIN</Link></li>
                 <li><a href="#">MY ACCOUNT</a></li>
               </ul>
             </div>
