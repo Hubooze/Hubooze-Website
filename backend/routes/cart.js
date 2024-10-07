@@ -4,8 +4,8 @@ const { addToCart, removeFromCart, getCart } = require('../controllers/cartContr
 const authenticateToken = require('../middlewares/authToken');
 const cacheMiddleware = require('../middlewares/cachingMiddleware');
 
-router.post('/addtocart', authenticateToken, cacheMiddleware, addToCart);
-router.post('/removefromcart', authenticateToken, cacheMiddleware, removeFromCart);
-router.get('/getcart', authenticateToken, cacheMiddleware, getCart);
+router.post('/addtocart', addToCart);
+router.post('/removefromcart', removeFromCart);
+router.get('/getcart', getCart);
 
 module.exports = router;

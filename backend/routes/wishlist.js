@@ -5,8 +5,8 @@ const authenticateToken = require('../middlewares/authToken');
 const cacheMiddleware = require('../middlewares/cachingMiddleware');
 
 
-router.get('/getwishlist', authenticateToken, cacheMiddleware, getWishlist);
-router.post('/addtowishlist', authenticateToken, cacheMiddleware, addToWishlist);
-router.delete('/removefromwishlist', authenticateToken, cacheMiddleware, removeFromWishlist);
+router.get('/getwishlist', authenticateToken, getWishlist);
+router.post('/addtowishlist', authenticateToken, addToWishlist);
+router.delete('/removefromwishlist', authenticateToken, removeFromWishlist);
 
 module.exports = router;

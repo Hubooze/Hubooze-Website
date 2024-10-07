@@ -8,6 +8,8 @@ const secret = process.env.JWT_SECRET;
 
 router.post('/adminregister', authenticateAdmin, adminController.registerAdmin);
 router.post('/adminlogin', adminController.loginAdmin);
+router.post('/adminlogout', authenticateAdmin, adminController.logoutAdmin);
+router.get('/check-auth', authenticateAdmin, adminController.checkAdminAuth);
 
 
 module.exports = router;

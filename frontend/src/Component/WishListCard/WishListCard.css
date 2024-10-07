@@ -1,0 +1,256 @@
+.wishlist-card-container {
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid rgb(115, 110, 110); */
+    border-radius: 8px;
+    width: 70%;
+    height: 12rem;
+    align-items: center;
+    padding: 0% 5%;
+    margin: auto;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    background-color: rgb(247, 243, 243);
+}
+
+.wishlist-card-text {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.wishlist-buttons {
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid red; */
+    gap: 1rem;
+}
+
+#wishlist-buy-btn:hover {
+    color: black;
+    background-color: white;
+}
+
+#wishlist-add-btn:hover {
+    color: white;
+    background-color: black;
+}
+
+#wishlist-remove-btn:hover {
+    color: white;
+    background-color: black;
+}
+
+/* image css */
+#wishlist-img-div {
+    /* border: 2px solid red; */
+    height: 10rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 10rem;
+    height: 9rem;
+    border-radius: 1rem;
+
+}
+
+
+#wishlist-text-div {
+    /* border: 2px solid green; */
+    height: 10rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-left: 1rem;
+}
+
+/* buttons */
+#wishlist-button-div {
+    /* border: 2px solid blue; */
+    height: 10rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#wishlist-second-btn {
+    display: flex;
+    gap: 2rem;
+}
+
+button {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#wishlist-buy-btn {
+    width: 12rem;
+    background-color: black;
+    color: white;
+}
+
+.wishlist-color-p {
+    display: flex;
+    gap: 10px;
+}
+
+
+.wishlist-card-text p {
+    color: gray;
+}
+
+.wishlist-img-text {
+    display: flex;
+    flex-direction: row;
+    /* border: 2px solid red; */
+    width: 90rem;
+}
+
+@media screen and (max-width: 768px) {
+
+    .wishlist-card-container {
+        flex-direction: column;
+
+    }
+
+    .wishlist-img-text {
+        display: flex;
+        flex-direction: row;
+        /* border: 2px solid red; */
+        width: 30rem;
+    }
+
+    .wishlist-buttons {
+       
+        width: 5rem;
+        flex-direction: row;
+
+    }
+
+    #wishlist-button-div {
+        height: 3rem;
+        justify-content: space-between;
+        width: 26rem;
+    }
+}
+
+
+@media screen and (max-width: 1088px) {
+    .wishlist-card-container {
+        height: 40rem;
+        width: 80%;
+    }
+
+
+}
+
+
+@media screen and (max-width: 850px) {
+    .wishlist-card-container {
+
+        width: 85%;
+    }
+
+
+}
+
+@media screen and (max-width: 550px) {
+    .wishlist-card-container {
+
+        width: 25rem;
+    }
+
+    img {
+        width: 7rem;
+        height: 7rem;
+        border-radius: 1rem;
+    }
+
+    .wishlist-img-text {
+        display: flex;
+        flex-direction: row;
+        /* border: 2px solid red; */
+        width: 21rem;
+    }
+
+    #wishlist-buy-btn {
+        width: 5rem;
+        background-color: black;
+        color: white;
+    }
+
+    #wishlist-button-div {
+        height: 3rem;
+        justify-content: end;
+        width: 20rem;
+        margin-right: -26px;
+    }
+    #wishlist-button-div {
+        margin-right: 11px;
+        margin-top: -14px;
+        padding-bottom: 8px;
+    }
+  
+
+
+}
+
+@media screen and (max-width: 450px) {
+    .wishlist-card-container {
+        width: 314px;
+       
+    }
+
+    #wishlist-button-div {
+        margin-right: 11px;
+    }
+
+    .wishlist-img-text {
+        display: flex;
+        flex-direction: row;
+        /* border: 2px solid red; */
+        width: 17rem;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .wishlist-card-container {
+        width: 300px;
+       
+    }
+
+    .wishlist-img-text {
+        display: flex;
+        flex-direction: row;
+        /* border: 2px solid red; */
+        width: 17rem;
+    }
+
+
+}
+
+@media screen and (max-width: 360px) {
+
+    .wishlist-card-container {
+        width: 265px;
+        
+    }
+
+    #wishlist-second-btn {
+        display: flex;
+        gap: 20px;
+    }
+
+    #wishlist-button-div {
+
+        width: 18rem;
+
+    }
+}

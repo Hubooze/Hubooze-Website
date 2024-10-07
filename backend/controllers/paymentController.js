@@ -55,34 +55,44 @@ exports.updateOrderStatus = async (req, res) => {
   const { orderId, status } = req.body;
 
   // Validate the status value
-  const validStatuses = ['pending', 'delivered', 'canceled', 'returned', 'refunded'];
+  const validStatuses = ['pending', 'shipped', 'delivered', 'canceled', 'returned', 'refunded'];
   if (!validStatuses.includes(status)) {
-      return res.status(400).json({ error: 'Invalid status value' });
+    return res.status(400).json({ error: 'Invalid status value' });
   }
 
   try {
-      // Find the order by ID
-      const order = await Order.findOne({ order_id: orderId });
+    // Find the order by ID
+    const order = await Order.findOne({ order_id: orderId });
 
-      // If the order doesn't exist
-      if (!order) {
-          return res.status(404).json({ error: 'Order not found' });
-      }
+    // If the order doesn't exist
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
 
-      // Update the order status
-      order.status = status;
-      await order.save();
+    // Update the order status and timestamps based on status
+    order.status = status;
 
-      // Optionally, log status changes for auditing
-      console.log(`Order ${orderId} status updated to ${status}`);
+    // Automate shippedAt and deliveredAt changes
+    if (status === 'shipped' && !order.shippedAt) {
+      order.shippedAt = new Date();
+    }
 
-      // Respond with success
-      res.json({ message: 'Order status updated successfully', order });
+    if (status === 'delivered' && !order.deliveredAt) {
+      order.deliveredAt = new Date();
+    }
+
+    await order.save();
+
+    // Optionally, log status changes for auditing
+    console.log(`Order ${orderId} status updated to ${status}`);
+
+    // Respond with success
+    res.json({ message: 'Order status updated successfully', order });
   } catch (error) {
-      // Log the error for debugging purposes
-      console.error('Error updating order status:', error);
+    // Log the error for debugging purposes
+    console.error('Error updating order status:', error);
 
-      // Send a generic error response
-      res.status(500).json({ error: 'An error occurred while updating the order status' });
+    // Send a generic error response
+    res.status(500).json({ error: 'An error occurred while updating the order status' });
   }
 };
