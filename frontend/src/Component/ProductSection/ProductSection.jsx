@@ -25,7 +25,12 @@ const ProductSection = ({ category }) => {
                     const data = response.data;
                     // Check if the response data is an array
                     if (data.success && Array.isArray(data.products)) {
-                        console.log(typeof data.products.image);                   
+                        data.products.forEach(product => {
+                            console.log('Product:', product); // Check individual product fields
+                            console.log('Product ID:', product._id); // Check if _id exists
+                            console.log('Product Image:', product.image); // Check if image exists
+                        });
+                      
                         setProducts(data.products);
                     } else {
                         console.error('Unexpected API response:', data);
@@ -144,6 +149,7 @@ const ProductSection = ({ category }) => {
                     {products.map(product => (
                         <Item
                             key={product._id}
+                            productId={product._id} // Ensure you're passing this
                             name={product.name}
                             image={product.image}
                             market_price={product.market_price}

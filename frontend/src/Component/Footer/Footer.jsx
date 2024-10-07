@@ -21,10 +21,10 @@ function Footer() {
             <a href="https://www.instagram.com/hubooze.in/"><img src={instagramIcon} alt="Instagram"/></a>
           </div>
           <div className="footer-icon-container">
-            <a href="https://wa.me/919004908382" ><img src={whatsappIcon} alt="WhatsApp" /></a>
+            <a href="https://wa.me/919004908382" target="_blank" rel="noopener noreferrer" ><img src={whatsappIcon} alt="WhatsApp" /></a>
           </div>
           <div className="footer-icon-container">
-            <a href="#"><img src={twitterIcon} alt="Twitter"/></a>
+            <a href="https://x.com/hubooze66918?t=n4uL3ChyMBNbNw-8FciodA&s=09"><img src={twitterIcon} alt="Twitter"/></a>
           </div>
           <div className="footer-icon-container">
             <a href="https://www.linkedin.com/company/hubooze/posts/?feedView=all"><img src={linkedinIcon} alt="facebook"/></a>

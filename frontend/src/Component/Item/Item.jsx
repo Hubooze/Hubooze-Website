@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Item = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  console.log(props.productId)
 
   // Ensure that props.image is an array and not undefined or null
   const images = props.image && Array.isArray(props.image) ? props.image : [];
@@ -30,7 +31,7 @@ const Item = (props) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link to={`/product/${props.id}`}>
+      <Link to={`/products/${props.productId}`} key={props._id}>
         <div className='cart'>
           <span id='shopping_cart' className="material-symbols-outlined">add_shopping_cart</span>
         </div>

@@ -5,30 +5,19 @@ require('dotenv').config();
 const secret = process.env.JWT_SECRET;
 
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = req.cookies.token;
 
-  if (!token) return res.status(401).json({ message: 'Access denied, no token provided' });
+  if (!token) {
+    return res.status(401).json({ message: 'Access denied, no token provided' });
+  }
 
-  jwt.verify(token, secret, (err, user) => {
-    if (err) return res.status(403).json({ message: 'Invalid token' });
-    req.user = user;
+  try {
+    const decoded = jwt.verify(token, secret);
+    req.user = decoded; // Attach user info to request object
     next();
-  });
+  } catch (error) {
+    res.status(400).json({ message: 'Invalid token' });
+  }
 };
 
 module.exports = authenticateToken;
-
-// const authenticateToken = (req, res, next) => {
-//   const token = req.header('Authorization')?.split(' ')[1]; // Assuming 'Bearer <token>'
-
-//   if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
-
-//   try {
-//     const decoded = jwt.verify(token, secret);
-//     req.user = decoded; // Save the decoded token data to request object
-//     next();
-//   } catch (err) {
-//     res.status(400).json({ message: 'Invalid token.' });
-//   }
-// };
