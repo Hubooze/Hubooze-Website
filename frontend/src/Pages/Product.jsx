@@ -63,13 +63,18 @@ const Product = () => {
   };
 
   // Function to add product to the wishlist
+  // Function to add product to the wishlist
   const addToWishlist = async () => {
     try {
-      await axios.post('http://192.168.1.109:3000/api/wishlist/addtowishlist', { productId: product._id }, {
+      const response = await axios.post('http://192.168.1.109:3000/api/wishlist/addtowishlist', { productId: product._id }, {
         withCredentials: true, // Sends cookies for authentication
       });
-      console.log('Product ID:', product._id);
-      setWishlistMessage('Product added to wishlist!');
+
+      if (response.data.message === 'Product already in wishlist') {
+        setWishlistMessage('Product is already in your wishlist!');
+      } else {
+        setWishlistMessage('Product added to wishlist!');
+      }
     } catch (err) {
       setWishlistMessage('Failed to add product to wishlist.');
     }

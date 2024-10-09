@@ -7,6 +7,6 @@ const cacheMiddleware = require('../middlewares/cachingMiddleware');
 
 router.get('/getwishlist', authenticateToken, getWishlist);
 router.post('/addtowishlist', authenticateToken, addToWishlist);
-router.delete('/removefromwishlist', authenticateToken, removeFromWishlist);
+router.delete('/removefromwishlist/:productId', authenticateToken, removeFromWishlist);
 
 module.exports = router;

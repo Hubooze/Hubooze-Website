@@ -267,7 +267,8 @@ function Navbar() {
                     </>
                   ) : (
                     <>
-                      <li><Link to="/profile">MY ACCOUNT</Link></li>
+                      <li><Link to="/profile">PROFILE</Link></li>
+                      <li><Link to="/wishlist">WISHLIST</Link></li>
                       <li><a href="#" onClick={handleLogout}>LOGOUT</a></li>
                     </>
                   )}

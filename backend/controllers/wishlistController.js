@@ -40,7 +40,7 @@ exports.addToWishlist = async (req, res) => {
       await wishlist.save();
       return res.status(201).json({ message: 'Product added to wishlist' });
     } else {
-      return res.status(400).json({ message: 'Product already in wishlist' });
+      return res.status(200).json({ message: 'Product already in wishlist' }); // Updated message and status code
     }
   } catch (err) {
     return res.status(500).json({ message: 'Server error', error: err.message });
@@ -51,7 +51,7 @@ exports.addToWishlist = async (req, res) => {
 // Remove Product from Wishlist
 exports.removeFromWishlist = async (req, res) => {
   const userId = req.user.id;
-  const { productId } = req.body;
+  const { productId } = req.params; // Extract productId from URL parameters
 
   try {
     const wishlist = await Wishlist.findOne({ userId });
@@ -66,3 +66,30 @@ exports.removeFromWishlist = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
+
+
+
+
+// exports.removeFromWishlist = async (req, res) => {
+//   const userId = req.user.id;
+//   const { productId } = req.body;
+
+//   try {
+//     // Use the $pull operator to remove the product from the products array
+//     const wishlist = await Wishlist.findOneAndUpdate(
+//       { userId },
+//       { $pull: { products: { productId: productId } } }, // Pull the product based on its productId
+//       { new: true } // Return the updated document after the operation
+//     );
+
+//     if (!wishlist) {
+//       return res.status(404).json({ message: 'Wishlist not found' });
+//     }
+
+//     res.status(200).json({ message: 'Product removed from wishlist', wishlist });
+//   } catch (err) {
+//     res.status(500).json({ message: 'Server error', error: err.message });
+//   }
+// };
+
+

@@ -3,8 +3,203 @@ import WishListCard from '../Component/WishListCard/WishListCard';
 import './CSS/WishListPage.css'
 import axios from 'axios';
 
+const WishList = () => {
+  const [wishList, setWishList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-// Assuming you have a Navbar component
+  // Fetch Wishlist from the backend
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await axios.get('http://192.168.1.109:3000/api/wishlist/getwishlist', {
+          withCredentials: true, // Include credentials for authentication
+        });
+        const products = response.data.wishlist?.products || []; // Ensure products exist
+        setWishList(products);
+      } catch (err) {
+        setError('Failed to fetch wishlist.');
+        setWishList([]); // Fallback to empty array in case of error
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchWishlist();
+  }, []);
+
+  // Function to remove product from wishlist
+  const removeFromWishlist = async (productId) => {
+    try {
+      await axios.delete(`http://192.168.1.109:3000/api/wishlist/removefromwishlist/${productId}`, {
+        withCredentials: true, // Sends the cookie for authentication
+      });
+
+      // Update UI after removing the item
+      setWishList((prevItems) =>
+        prevItems.filter((item) => item.productId._id !== productId)
+      );
+    } catch (err) {
+      setError('Failed to remove item from wishlist.');
+    }
+  };
+
+  if (loading) return <p>Loading wishlist...</p>;
+  if (error) return <p>{error}</p>;
+
+  return (
+    <div className='wl-container'>
+      <div className='heading'>
+        <h1>Wishlist</h1>
+        <span className="material-symbols-outlined icon">favorite</span>
+        <span className='total-item'><p>({wishList.length})</p></span>
+      </div>
+      <div className='card'>
+        {Array.isArray(wishList) && wishList.length > 0 ? (
+          wishList.map(item => (
+            <WishListCard
+              key={item._id} // The unique key should be based on item._id, which is unique to each wishlist entry
+              productImg={item.productId.image[0]} // Display the first image from the array
+              productName={item.productId.name}
+              productDescription={item.productId.description}
+              productPrice={item.productId.selling_price}
+              productColor={item.productId.color}
+              productId={item.productId._id}
+              onRemove={removeFromWishlist} // Pass the remove function
+            />
+          ))
+        ) : (
+          <p>No items in your wishlist</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default WishList;
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import WishListCard from '../Component/WishListCard/WishListCard';
+// import './CSS/WishListPage.css'
+// import axios from 'axios';
+
+// const WishList = () => {
+
+//   const [wishList, setWishList] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//   // Fetch Wishlist from the backend
+//   useEffect(() => {
+//     const fetchWishlist = async () => {
+//       try {
+//         const response = await axios.get('http://192.168.1.109:3000/api/wishlist/getwishlist', {
+//           withCredentials: true, // Include credentials for authentication
+//         });
+//         setWishList(response.data.wishlist.products || []); // Ensure it's an array
+//       } catch (err) {
+//         setError('Failed to fetch wishlist.');
+//         setWishList([]); // Fallback to empty array in case of error
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchWishlist();
+//   }, []);
+
+//   // Function to remove product from wishlist
+//   const removeFromWishlist = async (productId) => {
+//     try {
+//       await axios.post('http://192.168.1.109:3000/api/wishlist/removefromwishlist', { productId }, {
+//         withCredentials: true, // Sends the cookie for authentication
+//       });
+
+//       // Update UI after removing the item
+//       setWishList((prevItems) =>
+//         prevItems.filter((item) => item.productId._id !== productId)
+//       );
+//     } catch (err) {
+//       setError('Failed to remove item from wishlist.');
+//     }
+//   };
+
+//   if (loading) return <p>Loading wishlist...</p>;
+//   if (error) return <p>{error}</p>;
+
+//   return (
+//     <div className='wl-container'>
+//       <div className='heading'>
+//         <h1>Wishlist</h1>
+//         <span className="material-symbols-outlined icon">favorite</span>
+//         <span className='total-item'><p>({wishList.length})</p></span>
+//       </div>
+//       <div className='card'>
+//         {Array.isArray(wishList) && wishList.length > 0 ? (
+//           wishList.map(item => (
+//             <WishListCard
+//               key={item.productId}
+//               productImg={item.productId.image}
+//               productName={item.productId.name}
+//               productDescription={item.productId.description}
+//               productPrice={item.productId.selling_price}
+//               productColor={item.productId.color}
+//               productId={item.productId._id}
+//               onRemove={removeFromWishlist} // Pass the remove function
+//             />
+//           ))
+//         ) : (
+//           <p>No items in your wishlist</p>
+//         )}
+//       </div>
+//       {/* <div className='card'>
+//         {wishListItems.length === 0 ? (
+//           <p>No items in wishlist</p>
+//         ) : (
+//           wishListItems.map((item, index) => (
+//             <WishListCard
+//               key={index}
+//               productImg={item.productId.image}
+//               productName={item.productId.name}
+//               productDescription={item.productId.description}
+//               productPrice={item.productId.selling_price}
+//               productColor={item.productId.color}
+//               productId={item.productId._id}
+//               onRemove={removeFromWishlist} // Pass the remove function
+//             />
+//           ))
+//         )}
+//       </div> */}
+//     </div>
+//   );
+// };
+
+// export default WishList;
+    
+
+//     return (
+//            <div className='wlp-container'>
+//       <div className='wlp-heading'><h1>Wishlist</h1><span class="wlp-material-symbols-outlined wlp-icon">
+// favorite 
+// </span><span className='wlp-total-item'><p>(10)</p></span></div>
+//       <div className='wlp-card'>
+        
+//            {wishListItems.map((item, index) => (
+//           <WishListCard
+//           key={index}
+//           productImg={item.productImg}
+//           productName={item.productName}
+//           productDescription={item.productDescription}
+//           productPrice={item.productPrice}
+//           productColor={item.productColor}
+//         />
+//       ))} 
+//                  </div>
+//     </div>
+//     );
+// }
+
+// export default WishList;
 
 // const wishListItems = [
 //   {
@@ -78,120 +273,3 @@ import axios from 'axios';
 //     productColor: "#c7d3d9"
 //   },
 // ];
-
-const WishList = () => {
-
-  const [wishListItems, setWishListItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Fetch Wishlist from the backend
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        const response = await axios.get('http://192.168.1.109:3000/api/wishlist/getwishlist', {
-          withCredentials: true, // Include credentials for authentication
-        });
-        setWishListItems(response.data.wishlistItems || []); // Ensure it's an array
-      } catch (err) {
-        setError('Failed to fetch wishlist.');
-        setWishListItems([]); // Fallback to empty array in case of error
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchWishlist();
-  }, []);
-
-  // Function to remove product from wishlist
-  const removeFromWishlist = async (productId) => {
-    try {
-      await axios.post('http://192.168.1.109:3000/api/wishlist/removefromwishlist', { productId }, {
-        withCredentials: true, // Sends the cookie for authentication
-      });
-
-      // Update UI after removing the item
-      setWishListItems((prevItems) =>
-        prevItems.filter((item) => item.productId._id !== productId)
-      );
-    } catch (err) {
-      setError('Failed to remove item from wishlist.');
-    }
-  };
-
-  if (loading) return <p>Loading wishlist...</p>;
-  if (error) return <p>{error}</p>;
-
-  return (
-    <div className='wl-container'>
-      <div className='heading'>
-        <h1>Wishlist</h1>
-        <span className="material-symbols-outlined icon">favorite</span>
-        <span className='total-item'><p>({wishListItems.length})</p></span>
-      </div>
-      <div className='card'>
-        {Array.isArray(wishListItems) && wishListItems.length > 0 ? (
-          wishListItems.map((item, index) => (
-            <WishListCard
-              key={item.productId}
-              productImg={item.productId.image}
-              productName={item.productId.name}
-              productDescription={item.productId.description}
-              productPrice={item.productId.selling_price}
-              productColor={item.productId.color}
-              productId={item.productId._id}
-              onRemove={removeFromWishlist} // Pass the remove function
-            />
-          ))
-        ) : (
-          <p>No items in your wishlist</p>
-        )}
-      </div>
-      {/* <div className='card'>
-        {wishListItems.length === 0 ? (
-          <p>No items in wishlist</p>
-        ) : (
-          wishListItems.map((item, index) => (
-            <WishListCard
-              key={index}
-              productImg={item.productId.image}
-              productName={item.productId.name}
-              productDescription={item.productId.description}
-              productPrice={item.productId.selling_price}
-              productColor={item.productId.color}
-              productId={item.productId._id}
-              onRemove={removeFromWishlist} // Pass the remove function
-            />
-          ))
-        )}
-      </div> */}
-    </div>
-  );
-};
-
-export default WishList;
-    
-
-//     return (
-//            <div className='wlp-container'>
-//       <div className='wlp-heading'><h1>Wishlist</h1><span class="wlp-material-symbols-outlined wlp-icon">
-// favorite 
-// </span><span className='wlp-total-item'><p>(10)</p></span></div>
-//       <div className='wlp-card'>
-        
-//            {wishListItems.map((item, index) => (
-//           <WishListCard
-//           key={index}
-//           productImg={item.productImg}
-//           productName={item.productName}
-//           productDescription={item.productDescription}
-//           productPrice={item.productPrice}
-//           productColor={item.productColor}
-//         />
-//       ))} 
-//                  </div>
-//     </div>
-//     );
-// }
-
-// export default WishList;
