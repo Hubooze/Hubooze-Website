@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font-family: 'sans-serif';
+  font-family: 'Merriweather Sans', sans-serif;
   line-height: 1;
   font-weight: 400;
   color: #000000;
@@ -101,11 +101,6 @@ h3 {
 }
 
 
-.straight-line {
-  height: 30px;
-  width: 30px;
-}
-
 .search {
   height: 30px;
   width: 30px;
@@ -183,44 +178,6 @@ h3 {
 
 }
 
-/* Testing .dropdown code start */
-/* Add a class to hide the navbar when modals are open */
-.hide-navbar {
-  display: none;
-}
-
-.dropdown {
-  position: absolute;
-  right: 80px;
-  top: 55px;
-  background-color: white;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  z-index: 1000;
-}
-
-.dropdown ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 10px;
-}
-
-.dropdown ul li {
-  padding: 10px;
-}
-
-.dropdown ul li a {
-  text-decoration: none;
-  color: black;
-  display: block;
-  font-size: medium;
-}
-
-.dropdown ul li a:hover {
-  background-color: #f2f2f2;
-}
-/* End */
-
 /* General Styling */
 
 @media (max-width: 1280px) {
@@ -265,16 +222,32 @@ h3 {
 }
 @media (max-width: 997px){
  .header {
-     height: 8rem !important;
+     height: 6rem !important;
  }
  .main-nav-list{
-     gap: 2.2rem !important;
+     gap: 3rem !important;
  }
+ .search-container {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 6rem;
+  right: 0;
+  padding: 10px 10px;
+}
+
+.search-container.visible {
+  display: flex;
+}
+
+.search-container input {
+  width: 100%;
+}
 }
 
 @media (max-width: 800px) {
   .header {
-      height: 6rem;
+      height: 4rem;
   }
 
   .header .logo {
@@ -283,11 +256,28 @@ h3 {
   }
 
   .main-nav-list {
-      gap: 1.1rem !important;
+      gap: 2rem !important;
   }
 
   .main-nav-link {
       font-size: 1.8rem !important;
+  }
+
+  .search-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
+  }
+
+  .search-container input {
+    width: 100%;
   }
 
 }
@@ -303,19 +293,53 @@ h3 {
       gap: 2rem;
   }
 
+  .search-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
+
 }
 
 @media (max-width: 630px) {
  .header.scrolled {
-     height: 6rem;
+     height: 4rem;
  }
  .header {
-     height: 5rem;
+     height: 4rem;
  }
  .header .logo {
-     height: 46px !important;
+     height: 36px !important;
      width: 56px !important;
  }
+ .search-container {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 6rem;
+  left: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.search-container.visible {
+  display: flex;
+}
+
+.search-container input {
+  width: 100%;
+}
  
 }
 @media (max-width: 500px) {
@@ -327,21 +351,55 @@ h3 {
   .main-nav-link {
       font-size: 12px !important;
   }
+  .search-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
 }
 
 @media (max-width: 550px) {
   .header {
-      height: 5rem;
+      height: 4rem;
       padding-left: 7px;
   }
 
   .header .logo {
-      height: 40px !important;
+      height: 30px !important;
       width: 53px !important;
   }
 
   .main-nav-link {
       font-size: 1.5rem !important;
+  }
+  .search-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    left: 0;  
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
+  }
+
+  .search-container input {
+    width: 100%;
   }
 
   .main-nav-img {
@@ -357,15 +415,11 @@ h3 {
       height: 5rem;
   }
 
-  .search-container input {
-      width: 90px;
-  }
-
 }
 
 @media (max-width: 420px) {
   .header .logo {
-      height: 35px !important;
+      height: 25px !important;
       width: 42px !important;
   }
 
@@ -373,8 +427,26 @@ h3 {
       height: 5rem;
   }
 
+  .search-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
+
   .main-nav-list {
-      gap: 5px !important;
+      gap: 8px !important;
   }
 
   .main-nav-link {
@@ -386,15 +458,6 @@ h3 {
   }
 
 
-
-  .search-container {
-      padding: 2px 7px;
-  }
-
-  .search-container input {
-      width: 58px;
-  }
-
   .main-nav-img {
       width: 18px;
       height: 18px;
@@ -403,7 +466,7 @@ h3 {
 
 @media (max-width: 440px) {
   .main-nav-list {
-      gap: 5px !important;
+      gap: 8px !important;
       padding-left: 18px;
   }
 
@@ -417,12 +480,23 @@ h3 {
   }
 
   .search-container {
-      padding: 3px 6px;
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
   }
 
   .search-container input {
-      padding: 3px 6px;
+    width: 100%;
   }
+
 
   .main-nav-img {
       width: 20px;
@@ -436,16 +510,32 @@ h3 {
   }
 
   .main-nav-list {
-      gap: 5px !important;
+      gap: 7px !important;
   }
 
-  .search-container {
-      padding: 3px 7px;
-  }
+
 
   .main-nav-img {
       width: 23px;
       height: 21px;
+  }
+
+  .search-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
+  }
+
+  .search-container input {
+    width: 100%;
   }
 }
 
@@ -454,6 +544,25 @@ h3 {
   .main-nav-link {
       font-size: 12px !important;
   }
+
+      .search-container {
+        display: none;
+        position: absolute;
+        width: 100%;
+        top: 6rem;
+        left: 0;
+        right: 0;
+        padding: 10px;
+      }
+    
+      .search-container.visible {
+        display: flex;
+      }
+    
+      .search-container input {
+        width: 100%;
+      }
+  
 }
 
 @media (max-width: 380px) {
@@ -479,18 +588,29 @@ h3 {
       font-size: 12px !important;
   }
 
+  .search-container {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    padding: 10px;
+  }
+
+  .search-container.visible {
+    display: flex;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
+
   .main-nav-img {
       width: 15px;
       height: 18px;
   }
 
-  .search-container {
-      padding: 0px 0px;
-  }
-
-  .search-container input {
-      width: 42px;
-  }
 
   .header.scrolled {
       height: 4rem;
@@ -502,5 +622,3 @@ h3 {
 
 
 }
-
-

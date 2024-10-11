@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import WishListCard from '../Component/WishListCard/WishListCard';
 import './CSS/WishListPage.css'
 import axios from 'axios';
@@ -7,6 +8,7 @@ const WishList = () => {
   const [wishList, setWishList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // Fetch Wishlist from the backend
   useEffect(() => {
@@ -18,14 +20,18 @@ const WishList = () => {
         const products = response.data.wishlist?.products || []; // Ensure products exist
         setWishList(products);
       } catch (err) {
-        setError('Failed to fetch wishlist.');
-        setWishList([]); // Fallback to empty array in case of error
+        if (err.response && err.response.status === 401) {
+          // Unauthorized, redirect to home or login
+          navigate('/');
+        } else {
+          setError('Failed to fetch wishlist.');
+        }
       } finally {
         setLoading(false);
       }
     };
     fetchWishlist();
-  }, []);
+  }, [navigate]);
 
   // Function to remove product from wishlist
   const removeFromWishlist = async (productId) => {
