@@ -9,7 +9,9 @@ function VideoSection() {
     <section className="Video">
       <div>
         <video id="background-video" src={Video} autoPlay loop muted></video>
-        <img className="Return" alt="90-Day-Return" src={returnImg} />
+        <div className="attached-box">
+          <p>AB RETURN OR EXCHANGE KRO 90 DINO TAK</p>
+        </div>
       </div>
     </section>
   );

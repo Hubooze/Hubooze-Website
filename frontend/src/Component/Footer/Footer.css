@@ -1,19 +1,15 @@
-
 .footer {
   background-color: #2e2e2e;
   color: white;
   justify-content: center;
   text-align: center;
   padding: 20px 0;
-  /* gap: 30px; */
   z-index: 1000;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding-bottom: 00px; */
 }
-
 
 .footerlogo {
   display: flex;
@@ -38,6 +34,7 @@
   justify-content: center;
   gap: 25px;
   margin-bottom: 15px;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
 .footer-links a {
@@ -63,7 +60,6 @@
   background: #fbfbfb;
   border: 1px solid #ebebeb;
   border-radius: 50%;
-
 }
 
 .footer-icon-container img {
@@ -90,21 +86,139 @@
   background: #c7c7c7;
 }
 
+/* Media Queries */
 
-
-@media (max-width: 420px) {
-  .social-icons {
-      margin-bottom: 8px;
-      gap: 30px;
-  }
-
-  .footer-icon-container {
-      padding: 8px;
-      padding-bottom: 6px;
-  }
-
+/* Screen 1280px */
+@media (max-width: 1280px) {
   .footer-links {
-      gap: 16px;
-      margin-bottom: 15px;
+    gap: 20px;
+  }
+
+  .footerlogo p {
+    font-size: 16px;
+  }
+
+  .footer-copyright {
+    font-size: 18px;
+  }
+}
+
+/* Screen 1060px */
+@media (max-width: 1060px) {
+  .footer-links {
+    gap: 18px;
+  }
+
+  .footerlogo p {
+    font-size: 15px;
+  }
+
+  .footer-copyright {
+    font-size: 17px;
+  }
+}
+
+/* Screen 980px and below */
+@media (max-width: 980px) {
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(4, auto); /* Four columns in the first row */
+    grid-gap: 10px 25px;
+    justify-content: center;
+    text-align: center;
+    width: 100%; /* Full width for the links */
+  }
+
+  /* First row: About Us, Careers, Employees, Policy */
+  .footer-links a:nth-child(1),
+  .footer-links a:nth-child(2),
+  .footer-links a:nth-child(3),
+  .footer-links a:nth-child(4) {
+    grid-column: span 1; /* All span 1 column each */
+  }
+
+  /* Second row: Terms and Conditions, Press Releases, Blogs */
+  .footer-links a:nth-child(5),
+  .footer-links a:nth-child(6),
+  .footer-links a:nth-child(7) {
+    grid-column: span 1; /* All span 1 column each */
+  }
+
+  .footerlogo p {
+    font-size: 14px;
+  }
+
+  .footer-copyright {
+    font-size: 16px;
+  }
+}
+
+/* Screen 800px */
+@media (max-width: 800px) {
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(4, auto); /* Four columns in the first row */
+    grid-gap: 10px 25px;
+    justify-content: center;
+    text-align: center;
+    width: 100%; /* Full width for the links */
+  }
+
+  /* First row: About Us, Careers, Employees, Policy */
+  .footer-links a:nth-child(1),
+  .footer-links a:nth-child(2),
+  .footer-links a:nth-child(3),
+  .footer-links a:nth-child(4) {
+    grid-column: span 1; /* All span 1 column each */
+  }
+
+  /* Second row: Terms and Conditions, Press Releases, Blogs */
+  .footer-links a:nth-child(5),
+  .footer-links a:nth-child(6),
+  .footer-links a:nth-child(7) {
+    grid-column: span 1; /* All span 1 column each */
+  }
+
+  .footerlogo p {
+    font-size: 14px;
+  }
+
+  .footer-copyright {
+    font-size: 16px;
+  }
+}
+
+/* Screen 550px */
+@media (max-width: 550px) {
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, auto); /* Two columns */
+    grid-gap: 10px 15px;
+    justify-content: center;
+    text-align: center;
+    width: 100%; /* Full width for the links */
+  }
+
+  /* First row: About Us, Careers, Employees, Policy */
+  .footer-links a:nth-child(1),
+  .footer-links a:nth-child(2),
+  .footer-links a:nth-child(3),
+  .footer-links a:nth-child(4) {
+    grid-column: span 1;
+  }
+
+  /* Second row: Terms and Conditions, Press Releases, Blogs */
+  .footer-links a:nth-child(5),
+  .footer-links a:nth-child(6),
+  .footer-links a:nth-child(7) {
+    grid-column: span 1;
+  }
+
+  .footerlogo p {
+    font-size: 12px;
+  }
+
+  .footer-copyright {
+    font-size: 14px;
   }
 }

@@ -1,20 +1,20 @@
 import React from 'react';
-import './CSS/Common.css'
+import './CSS/Policy.css'
 
 const CompanyPolicy = () => {
   return (
     <div className="page">
       <h1>Company Policy</h1>
-      <p>
+      <p className="Policypara">
       Last update : 18 Jan 2024
       </p>
-      <p>Hubooze.in</p>
+      <p className="Policypara">Hubooze.in</p>
 
-      <p>90 din ka Easy Return aur Refund Policy - Ab khareedari hogi aur bhi mazedaar !!"
+      <p className="Policypara">90 din ka Easy Return aur Refund Policy - Ab khareedari hogi aur bhi mazedaar !!"
       </p>
 
       
-<p>Privacy Policy for Hubooze.in
+<p className="Policypara">Privacy Policy for Hubooze.in
 We are committed to protecting your privacy and ensuring the security of your personal 
 information. This Privacy Policy outlines how we collect, use, and safeguard your data when 
 you visit our website and make purchases. By using Hubooze's services, you agree to the 
@@ -76,25 +76,25 @@ Hubooze Email: team.support@hubooze.com
 Thank you for choosing Hubooze. We appreciate your trust and are dedicated to protecting 
 your privacy.</p>
 
-      <p>Return and Refund Policy</p>
+      <p className="Policypara">Return and Refund Policy</p>
 
-      <p>
-      <p>1. Easy Returns: We offer a 90-day return policy for your convenience.</p>
-      <p>2. Condition of Return: Items can be returned in any condition.</p>
-      <p>3. Return Process: You can initiate a return through our website or by contacting our
+      <p className="Policypara">
+      <p className="Policypara">1. Easy Returns: We offer a 90-day return policy for your convenience.</p>
+      <p className="Policypara">2. Condition of Return: Items can be returned in any condition.</p>
+      <p className="Policypara">3. Return Process: You can initiate a return through our website or by contacting our
       customer service team.</p>
-      <p>4. Instant Refund: Refunds are processed instantly upon approval of the return.</p>
-      <p>5. Contact Details: For any questions or assistance, please contact us at
+      <p className="Policypara">4. Instant Refund: Refunds are processed instantly upon approval of the return.</p>
+      <p className="Policypara">5. Contact Details: For any questions or assistance, please contact us at
             Team.Support@hubooze.in.</p>
       </p>
 
-      <p>
+      <p className="Policypara">
       At Hubooze we want you to be completely satisfied with your purchase. If for any
       reason you are not satisfied with your order, we offer a 90-day return or refund period
       from the date of purchase.
       </p>
 
-      <p>
+      <p className="Policypara">
       Note:
       This return policy is applicable only to purchases.
       </p>

@@ -18,7 +18,7 @@ function Collection() {
   return (
     <div>
       <section className="shop-section">
-        <span className="subheading">Womens Collection</span>
+        <span className="subheading SUBHEADING1">Womens Collection</span>
         <div className="shop-images">
           <div className="shop-link">
             <h3>T-Shirts & Jeans</h3>
@@ -108,6 +108,6 @@ function Collection() {
       </section>
     </div>
   );
-}
+} 
 
 export default Collection;
